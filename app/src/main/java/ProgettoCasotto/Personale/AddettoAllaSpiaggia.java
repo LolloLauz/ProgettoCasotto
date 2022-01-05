@@ -1,6 +1,6 @@
 package ProgettoCasotto.Personale;
 
-public class AddettoAllaSpiaggia implements IAddettoPagamento {
+public class AddettoAllaSpiaggia {
     private String nome;
     private int ID;
 
