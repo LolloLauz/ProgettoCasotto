@@ -9,68 +9,68 @@ public class App {
 
     public static void main(String[] args) {
 
-        Chalet chalet=new Chalet("lollo");
-
-        //creo una spiaggia
-        Spiaggia spiaggia = new Spiaggia("BarracudaSpiaggia");
-        spiaggia.setNumOmbrelloni(50);
-        spiaggia.setNumSdraio(10);
-
-        //creo una prenotazione
-        String IDPrenotazione="50";
-        Prenotazione prenotazione=new Prenotazione(IDPrenotazione,15,25);
-        spiaggia.addPrenotazione(prenotazione);
-        spiaggia.addOmbrelloneToPrenotazione(IDPrenotazione,"4");
-        spiaggia.addOmbrelloneToPrenotazione(IDPrenotazione,"5");
-        spiaggia.confermaAvvenutoPagamentoPrenotazione(prenotazione);
-        spiaggia.pagaPrenotazione(prenotazione);
-
-        //creo un'altra prenotazione
-        String IDAltraPrenotazione="90";
-        Prenotazione prenotazione2=new Prenotazione(IDAltraPrenotazione,15,25);
-        spiaggia.addPrenotazione(prenotazione2);
-        spiaggia.addOmbrelloneToPrenotazione(IDAltraPrenotazione,"20");
-        spiaggia.pagaPrenotazione(prenotazione2);
-
-        //provo la modifica di un periodo
-        Prenotazione prenotazione3=new Prenotazione("70",26,30);
-        spiaggia.addPrenotazione(prenotazione3);
-        spiaggia.addOmbrelloneToPrenotazione("70","10");
-        spiaggia.pagaPrenotazione(prenotazione3);
-//        spiaggia.modificaPrenotazione(prenotazione2);
-
-        //provo la modifica del numero di sdraio
-        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"0");
-        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"1");
-        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"2");
-        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"3");
-        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"4");
-        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"5");
-        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"6");
-        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"7");
+//        Chalet chalet=new Chalet("lollo");
 //
-//        spiaggia.modificaPrenotazione(prenotazione2);
+//        //creo una spiaggia
+//        Spiaggia spiaggia = new Spiaggia("BarracudaSpiaggia");
+//        spiaggia.setNumOmbrelloni(50);
+//        spiaggia.setNumSdraio(10);
+//
+//        //creo una prenotazione
+//        String IDPrenotazione="50";
+//        Prenotazione prenotazione=new Prenotazione(IDPrenotazione,15,25);
+//        spiaggia.addPrenotazione(prenotazione);
+//        spiaggia.addOmbrelloneToPrenotazione(IDPrenotazione,"4");
+//        spiaggia.addOmbrelloneToPrenotazione(IDPrenotazione,"5");
+//        spiaggia.confermaAvvenutoPagamentoPrenotazione(prenotazione);
+//        spiaggia.pagaPrenotazione(prenotazione);
+//
+//        //creo un'altra prenotazione
+//        String IDAltraPrenotazione="90";
+//        Prenotazione prenotazione2=new Prenotazione(IDAltraPrenotazione,15,25);
+//        spiaggia.addPrenotazione(prenotazione2);
+//        spiaggia.addOmbrelloneToPrenotazione(IDAltraPrenotazione,"20");
+//        spiaggia.pagaPrenotazione(prenotazione2);
+//
+//        //provo la modifica di un periodo
+//        Prenotazione prenotazione3=new Prenotazione("70",26,30);
+//        spiaggia.addPrenotazione(prenotazione3);
+//        spiaggia.addOmbrelloneToPrenotazione("70","10");
+//        spiaggia.pagaPrenotazione(prenotazione3);
+////        spiaggia.modificaPrenotazione(prenotazione2);
+//
+//        //provo la modifica del numero di sdraio
+//        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"0");
+//        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"1");
+//        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"2");
+//        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"3");
+//        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"4");
+//        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"5");
+//        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"6");
+//        spiaggia.addSdraioToPrenotazione(IDPrenotazione,"7");
+////
+////        spiaggia.modificaPrenotazione(prenotazione2);
+////        spiaggia.getPrenotazione();
+//
+//        //provo la modifica del numero di ombrelloni
+////        spiaggia.modificaPrenotazione(prenotazione2);
+//
+//
+//        Prenotazione prenotazione4=new Prenotazione("40",26,30);
+//        spiaggia.addPrenotazione(prenotazione4);
+//        spiaggia.addOmbrelloneToPrenotazione("40","9");
+//        Prenotazione prenotazione5=new Prenotazione("60",26,30);
+//        spiaggia.addPrenotazione(prenotazione5);
+//        spiaggia.addOmbrelloneToPrenotazione("60","1");
+//        Prenotazione prenotazione6=new Prenotazione("650",26,30);
+//        spiaggia.addPrenotazione(prenotazione6);
+//        spiaggia.addOmbrelloneToPrenotazione("650","15");
+//        spiaggia.pagaPrenotazione(prenotazione6);
+//        spiaggia.cambiaStatoPrenotazioneInBaseAlTempo();
+//        chalet.addAreaAttivita("Campo Beach Volley");
+//        chalet.createAttivita("torneoBeach", 20,10,11);
+//        chalet.StampaChalet();
 //        spiaggia.getPrenotazione();
-
-        //provo la modifica del numero di ombrelloni
-//        spiaggia.modificaPrenotazione(prenotazione2);
-
-
-        Prenotazione prenotazione4=new Prenotazione("40",26,30);
-        spiaggia.addPrenotazione(prenotazione4);
-        spiaggia.addOmbrelloneToPrenotazione("40","9");
-        Prenotazione prenotazione5=new Prenotazione("60",26,30);
-        spiaggia.addPrenotazione(prenotazione5);
-        spiaggia.addOmbrelloneToPrenotazione("60","1");
-        Prenotazione prenotazione6=new Prenotazione("650",26,30);
-        spiaggia.addPrenotazione(prenotazione6);
-        spiaggia.addOmbrelloneToPrenotazione("650","15");
-        spiaggia.pagaPrenotazione(prenotazione6);
-        spiaggia.cambiaStatoPrenotazioneInBaseAlTempo();
-        chalet.addAreaAttivita("Campo Beach Volley");
-        chalet.createAttivita("torneoBeach", 20,10,11);
-        chalet.StampaChalet();
-        spiaggia.getPrenotazione();
 
         //modifico AltraPrenotazione
 //        spiaggia.getStatoSpiaggia();
@@ -151,6 +151,7 @@ public class App {
 //        bar.stampaListaOrdinazioni();
 //        bar.getInventario();
 //        chalet.StampaChalet();
+        gestoreDB gestore=new gestoreDB();
     }
 
 }

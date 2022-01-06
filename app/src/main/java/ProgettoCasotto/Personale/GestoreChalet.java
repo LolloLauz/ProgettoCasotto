@@ -1,35 +1,37 @@
 package ProgettoCasotto.Personale;
 
-public class AddettoAllaSpiaggia implements Utenti {
+public class GestoreChalet implements Utenti{
     private String nome;
     private String cognome;
     private String email;
     private String password;
+    private Privilegio privilegio;
 
-    public AddettoAllaSpiaggia(String nome, String cognome, String email, String password) {
+    public GestoreChalet(String nome, String cognome, String email, String password) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
         this.password = password;
+        privilegio=Privilegio.SUPERADMIN;
     }
 
     @Override
     public String getNome() {
-        return null;
+        return nome;
     }
 
     @Override
     public String getCognome() {
-        return null;
+        return cognome;
     }
 
     @Override
     public String getEmail() {
-        return null;
+        return email;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 }
