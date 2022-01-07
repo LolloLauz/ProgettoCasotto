@@ -3,7 +3,8 @@
  */
 package ProgettoCasotto;
 
-import ProgettoCasotto.Spiaggia.*;
+import java.util.Scanner;
+
 
 public class App {
 
@@ -150,8 +151,22 @@ public class App {
 //        System.out.println(chalet.addBar(bar));
 //        bar.stampaListaOrdinazioni();
 //        bar.getInventario();
-//        chalet.StampaChalet();
-        gestoreDB gestore=new gestoreDB();
+////        chalet.StampaChalet();
+//        gestoreDB gestore=new gestoreDB();
+//        gestore.starta();
+
+        System.out.println("FINESTRA DI LOGIN");
+
+        System.out.println("INSERISCI NOME UTENTE");
+
+        Scanner scanner=new Scanner(System.in);
+        String nomeUtente=scanner.nextLine();
+
+        System.out.println("INSERISCI LA PASSWORD");
+        String password= scanner.nextLine();
+
+        GestoreDB gestore=new GestoreDB(nomeUtente,password);
+        gestore.connettiaDB();
     }
 
 }
