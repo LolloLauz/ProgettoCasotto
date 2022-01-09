@@ -1,16 +1,13 @@
-package ProgettoCasotto.Personale;
+package ProgettoCasotto.PersonaleDelloChalet;
 
-public class AddettoAllaSpiaggia implements Utenti {
+public class AddettoAllaSpiaggia extends Personale implements Utenti {
     private String nome;
     private String cognome;
     private String email;
     private String password;
 
     public AddettoAllaSpiaggia(String nome, String cognome, String email, String password) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.password = password;
+        super(nome,cognome,email,password,Privilegio.ADMIN);
     }
 
     @Override

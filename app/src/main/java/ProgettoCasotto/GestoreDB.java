@@ -1,35 +1,45 @@
 package ProgettoCasotto;
 
+import ProgettoCasotto.PersonaleDelloChalet.Privilegio;
+
 import java.sql.*;
 
 public class GestoreDB {
     Connection connection;
-    String nome;
-    String passwd;
+    String email;
+    String password;
 
-    public GestoreDB(String nome, String passwd) {
-        this.nome = nome;
-        this.passwd = passwd;
-    }
-
-    public void connettiaDB() {
+    public GestoreDB() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/casottodb", "root", "");
-            PreparedStatement preparedStatement=(PreparedStatement)connection.prepareStatement("SELECT email,privilegio FROM utente WHERE nome=? AND password=? ");
-            preparedStatement.setString(1,nome);
-            preparedStatement.setString(2,passwd);
-            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-                System.out.println("LOG IN AVVENUCO CORRETTAMENTE");
-                String privilegio = resultSet.getString("privilegio");
-                String email = resultSet.getString("email");
-                System.out.println("email:" + nome + " priviledio: " + privilegio);
-            }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
+    public Privilegio getEmailPassw(String email, String password) {
+        String privilegio = null;
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT nome,privilegio FROM utente WHERE email=? AND password=? ");
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+
+            if (resultSet.next()) {
+                System.out.println("LOG IN AVVENUTO CORRETTAMENTE");
+                privilegio = resultSet.getString("privilegio");
+                String nome = resultSet.getString("nome");
+                System.out.println("email:" + nome + " privilegio: " + privilegio);
+            } else {
+                System.out.println("LOGIN Errato");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Privilegio.valueOf(privilegio);
+    }
+
 }
 

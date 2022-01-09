@@ -3,20 +3,38 @@
  */
 package ProgettoCasotto;
 
-import java.util.Scanner;
+
+import ProgettoCasotto.View.DefaultView;
 
 
 public class App {
 
     public static void main(String[] args) {
 
+        //FACCIO IL LOGIN COME SUPERADMIN
+        DefaultView defaultView=new DefaultView();
+/*
+questa sono le operazioni possibili attraverso la view di un SUPERADMIN
+ */
 //        Chalet chalet=new Chalet("lollo");
 //
 //        //creo una spiaggia
 //        Spiaggia spiaggia = new Spiaggia("BarracudaSpiaggia");
 //        spiaggia.setNumOmbrelloni(50);
 //        spiaggia.setNumSdraio(10);
-//
+        /*
+        tramite il main controller il SUPERADMIN può creare uno chalet e aggiungere spiaggia e bar
+         */
+//        MainController mainController=new MainController();
+//        mainController.createChalet("lollo");
+//        mainController.addSpiaggia("Spiaggia");
+//        mainController.addBar("Lampara");
+        /*
+        in questo caso caso passo alla view di un cliente
+         */
+//        ViewClient viewClient=new ViewClient(mainController.getDefaultClienteController());
+
+//        mainController.getStatoPrenotazioniSpiaggia();
 //        //creo una prenotazione
 //        String IDPrenotazione="50";
 //        Prenotazione prenotazione=new Prenotazione(IDPrenotazione,15,25);
@@ -24,7 +42,6 @@ public class App {
 //        spiaggia.addOmbrelloneToPrenotazione(IDPrenotazione,"4");
 //        spiaggia.addOmbrelloneToPrenotazione(IDPrenotazione,"5");
 //        spiaggia.confermaAvvenutoPagamentoPrenotazione(prenotazione);
-//        spiaggia.pagaPrenotazione(prenotazione);
 //
 //        //creo un'altra prenotazione
 //        String IDAltraPrenotazione="90";
@@ -32,6 +49,7 @@ public class App {
 //        spiaggia.addPrenotazione(prenotazione2);
 //        spiaggia.addOmbrelloneToPrenotazione(IDAltraPrenotazione,"20");
 //        spiaggia.pagaPrenotazione(prenotazione2);
+//        spiaggia.confermaAvvenutoPagamentoPrenotazione(prenotazione2);
 //
 //        //provo la modifica di un periodo
 //        Prenotazione prenotazione3=new Prenotazione("70",26,30);
@@ -154,19 +172,11 @@ public class App {
 ////        chalet.StampaChalet();
 //        gestoreDB gestore=new gestoreDB();
 //        gestore.starta();
-
-        System.out.println("FINESTRA DI LOGIN");
-
-        System.out.println("INSERISCI NOME UTENTE");
-
-        Scanner scanner=new Scanner(System.in);
-        String nomeUtente=scanner.nextLine();
-
-        System.out.println("INSERISCI LA PASSWORD");
-        String password= scanner.nextLine();
-
-        GestoreDB gestore=new GestoreDB(nomeUtente,password);
-        gestore.connettiaDB();
+//        DefaultView defaultView=new DefaultView();
+//
+//        if(defaultView.getNomePrivilegio()== Privilegio.USER){
+//            ViewClient viewClient=new ViewClient(spiaggia);
+//        }
     }
 
 }

@@ -9,16 +9,15 @@ public interface ClienteController {
      * metodo che serve ad un cliente per prenotare un ombrellone
      * @param dataInizo la data di inizio del periodo in cui vuole prenotare
      * @param dataFine la data di fine del periodo in cui vuole prenotare
-     * @param ombrellone ombrellone che vuole prenotare
+     *
      */
-    public void prenotaOmbrellone(int dataInizo, int dataFine, Ombrellone ombrellone);
+    public void prenotaOmbrellone(int dataInizo, int dataFine);
 
     /**
      * metodo che serve ad un cliente per prenotare uno sdraio
      * @param dataInizio
      * @param dataFine
-     * @param sdraio
      */
-    public void prenotaSdraio(int dataInizio, int dataFine, Sdraio sdraio);
+    public void prenotaSdraio(int dataInizio, int dataFine);
 
 }

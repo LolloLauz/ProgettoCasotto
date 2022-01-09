@@ -1,6 +1,6 @@
-package ProgettoCasotto.Personale;
+package ProgettoCasotto.PersonaleDelloChalet;
 
-public class GestoreChalet implements Utenti{
+public class GestoreChalet  extends Personale implements Utenti{
     private String nome;
     private String cognome;
     private String email;
@@ -8,11 +8,7 @@ public class GestoreChalet implements Utenti{
     private Privilegio privilegio;
 
     public GestoreChalet(String nome, String cognome, String email, String password) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.password = password;
-        privilegio=Privilegio.SUPERADMIN;
+        super(nome,cognome,email,password,Privilegio.SUPERADMIN);
     }
 
     @Override

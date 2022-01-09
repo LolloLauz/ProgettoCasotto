@@ -1,4 +1,4 @@
-package ProgettoCasotto.Personale;
+package ProgettoCasotto.PersonaleDelloChalet;
 
 public enum Privilegio {
     USER,

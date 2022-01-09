@@ -12,6 +12,7 @@ import java.util.*;
  */
 public class Spiaggia implements SpiaggiaInterface{
     private String nome;
+    private Map<String,Prenotazione> mappaPrenotazioni;
     private ArrayList<Prenotazione> prenotazioni;
     private ArrayList<Ombrellone> listaOmbrelloni;
     private ArrayList<Sdraio> listaSdraio;
@@ -19,6 +20,17 @@ public class Spiaggia implements SpiaggiaInterface{
 
     public String getNome() {
         return nome;
+    }
+    public void setNome(String nome){
+        this.nome=nome;
+    }
+
+    public Spiaggia() {
+        listaOmbrelloni=new ArrayList<>();
+        listaSdraio=new ArrayList<>();
+        prenotazioni=new ArrayList<>();
+        listaAttivita=new ArrayList<>();
+        mappaPrenotazioni=new HashMap<>();
     }
 
     @Override
@@ -40,6 +52,7 @@ public class Spiaggia implements SpiaggiaInterface{
         listaSdraio=new ArrayList<>();
         prenotazioni=new ArrayList<>();
         listaAttivita=new ArrayList<>();
+        mappaPrenotazioni=new HashMap<>();
     }
 
     public ArrayList<Ombrellone> getOmbrelloniOccupati(int dataInizio, int dataFine){
@@ -68,6 +81,7 @@ public class Spiaggia implements SpiaggiaInterface{
     }
 
     public boolean addPrenotazione(String ID,int dataInizio, int dataFine){
+        mappaPrenotazioni.put(ID,new Prenotazione(ID,dataInizio,dataFine));
         return prenotazioni.add(new Prenotazione(ID,dataInizio,dataFine));
     }
 
@@ -265,6 +279,15 @@ public class Spiaggia implements SpiaggiaInterface{
         System.out.println("il nome della spiaggia: "+nome+" il numero degli ombrelloni: "+listaOmbrelloni.size()+" il numero delle sdraio: "+listaSdraio.size());
     }
 
+    public Prenotazione getPrenotazioneById(String id){
+        for(Prenotazione prenotazione:prenotazioni){
+            if(prenotazione.getID().equals(id)){
+                System.out.println("la prenotazione che sto pagando: "+prenotazione.getID()+" "+prenotazione.getStatoPrenotazione());
+                return prenotazione;
+            }
+        }
+        return null;
+    }
     public String getPrenotazione(){
         for (Prenotazione prenotazione:prenotazioni) {
             if (prenotazione.getStatoPrenotazione() == Stato.CONFERMATA) {

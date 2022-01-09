@@ -77,6 +77,14 @@ public class Chalet implements ChaletInterface {
         return listaAttivita.add(attivita);
     }
 
+    public Spiaggia getListaSpiaggia() {
+        return listaSpiaggia.get(0);
+    }
+
+    public Bar getListaBar() {
+        return listaBar.get(0);
+    }
+
     public String StampaChalet(){
         System.out.println("-------------------------------");
         for(Spiaggia spiaggia:listaSpiaggia){
@@ -94,7 +102,6 @@ public class Chalet implements ChaletInterface {
         for(Attivita attivita: listaAttivita){
             System.out.println(attivita.getNome());
         }
-
         return "-------------------------------";
     }
 }
