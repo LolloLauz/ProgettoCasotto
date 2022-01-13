@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="369511c7-3b04-4661-a84c-3136840b0599" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/DataBase/GestoreDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProgettoCasotto.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProgettoCasotto.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultaMasterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultaMasterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/DefaultChalet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/DefaultChalet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/DefaultSpiaggia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/DefaultSpiaggia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/ChaletInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/ChaletInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Spiaggia/DefaultPrenotazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Spiaggia/DefaultPrenotazione.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/DefaultView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/DefaultView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/UsersView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/ICliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultUserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultUserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultaMasterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultaMasterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/HelloApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/HelloApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/Chalet/DefaultChalet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/Chalet/DefaultChalet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/Chalet/DefaultSpiaggia.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/Chalet/DefaultSpiaggia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/ChaletInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/Spiaggia/DefaultPrenotazione.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/Spiaggia/DefaultPrenotazione.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/View/DefaultView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/View/DefaultView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/View/UsersView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="23Ybngop4YUMTqhlOc6RVYDZRsM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Robe/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.progettocasotto.Model.Chalet" />
+      <recent name="com.example.progettocasotto.Model.Spiaggia" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.progettocasotto" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.progettocasotto.HelloApplication" />
+      <module name="ProgettoCasotto" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.progettocasotto.DataBase.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.HelloApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="369511c7-3b04-4661-a84c-3136840b0599" name="Changes" comment="" />
+      <created>1641914138799</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1641914138799</updated>
+      <workItem from="1641914140280" duration="10631000" />
+      <workItem from="1641926414107" duration="39000" />
+      <workItem from="1642009308112" duration="5785000" />
+      <workItem from="1642019512637" duration="3273000" />
+      <workItem from="1642067861915" duration="4172000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

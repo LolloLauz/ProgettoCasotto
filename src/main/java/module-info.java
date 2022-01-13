@@ -9,7 +9,10 @@ module com.example.progettocasotto {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.sql;
 
     opens com.example.progettocasotto to javafx.fxml;
     exports com.example.progettocasotto;
+    exports com.example.progettocasotto.DataBase;
+    opens com.example.progettocasotto.DataBase to javafx.fxml;
 }

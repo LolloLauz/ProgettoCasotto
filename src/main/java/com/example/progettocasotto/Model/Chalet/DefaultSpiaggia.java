@@ -34,9 +34,10 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
 
     @Override
     public boolean addOmbrelloneToPrenotazione(String idPrenotazione, Ombrellone ombrellone) {
-
-        if(getPrenotaizioneById(idPrenotazione).getListaOmbrelloni().contains(ombrellone)){
-            return false;
+        if(getPrenotaizioneById(idPrenotazione)!=null) {
+            if (getPrenotaizioneById(idPrenotazione).getListaOmbrelloni().contains(ombrellone)) {
+                return false;
+            }
         }
         if(listaOmbrelloni.contains(ombrellone)) {
             return getPrenotaizioneById(idPrenotazione).addOmbrellone(ombrellone);

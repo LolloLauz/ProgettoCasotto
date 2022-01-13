@@ -9,6 +9,10 @@ public class GesoreDB {
 
     Connection connection;
     public GesoreDB() {
+public class GestoreDB {
+
+    Connection connection;
+    public GestoreDB() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/casottodb", "root", "");
@@ -53,5 +57,20 @@ public class GesoreDB {
 
 
         return listaClienti;
+    }
+
+    public String getNomeUtente(String email, String password) {
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT nome,privilegio FROM utente WHERE email=? AND password=? ");
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return resultSet.getString("nome");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       return "";
     }
 }

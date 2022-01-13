@@ -8,7 +8,7 @@ public class DefaultPrenotazione implements PrenotazioneInterface{
     private Date dataInizio;
     private Date dataFine;
     private StatoPreOrd statoPrenotazione;
-    ArrayList<Ombrellone> listaOmbrelloni;
+    ArrayList<Ombrellone> listaOmbrelloni=new ArrayList<>();
     ArrayList<Sdraio> listaSdraio;
 
     public DefaultPrenotazione(String ID, Date dataInizio, Date dataFine) {
