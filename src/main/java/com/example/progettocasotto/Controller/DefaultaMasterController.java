@@ -56,4 +56,8 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
     public void stampaStatoSpiaggia(){
         chalet.getSpiaggia().stampaPrenotazioni();
     }
+
+    public DefaultChalet getChalet() {
+        return chalet;
+    }
 }
