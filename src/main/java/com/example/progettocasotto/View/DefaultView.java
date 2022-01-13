@@ -19,6 +19,8 @@ public class DefaultView {
 //        prendo la lista dei clienti dal database
         String nomeCliente="";
         //eseguo un login e controllo che privilegio ha l'utente
+
+        //perche
         if(Privilegio.USER== gestoreDB.getPrivilegio("aaa@gmail.com","aaaa")){
             //TODO : metodo per ottenere l'ID di un cliente
             nomeCliente=gestoreDB.getNomeUtente("aaa@gmail.com","aaaa");
