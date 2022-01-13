@@ -5,10 +5,6 @@ import com.example.progettocasotto.Model.Utenti.DefaultCliente;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class GesoreDB {
-
-    Connection connection;
-    public GesoreDB() {
 public class GestoreDB {
 
     Connection connection;
