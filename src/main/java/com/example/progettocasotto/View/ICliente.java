@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Locale;
 
-import static java.text.DateFormat.getDateInstance;
+
 
 public class UsersView {
    DefaultUserController userController;
