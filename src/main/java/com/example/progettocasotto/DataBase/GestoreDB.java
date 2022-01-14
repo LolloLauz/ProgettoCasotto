@@ -55,6 +55,26 @@ public class GestoreDB {
         return listaClienti;
     }
 
+
+    public  boolean insertUtente(String nome,String cognome,String email,String password,String pri){
+
+        try {
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO utente (nome,cognome,email,password,privilegio) VALUES (?,?,?,?,?)");
+            preparedStatement.setString(1,nome);
+            preparedStatement.setString(2,cognome);
+            preparedStatement.setString(3,email);
+            preparedStatement.setString(4,password);
+            preparedStatement.setString(5,pri);
+            if(preparedStatement.executeUpdate()==0){
+                System.out.println("errore nell'esecuzione della query");
+                return false;
+            }
+            return true;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
     public String getNomeUtente(String email, String password) {
         try {
             PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT nome,privilegio FROM utente WHERE email=? AND password=? ");
@@ -67,6 +87,7 @@ public class GestoreDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-       return "";
+        return "";
     }
 }
+

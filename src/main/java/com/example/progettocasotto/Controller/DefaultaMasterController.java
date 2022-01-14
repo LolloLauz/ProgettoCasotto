@@ -60,4 +60,9 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
     public DefaultChalet getChalet() {
         return chalet;
     }
+
+    public GestoreDB getGestoreDB() {
+        return gestoreDB;
+    }
 }
+

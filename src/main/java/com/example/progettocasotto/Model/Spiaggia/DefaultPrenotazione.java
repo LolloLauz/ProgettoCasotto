@@ -64,4 +64,11 @@ public class DefaultPrenotazione implements PrenotazioneInterface{
             System.out.println(ombrellone.getID());
         }
     }
+
+    public void stampaSdraio(){
+        for(Sdraio sdraio:listaSdraio){
+            System.out.println(sdraio.getID());
+        }
+    }
+
 }
