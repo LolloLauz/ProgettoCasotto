@@ -32,7 +32,7 @@ public interface SpiaggiaInterface {
      * @param sdraio
      * @return
      */
-    boolean addSdraioToPrenotazione(String idPrenotazione,Sdraio sdraio);
+    boolean addSdraioToPrenotazione(String idPrenotazione,int numSdraio);
 
     /**
      * Metodo che ritorna una lista di ombrelloni occupati in un certo periodo

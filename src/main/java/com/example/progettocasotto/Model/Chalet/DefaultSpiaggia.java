@@ -35,9 +35,7 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
     @Override
     public boolean addOmbrelloneToPrenotazione(String idPrenotazione, Ombrellone ombrellone) {
         if(getPrenotaizioneById(idPrenotazione)!=null) {
-            if (getPrenotaizioneById(idPrenotazione).getListaOmbrelloni().contains(ombrellone)) {
-                return false;
-            }
+            return false;
         }
         if(listaOmbrelloni.contains(ombrellone)) {
             return getPrenotaizioneById(idPrenotazione).addOmbrellone(ombrellone);
@@ -46,11 +44,12 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
     }
 
     @Override
-    public boolean addSdraioToPrenotazione(String idPrenotazione, Sdraio sdraio) {
-        if(getPrenotaizioneById(idPrenotazione).getListaSdraio().contains(sdraio)){
-            return false;
+    public boolean addSdraioToPrenotazione(String idPrenotazione, int numSdraio) {
+        for(int i=0;i<numSdraio;i++){
+            System.out.println(getSdraioLiberi(getPrenotaizioneById(idPrenotazione).getDataInizio(),getPrenotaizioneById(idPrenotazione).getDataFine()).get(i).getID());
+            System.out.println(getPrenotaizioneById(idPrenotazione).getListaSdraio().add(getSdraioLiberi(getPrenotaizioneById(idPrenotazione).getDataInizio(),getPrenotaizioneById(idPrenotazione).getDataFine()).get(i)));
         }
-        return getPrenotaizioneById(idPrenotazione).getListaSdraio().add(sdraio);
+        return true;
     }
 
 
@@ -97,7 +96,8 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
         ArrayList<Sdraio> sdraioOccupati=new ArrayList<>();
         for(DefaultPrenotazione prenotazione:listaPrenotazioni){
             if(prenotazione.getStatoPrenotazione()== StatoPreOrd.PAGATA){
-                if((prenotazione.getDataInizio().before(dataInizio) && dataInizio.before(prenotazione.getDataFine())) ||
+                if((prenotazione.getDataInizio().equals(dataInizio) || prenotazione.getDataFine().equals(dataFine))||
+                        (prenotazione.getDataInizio().before(dataInizio) && dataInizio.before(prenotazione.getDataFine())) ||
                         (prenotazione.getDataInizio().before(dataFine) && dataFine.before(prenotazione.getDataFine()) ||
                                 (dataInizio.before(prenotazione.getDataInizio()) && prenotazione.getDataInizio().before(dataFine))||
                                 (dataFine.before(prenotazione.getDataFine()) && prenotazione.getDataFine().before(dataFine)))){
@@ -120,7 +120,7 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
     @Override
     public void setNumeroSdraio(int numSdraio) {
         for(int i=0;i<numSdraio;i++){
-            listaSdraio.add(new Sdraio());
+            listaSdraio.add(new Sdraio(Integer.toString(i)));
         }
     }
 
@@ -135,6 +135,8 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
         for(DefaultPrenotazione prenotazione:listaPrenotazioni){
             System.out.println("la prentoazione :"+ prenotazione.getID()+" Data inizio "+prenotazione.getDataInizio().toString()+" DataFine "+prenotazione.getDataFine().toString());
             prenotazione.stampaOmbrelloni();
+            System.out.println("il numero di sdraio: ");
+            prenotazione.stampaSdraio();
         }
     }
     public void stampaOmbrelloniLiberi(Date dataInizo, Date dataFine){
@@ -142,4 +144,11 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
             System.out.println(ombrellone.getID());
         }
     }
+    public void stampaSdraioLiberi(Date dataInizio,Date dataFine){
+        for(Sdraio sdraio:getSdraioLiberi(dataInizio,dataFine)){
+            System.out.println(sdraio.getID());
+        }
+
+    }
 }
+

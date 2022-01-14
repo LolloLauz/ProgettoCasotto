@@ -17,6 +17,10 @@ public class Sdraio {
         return Objects.equals(ID, sdraio.ID);
     }
 
+    public Sdraio(String ID) {
+        this.ID = ID;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(ID);
