@@ -1,15 +1,14 @@
 package com.example.progettocasotto.View;
 
+
 import com.example.progettocasotto.Controller.DefaultaMasterController;
 import com.example.progettocasotto.DataBase.GestoreDB;
 import com.example.progettocasotto.DataBase.Privilegio;
-import com.example.progettocasotto.Model.Chalet.DefaultSpiaggia;
+import com.example.progettocasotto.Model.Chalet.Bar.DefaultBar;
+import com.example.progettocasotto.Model.Chalet.DefaultChalet;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Scanner;
+
 
 public class DefaultView {
 
@@ -17,12 +16,14 @@ public class DefaultView {
     GestoreDB gestoreDB =new GestoreDB();
 
     public DefaultView() {
+
+//        testMetodi();
         provametodi();
     }
 
     private void provametodi() {
         System.out.println("BENVENUTO AL PROGETTO CASOTTO");
-        String accessoRieseguito="continua";
+        String accessoRieseguito="c";
         while(accessoRieseguito!="") {
             Scanner scanner = new Scanner(System.in);
             System.out.println("INSERISCI EMAIL UTENTE");
@@ -42,30 +43,23 @@ public class DefaultView {
                     break;
                 case USER:
                     nomeCliente = gestoreDB.getNomeUtente(email, password);
-                    ICliente iCliente = new ICliente(masterController.getUserController(), nomeCliente, masterController);
+                    ICliente iCliente = new ICliente(masterController, nomeCliente);
             }
-            System.out.println("che cosa vuoi fare" );
+            System.out.println(masterController.getChalet().getSpiaggia().getNomeSpiaggia());
+            System.out.println("per eseguire un nuovo accesso inserire premi una lettera qualsiasi " +
+                    "\n per uscire premi invio" );
             accessoRieseguito=scanner.nextLine();
         }
-        /*masterController.stampaStatoSpiaggia();
-        Date dataInizio;
-        Date dataFine;
-        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
-        DefaultSpiaggia spiaggia=new DefaultSpiaggia("spiaggia");
-        try {
-            dataInizio=dateFormat.parse("10/06/20");
-            dataFine=dateFormat.parse("10/06/20");
-            spiaggia.addPrenotazione("123",dataInizio,dataFine);
-            spiaggia.addPrenotazione("143",dataInizio,dataFine);
-            spiaggia.setNumeroSdraio(10);
-//            spiaggia.stampaSdraioLiberi(dataInizio,dataFine);
-            spiaggia.addSdraioToPrenotazione("123",2);
-            spiaggia.stampaSdraioLiberi(dataInizio,dataFine);
-            spiaggia.addSdraioToPrenotazione("143",2);
-            spiaggia.stampaPrenotazioni();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
+        masterController.stampaStatoSpiaggia();
+    }
 
+    public void testMetodi(){
+        DefaultChalet chalet=new DefaultChalet();
+        chalet.setNome("chalet");
+        DefaultBar bar=new DefaultBar("bar");
+        bar.creaBevanda("acqua","bottiglia d'acqua da 0,5lt",10,1.00);
+        bar.creaOrdinazione("123");
+        bar.selezionaBevanda("123","acqua",40);
+        bar.stampaListaPrenotazioni();
     }
 }

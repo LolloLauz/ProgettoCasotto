@@ -1,5 +1,6 @@
 package com.example.progettocasotto.Model.Utenti;
 
+import com.example.progettocasotto.Model.Chalet.Bar.DefaultOrdinazione;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.Objects;
 
 public class DefaultCliente {
     ArrayList<DefaultPrenotazione> prenotazioniAssociate=new ArrayList<>();
+    ArrayList<DefaultOrdinazione> ordinazioniAssociate=new ArrayList<>();
     private String ID;
 
     public DefaultCliente(String ID) {
@@ -19,6 +21,14 @@ public class DefaultCliente {
 
     public boolean addPrenotazioneToCliente(DefaultPrenotazione prenotazione){
         return prenotazioniAssociate.add(prenotazione);
+    }
+
+    public ArrayList<DefaultPrenotazione> getPrenotazioniAssociate(){
+        return prenotazioniAssociate;
+    }
+
+    public ArrayList<DefaultOrdinazione> getOrdinazioniAssociate() {
+        return ordinazioniAssociate;
     }
 
     @Override

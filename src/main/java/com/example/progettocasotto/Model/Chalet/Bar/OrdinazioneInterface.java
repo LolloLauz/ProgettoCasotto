@@ -4,5 +4,5 @@ import com.example.progettocasotto.Model.Chalet.Bar.Bevanda;
 
 public interface OrdinazioneInterface {
 
-    boolean addBevanda(Bevanda bevanda);
+    void addBevanda(Bevanda bevanda,int quantita);
 }

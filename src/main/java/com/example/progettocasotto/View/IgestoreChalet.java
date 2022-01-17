@@ -15,6 +15,11 @@ public class IgestoreChalet {
             Scanner scanner=new Scanner(System.in);
             System.out.println("SE E' IL TUO PRIMO ACCESSO PREMI 2");
             System.out.println("CHE COSA VUOI FARE");
+            String coseDaFare="1-inserisci nome spiaggia" +
+                    "\n2-crea chalet" +
+                    "\n3-creazione chalet di default" +
+                    "\n-invio per uscire";
+            System.out.println(coseDaFare);
             String operazione=scanner.nextLine();
             while (!operazione.equals("")) {
                 switch (operazione) {
@@ -28,10 +33,18 @@ public class IgestoreChalet {
                         System.out.println("INSERISCI NOME CHALET");
                         creaChalet();
                         break;
+                    case "3":
+                        System.out.println("Hai selezionato crea Bar");
+                        creaBar();
+                    case "4":
+                        creaChaletDefault();
+                        System.out.println("chalet di default creato");
+                        break;
                     default:
                         break;
                 }
                 System.out.println("CHE COSA VUOI FARE");
+                System.out.println(coseDaFare);
                 operazione= scanner.nextLine();
             }
         }
@@ -69,12 +82,16 @@ public class IgestoreChalet {
             return false;
         }
 
-        public boolean creaBar(DefaultBar bar){
+        public boolean creaBar(){
+            System.out.println("Inserisci il nome del bar");
+            Scanner scanner=new Scanner(System.in);
+            String bar =scanner.nextLine();
+            masterController.getChalet().addBar(new DefaultBar(bar));
             return false;
         }
 
-        public boolean creaMenu(){
-            //TODO : da fare
+        public boolean creaBevanda(String nome, String descrizione,int quantita,double prezzo){
+            masterController.getChalet().getBar().creaBevanda(nome,descrizione,quantita,prezzo);
             return false;
         }
 
@@ -85,5 +102,9 @@ public class IgestoreChalet {
 
         public boolean creaAttiva(String nome, String luogo, Date dataInizio, Date dataFine, int numMassimoPersone){
             return false;
+        }
+
+        public void creaChaletDefault(){
+            masterController.creaChaletDefault();
         }
     }

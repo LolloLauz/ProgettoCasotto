@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class DefaultSpiaggia implements SpiaggiaInterface{
     private String nomeSpiaggia;
-    private ArrayList<DefaultPrenotazione> listaPrenotazioni;
+    private ArrayList<DefaultPrenotazione> listaPrenotazioni=new ArrayList<>();
     private ArrayList<Ombrellone> listaOmbrelloni;
     private ArrayList<Sdraio> listaSdraio;
     private ArrayList<DefaultAttivita> listaAttivita;
@@ -46,8 +46,7 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
     @Override
     public boolean addSdraioToPrenotazione(String idPrenotazione, int numSdraio) {
         for(int i=0;i<numSdraio;i++){
-            System.out.println(getSdraioLiberi(getPrenotaizioneById(idPrenotazione).getDataInizio(),getPrenotaizioneById(idPrenotazione).getDataFine()).get(i).getID());
-            System.out.println(getPrenotaizioneById(idPrenotazione).getListaSdraio().add(getSdraioLiberi(getPrenotaizioneById(idPrenotazione).getDataInizio(),getPrenotaizioneById(idPrenotazione).getDataFine()).get(i)));
+            getPrenotaizioneById(idPrenotazione).getListaSdraio().add(getSdraioLiberi(getPrenotaizioneById(idPrenotazione).getDataInizio(),getPrenotaizioneById(idPrenotazione).getDataFine()).get(i));
         }
         return true;
     }
@@ -149,6 +148,14 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
             System.out.println(sdraio.getID());
         }
 
+    }
+
+    public boolean removePrenotazione(String idPrenotazione) {
+        return listaPrenotazioni.remove(getPrenotaizioneById(idPrenotazione));
+    }
+
+    public ArrayList<DefaultPrenotazione> getListaPrenotazioni() {
+        return listaPrenotazioni;
     }
 }
 

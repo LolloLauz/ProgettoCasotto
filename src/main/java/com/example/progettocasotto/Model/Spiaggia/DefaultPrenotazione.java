@@ -70,5 +70,11 @@ public class DefaultPrenotazione implements PrenotazioneInterface{
             System.out.println(sdraio.getID());
         }
     }
+    public void removeOmbrelloni(){
+        listaOmbrelloni.clear();
+    }
 
+    public void setStatoPrenotazione(StatoPreOrd statoPrenotazione) {
+        this.statoPrenotazione = statoPrenotazione;
+    }
 }

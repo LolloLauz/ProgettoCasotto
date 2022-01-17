@@ -55,7 +55,10 @@ public class IAddettoAllaSpiaggia implements IAddettoAllaSpiaggiaView {
 
     @Override
     public void removePrenotazione() {
-
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("inserisci l'id della prenotazione che vuoi rimuovere");
+        String idPrenotazione=scanner.nextLine();
+        addettoASController.removePrenotazione(idPrenotazione);
     }
 
     @Override

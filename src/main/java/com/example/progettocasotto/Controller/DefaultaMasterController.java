@@ -1,6 +1,7 @@
 package com.example.progettocasotto.Controller;
 
 import com.example.progettocasotto.DataBase.GestoreDB;
+import com.example.progettocasotto.Model.Chalet.Bar.DefaultBar;
 import com.example.progettocasotto.Model.Chalet.DefaultChalet;
 import com.example.progettocasotto.Model.Chalet.DefaultSpiaggia;
 import com.example.progettocasotto.Model.Utenti.DefaultCliente;
@@ -12,6 +13,7 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
 
     DefaultChalet chalet;
     DefaultUserController userController;
+    DefaultGestoreController gestoreController;
     ArrayList<DefaultCliente> listaClienti=new ArrayList<>();
     GestoreDB gestoreDB=new GestoreDB();
 
@@ -34,18 +36,18 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
     @Override
     public boolean creaSpiaggia(String nome) {
         chalet.addSpiaggia(new DefaultSpiaggia(nome));
-        chalet.getSpiaggia().setNumeroOmbrelloni(10);
-        userController=new DefaultUserController(chalet.getSpiaggia());
         return true;
 
     }
 
     @Override
     public boolean creaBar(String nome) {
+        chalet.addBar(new DefaultBar(nome));
         return false;
     }
 
     private void getListaClientiFromDb(){
+        System.out.println("lista clienti caricate");
         listaClienti.addAll(gestoreDB.getListaClienti());
     }
 
@@ -63,6 +65,17 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
 
     public GestoreDB getGestoreDB() {
         return gestoreDB;
+    }
+
+    public void creaChaletDefault(){
+        chalet.setNome("chalet");
+        chalet.addSpiaggia(new DefaultSpiaggia("spiaggia"));
+        chalet.getSpiaggia().setNumeroSdraio(50);
+        chalet.getSpiaggia().setNumeroOmbrelloni(50);
+        chalet.addBar(new DefaultBar("bar"));
+        chalet.getBar().creaBevanda("acqua","bottiglia da 0,5lt",10,1.00);
+        chalet.getBar().creaBevanda("birra","bottiglia da 0,5lt",10,3.00);
+        chalet.getBar().creaBevanda("coca-cola","bottiglia da 0,5lt",10,2.50);
     }
 }
 

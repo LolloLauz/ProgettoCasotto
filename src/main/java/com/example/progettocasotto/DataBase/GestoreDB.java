@@ -30,7 +30,7 @@ public class GestoreDB {
                 System.out.println("LOG IN AVVENUTO CORRETTAMENTE");
                 privilegio = resultSet.getString("privilegio");
                 String nome = resultSet.getString("nome");
-                System.out.println("email:" + nome + " privilegio: " + privilegio);
+                System.out.println("nome :" + nome + " privilegio: " + privilegio);
             } else {
                 System.out.println("LOGIN Errato");
             }

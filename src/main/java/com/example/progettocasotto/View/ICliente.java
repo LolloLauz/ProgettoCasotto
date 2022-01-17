@@ -2,6 +2,7 @@ package com.example.progettocasotto.View;
 
 import com.example.progettocasotto.Controller.DefaultUserController;
 import com.example.progettocasotto.Controller.DefaultaMasterController;
+import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 
 
 import java.text.DateFormat;
@@ -16,24 +17,36 @@ public class ICliente {
    DefaultaMasterController masterController;
 
 
-    public ICliente(DefaultUserController userController, String currentUser, DefaultaMasterController masterController) {
-        this.userController = userController;
+    public ICliente(DefaultaMasterController masterController, String currentUser ) {
+        this.userController = new DefaultUserController(masterController);
         this.masterController=masterController;
         userController.setlistaClienti(masterController.getListaClienti());
         userController.setCurrentClient(currentUser);
+        System.out.println("1-Per prenotare l'ombrellone" +
+                "\n2-per prenotare uno sdraio" +
+                "\n3- prenota attivita" +
+                "\n4-ordina bibita" +
+                "\n-invio per uscire");
         Scanner scanner=new Scanner(System.in);
-        int i=scanner.nextInt();
+        String i=scanner.nextLine();
         switch (i){
-            case 1:
+            case "1":
                 prenotaOmbrellone();
+                System.out.println("per aggiungere delle sdraio alla tua prenotazione premi una lettera qualsiasi" +
+                        "\n altrimenti premi invio");
+                String input=scanner.nextLine();
+                if(input!=""){
+                    System.out.println("entra");
+                    prenotaSdraio(userController.getCurrentPrenotazione());
+                }
                 break;
-            case 2:
+            case "2":
                 prenotaSdraio();
                 break;
-            case 3:
+            case "3":
                 prenotaAttivita();
                 break;
-            case 4:
+            case "4":
                 ordinaBibita();
                 break;
             default:
@@ -41,7 +54,26 @@ public class ICliente {
         }
     }
 
+    private void prenotaSdraio(DefaultPrenotazione currentPrenotazione) {
+        userController.mostraSdraioLiberi(currentPrenotazione.getDataInizio(),currentPrenotazione.getDataFine());
+        System.out.println("inserisci il numero di sdraio che vuoi pernotare");
+        Scanner scanner=new Scanner(System.in);
+        String check=scanner.nextLine();
+        if(check!=""){
+            userController.prenotaSdraio(Integer.parseInt(check));
+        }
+        userController.confermaPernotazione();
+    }
+
     private boolean ordinaBibita() {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("stampa menu ");
+        //TODO: implementare metodo per stampare il menu
+        System.out.println("Inserisci la bevanda che vuoi ordinare");
+        String bevanda=scanner.nextLine();
+        System.out.println("Inserisci la quantita");
+        int quantita=scanner.nextInt();
+        userController.ordinaBibita(bevanda,quantita);
         return false;
     }
 
@@ -50,6 +82,27 @@ public class ICliente {
     }
 
     private boolean prenotaSdraio() {
+        Date dataInizio;
+        Date dataFine;
+        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+        try {
+            Scanner scanner=new Scanner(System.in);
+            System.out.println("INSERIRE LA DATA di inizio");
+            dataInizio=dateFormat.parse(scanner.nextLine());
+            System.out.println("Inserire la data di fine");
+            dataFine=dateFormat.parse(scanner.nextLine());
+            userController.mostraSdraioLiberi(dataInizio,dataFine);
+            System.out.println("inserisci il numero di sdraio che vuoi pernotare");
+            String check=scanner.nextLine();
+            if(check!=""){
+                userController.prenotaSdraio(Integer.parseInt(check));
+            }
+            userController.confermaPernotazione();
+            return true;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 
@@ -63,18 +116,17 @@ public class ICliente {
             dataInizio=dateFormat.parse(scanner.nextLine());
             System.out.println("Inserire la data di fine");
             dataFine=dateFormat.parse(scanner.nextLine());
-            userController.mostraStatoSpiaggia(dataInizio,dataFine);
-            userController.prenotaOmbrellone(dataInizio,dataFine);
+            userController.mostraOmbrelloniLiberi(dataInizio,dataFine);
+            userController.prenotaOmbrellone(dataInizio,dataInizio);
             System.out.println("Seleziona ombrellone");
             String check=scanner.nextLine();
             while(check!=""){
-                System.out.println("Seleziona ombrellone");
                 userController.selectOmbrellone(check);
+                System.out.println("Seleziona ombrellone");
                 check=scanner.nextLine();
             }
             userController.confermaPernotazione();
             return true;
-//            userController.prenotaOmbrellone(dataInizio,dataFine);
         } catch (ParseException e) {
             e.printStackTrace();
         }
