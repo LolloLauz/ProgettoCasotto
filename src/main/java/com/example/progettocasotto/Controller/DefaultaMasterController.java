@@ -12,14 +12,9 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
 
 
     DefaultChalet chalet;
-    DefaultUserController userController;
-    DefaultGestoreController gestoreController;
     ArrayList<DefaultCliente> listaClienti=new ArrayList<>();
     GestoreDB gestoreDB=new GestoreDB();
 
-    public DefaultUserController getUserController() {
-        return userController;
-    }
 
     public DefaultaMasterController() {
         this.chalet=new DefaultChalet();
@@ -35,7 +30,7 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
 
     @Override
     public boolean creaSpiaggia(String nome) {
-        chalet.addSpiaggia(new DefaultSpiaggia(nome));
+        chalet.addSpiaggia(nome);
         return true;
 
     }
@@ -69,7 +64,7 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
 
     public void creaChaletDefault(){
         chalet.setNome("chalet");
-        chalet.addSpiaggia(new DefaultSpiaggia("spiaggia"));
+        chalet.addSpiaggia("spiaggia");
         chalet.getSpiaggia().setNumeroSdraio(50);
         chalet.getSpiaggia().setNumeroOmbrelloni(50);
         chalet.addBar(new DefaultBar("bar"));

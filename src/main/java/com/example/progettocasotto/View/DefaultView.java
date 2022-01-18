@@ -6,7 +6,14 @@ import com.example.progettocasotto.DataBase.GestoreDB;
 import com.example.progettocasotto.DataBase.Privilegio;
 import com.example.progettocasotto.Model.Chalet.Bar.DefaultBar;
 import com.example.progettocasotto.Model.Chalet.DefaultChalet;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -42,8 +49,9 @@ public class DefaultView {
                     IAddettoAllaSpiaggia addettoAllaSpiaggia = new IAddettoAllaSpiaggia(masterController);
                     break;
                 case USER:
-                    nomeCliente = gestoreDB.getNomeUtente(email, password);
-                    ICliente iCliente = new ICliente(masterController, nomeCliente);
+
+//                    ClientView clientView=new ClientView(masterController,nomeCliente);
+//                    ICliente iCliente = new ICliente(masterController, nomeCliente);
             }
             System.out.println(masterController.getChalet().getSpiaggia().getNomeSpiaggia());
             System.out.println("per eseguire un nuovo accesso inserire premi una lettera qualsiasi " +

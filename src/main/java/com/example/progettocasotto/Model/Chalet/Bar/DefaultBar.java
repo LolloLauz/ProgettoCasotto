@@ -86,4 +86,8 @@ public class DefaultBar implements BarInterface{
             }
         }
     }
+
+    public ArrayList<Bevanda> getListaBevande() {
+        return listaBevande;
+    }
 }

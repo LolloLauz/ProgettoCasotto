@@ -5,7 +5,7 @@ import com.example.progettocasotto.Model.Chalet.DefaultSpiaggia;
 
 public interface ChaletInterface {
 
-    void addSpiaggia(DefaultSpiaggia spiaggia);
+    void addSpiaggia(String spiaggia);
 
     void addBar(DefaultBar bar);
 }

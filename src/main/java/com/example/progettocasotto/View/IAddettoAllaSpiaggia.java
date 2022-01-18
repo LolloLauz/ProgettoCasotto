@@ -5,19 +5,49 @@ import com.example.progettocasotto.Controller.DefaultaMasterController;
 import com.example.progettocasotto.DataBase.Privilegio;
 
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
-public class IAddettoAllaSpiaggia implements IAddettoAllaSpiaggiaView {
+public class IAddettoAllaSpiaggia{
 
     AddettoASController addettoASController;
 
     public IAddettoAllaSpiaggia(DefaultaMasterController masterController) {
         addettoASController=new AddettoASController(masterController);
 
+        System.out.println("1-Inserisci utente" +
+                "\n2-modifica prenotazione" +
+                "\n3-modifica periodo prenotazione" +
+                "\n4-rimuovi prenotazione" +
+                "\5-conferma pagamento");
+        Scanner scanner=new Scanner(System.in);
+        String input=scanner.nextLine();
+        switch (input){
+            case "1":
+                creaUtente();
+                break;
+            case "2":
+                modificaPrenotazione();
+                break;
+            case "3":
+                modificaPeriodoPrenotazione();
+                break;
+            case "4":
+                removePrenotazione();
+                break;
+            case "5":
+                convalidaPagamento();
+                break;
+            default:
+                break;
+        }
         creaUtente();
     }
 
-    @Override
     public void creaUtente() {
         Scanner scanner=new Scanner(System.in);
         System.out.println("Inserisci nome utente");
@@ -29,31 +59,8 @@ public class IAddettoAllaSpiaggia implements IAddettoAllaSpiaggiaView {
         System.out.println("password di default: password");
         addettoASController.creaUtente(nome,cognome,email,"password", Privilegio.USER);
         scanner.close();
-
-
     }
 
-    @Override
-    public void selezionaPeriodo() {
-
-    }
-
-    @Override
-    public void slectOmbrellone() {
-
-    }
-
-    @Override
-    public void selectSdraio() {
-
-    }
-
-    @Override
-    public void insertPeriodo() {
-
-    }
-
-    @Override
     public void removePrenotazione() {
         Scanner scanner=new Scanner(System.in);
         System.out.println("inserisci l'id della prenotazione che vuoi rimuovere");
@@ -61,8 +68,59 @@ public class IAddettoAllaSpiaggia implements IAddettoAllaSpiaggiaView {
         addettoASController.removePrenotazione(idPrenotazione);
     }
 
-    @Override
-    public void convalidaPagamento() {
 
+    public void convalidaPagamento() {
+        System.out.println("inserisci l'id della prenotazione");
+        Scanner scanner=new Scanner(System.in);
+        String idPrenotazione=scanner.nextLine();
+        addettoASController.convalidaPagamento(idPrenotazione);
+
+    }
+
+    public void modificaPrenotazione(){
+        String idPrenotazione;
+        ArrayList<String> listaOmbrelloni=new ArrayList<>();
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("inserisci l'id della prenotazione");
+        idPrenotazione=scanner.nextLine();
+        Date dataInizio;
+        Date dataFine;
+        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+        try {
+            System.out.println("INSERIRE LA DATA di inizio");
+            dataInizio=dateFormat.parse(scanner.nextLine());
+            System.out.println("Inserire la data di fine");
+            dataFine=dateFormat.parse(scanner.nextLine());
+            String input="a";
+            while(!input.equals("")){
+                System.out.println("inserisci l'ombrellone da aggiungere" +
+                        "\n altrimenti premi invio");
+                listaOmbrelloni.add(scanner.nextLine());
+            }
+            System.out.println("inserisci il numero di sdriao da aggiungere");
+            int numSdraio=Integer.parseInt(scanner.nextLine());
+            addettoASController.modificaPrenotazione(idPrenotazione,dataInizio,dataFine,listaOmbrelloni,numSdraio);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void modificaPeriodoPrenotazione(){
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("inserisci id prentaione");
+        String idPrenotazione=scanner.nextLine();
+        Date dataInizio;
+        Date dataFine;
+        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+        try {
+            System.out.println("INSERIRE LA DATA di inizio");
+            dataInizio=dateFormat.parse(scanner.nextLine());
+            System.out.println("Inserire la data di fine");
+            dataFine=dateFormat.parse(scanner.nextLine());
+            System.out.println("inserisci il numero di sdriao da aggiungere");
+            addettoASController.modificaPeriodoPrenotazione(idPrenotazione,dataInizio,dataFine);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

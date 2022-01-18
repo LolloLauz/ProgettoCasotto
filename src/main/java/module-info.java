@@ -15,4 +15,6 @@ module com.example.progettocasotto {
     exports com.example.progettocasotto;
     exports com.example.progettocasotto.DataBase;
     opens com.example.progettocasotto.DataBase to javafx.fxml;
+    exports com.example.progettocasotto.View;
+    opens com.example.progettocasotto.View to javafx.fxml;
 }

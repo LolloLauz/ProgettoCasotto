@@ -19,7 +19,7 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
         this.nomeSpiaggia = nomeSpiaggia;
         listaOmbrelloni=new ArrayList<>();
         listaSdraio=new ArrayList<>();
-        listaPrenotazioni=new ArrayList<>();
+
         listaAttivita=new ArrayList<>();
     }
 

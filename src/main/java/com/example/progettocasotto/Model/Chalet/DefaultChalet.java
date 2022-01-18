@@ -19,8 +19,8 @@ public class DefaultChalet implements ChaletInterface {
     }
 
     @Override
-    public void addSpiaggia(DefaultSpiaggia spiaggia) {
-        this.spiaggia=spiaggia;
+    public void addSpiaggia(String nome) {
+        spiaggia=new DefaultSpiaggia(nome);
     }
 
     @Override
@@ -32,6 +32,7 @@ public class DefaultChalet implements ChaletInterface {
     public void setNome(String nome) {
         this.nome=nome;
     }
+
     public DefaultSpiaggia getSpiaggia(){
         return spiaggia;
     }

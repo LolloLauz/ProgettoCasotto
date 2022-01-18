@@ -1,7 +1,6 @@
 package com.example.progettocasotto.Controller;
 
 
-import com.example.progettocasotto.Model.Chalet.DefaultChalet;
 import com.example.progettocasotto.Model.Chalet.DefaultSpiaggia;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
@@ -19,19 +18,19 @@ public class DefaultUserController implements UserContrllerInterface{
 
     public DefaultUserController(DefaultaMasterController masterController) {
         this.masterController=new DefaultaMasterController();
-        checkPrenotazioneCurrentCliente();
+//        System.out.println(masterController.getChalet().getSpiaggia().getNomeSpiaggia());
+//        checkPrenotazioneCurrentCliente();
     }
 
     private void checkPrenotazioneCurrentCliente() {
+        for (DefaultPrenotazione prenotazione:masterController.getChalet().getSpiaggia().getListaPrenotazioni()){
+            System.out.println(prenotazione.getID());
+        }
         if(!masterController.getChalet().getSpiaggia().getListaPrenotazioni().isEmpty()) {
             if (masterController.getChalet().getSpiaggia().getListaPrenotazioni().containsAll(currentCliente.getPrenotazioniAssociate())) {
                 System.out.println("le prenotazioni del cliente sono in pari con quelle della spiaggia");
             } else {
-                for (DefaultPrenotazione prenotazione : currentCliente.getPrenotazioniAssociate()) {
-                    if (!masterController.getChalet().getSpiaggia().getListaPrenotazioni().contains(prenotazione)) {
-                        currentCliente.getPrenotazioniAssociate().remove(prenotazione);
-                    }
-                }
+                currentCliente.getPrenotazioniAssociate().removeIf(prenotazione -> !masterController.getChalet().getSpiaggia().getListaPrenotazioni().contains(prenotazione));
             }
         }
     }
