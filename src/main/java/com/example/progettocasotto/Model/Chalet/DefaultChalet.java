@@ -9,13 +9,14 @@ public class DefaultChalet implements ChaletInterface {
 
     ArrayList<DefaultSpiaggia> listaSpiaggia=new ArrayList<>();
     ArrayList<DefaultCliente> listaClienti=new ArrayList<>();
+    ArrayList<DefaultAttivita> listaAttivita=new ArrayList<>();
     DefaultSpiaggia spiaggia;
     DefaultBar bar;
 
     private String nome;
 
-    public DefaultChalet() {
-
+    public DefaultChalet(String nome) {
+        this.nome=nome;
     }
 
     @Override
@@ -41,6 +42,10 @@ public class DefaultChalet implements ChaletInterface {
         return listaClienti;
     }
 
+    public boolean addCliente(DefaultCliente cliente){
+        return listaClienti.add(cliente);
+    }
+
     public DefaultCliente getClienteById(String idCliente){
         for(DefaultCliente cliente:listaClienti){
             if(cliente.getID().equals(idCliente)){
@@ -52,5 +57,31 @@ public class DefaultChalet implements ChaletInterface {
 
     public DefaultBar getBar() {
         return bar;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public  boolean creaAttivita(DefaultAttivita attivita) {
+        if(listaAttivita.contains(attivita)){
+            return false;
+        }
+        return listaAttivita.add(attivita);
+    }
+
+    public boolean addPartecipantiToAttivta(String nomeAttivita, int numPersone) {
+        return getAttivitaById(nomeAttivita).decrementaPosti(numPersone);
+    }
+    private DefaultAttivita getAttivitaById(String nomeAttivita){
+        for(DefaultAttivita attivita:listaAttivita){
+            if(attivita.getNome().equals(nomeAttivita))
+                return attivita;
+        }
+        return null;
+    }
+
+    public ArrayList<DefaultAttivita> getListaAttivita() {
+        return listaAttivita;
     }
 }

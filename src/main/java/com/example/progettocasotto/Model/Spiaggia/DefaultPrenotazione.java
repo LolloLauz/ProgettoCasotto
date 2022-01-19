@@ -7,15 +7,16 @@ public class DefaultPrenotazione implements PrenotazioneInterface{
     private String ID;
     private Date dataInizio;
     private Date dataFine;
+    private String idUtenteAssociato;
     private StatoPreOrd statoPrenotazione;
     ArrayList<Ombrellone> listaOmbrelloni=new ArrayList<>();
     ArrayList<Sdraio> listaSdraio;
 
     public DefaultPrenotazione(String ID, Date dataInizio, Date dataFine) {
+        this.idUtenteAssociato="";
         this.ID = ID;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
-        listaOmbrelloni=new ArrayList<>();
         listaSdraio=new ArrayList<>();
         statoPrenotazione= StatoPreOrd.PAGATA;
     }
@@ -33,6 +34,10 @@ public class DefaultPrenotazione implements PrenotazioneInterface{
     @Override
     public void setPeriodo(Date dataInizio, Date dataFine) {
 
+    }
+
+    public String getIdUtenteAssociato() {
+        return idUtenteAssociato;
     }
 
     @Override
@@ -60,14 +65,20 @@ public class DefaultPrenotazione implements PrenotazioneInterface{
         return ID;
     }
     public void stampaOmbrelloni(){
-        for(Ombrellone ombrellone:listaOmbrelloni){
-            System.out.println(ombrellone.getID());
+        if(!listaOmbrelloni.isEmpty()) {
+            System.out.println("\ngli ombrelloni prenotati sono: ");
+            for (Ombrellone ombrellone : listaOmbrelloni) {
+                System.out.print("|"+ombrellone.getID()+"|");
+            }
         }
     }
 
     public void stampaSdraio(){
-        for(Sdraio sdraio:listaSdraio){
-            System.out.println(sdraio.getID());
+        if(!listaSdraio.isEmpty()) {
+            System.out.println("\nle sdraio prenotati sono:");
+            for (Sdraio sdraio : listaSdraio) {
+                System.out.print("|"+sdraio.getID()+"|");
+            }
         }
     }
     public void removeOmbrelloni(){
@@ -76,5 +87,13 @@ public class DefaultPrenotazione implements PrenotazioneInterface{
 
     public void setStatoPrenotazione(StatoPreOrd statoPrenotazione) {
         this.statoPrenotazione = statoPrenotazione;
+    }
+
+    public void setIdUtenteAssociato(String nome){
+        this.idUtenteAssociato=nome;
+    }
+
+    public void removeSdraio() {
+        listaSdraio.clear();
     }
 }

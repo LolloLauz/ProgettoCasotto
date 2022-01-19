@@ -8,14 +8,14 @@ public class DefaultAttivita {
     int numeroPosti;
     Date dataInizio;
     Date dataFine;
-    String descrizione;
+    String luogo;
 
-    public DefaultAttivita(String nome, int numeroPosti, Date dataInizio, Date dataFine, String descrizione) {
+    public DefaultAttivita(String nome, String luogo, Date dataInizio, Date dataFine, int numeroPosti) {
         this.nome = nome;
         this.numeroPosti = numeroPosti;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
-        this.descrizione = descrizione;
+        this.luogo = luogo;
     }
 
     public void setNumeroPosti(int numeroPosti) {
@@ -51,7 +51,15 @@ public class DefaultAttivita {
         return dataFine;
     }
 
-    public String getDescrizione() {
-        return descrizione;
+    public String getLuogo() {
+        return luogo;
+    }
+
+    public boolean decrementaPosti(int numPersone) {
+        if(numPersone>numeroPosti){
+            return false;
+        }
+        System.out.println(numeroPosti);
+        return true;
     }
 }

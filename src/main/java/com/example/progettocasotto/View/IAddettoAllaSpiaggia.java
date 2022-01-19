@@ -78,9 +78,12 @@ public class IAddettoAllaSpiaggia{
     }
 
     public void modificaPrenotazione(){
+        System.out.println("inserisci il nome utente a cui si vuole modificare una prentoazione");
+        Scanner scanner=new Scanner(System.in);
+        String nomeCliente=scanner.nextLine();
+        addettoASController.getPrenotazioniCliete(nomeCliente);
         String idPrenotazione;
         ArrayList<String> listaOmbrelloni=new ArrayList<>();
-        Scanner scanner=new Scanner(System.in);
         System.out.println("inserisci l'id della prenotazione");
         idPrenotazione=scanner.nextLine();
         Date dataInizio;
@@ -99,6 +102,7 @@ public class IAddettoAllaSpiaggia{
             }
             System.out.println("inserisci il numero di sdriao da aggiungere");
             int numSdraio=Integer.parseInt(scanner.nextLine());
+
             addettoASController.modificaPrenotazione(idPrenotazione,dataInizio,dataFine,listaOmbrelloni,numSdraio);
         } catch (ParseException e) {
             e.printStackTrace();

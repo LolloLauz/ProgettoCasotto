@@ -1,6 +1,9 @@
 package com.example.progettocasotto.Controller;
 
 
+import com.example.progettocasotto.Model.Chalet.Bar.Bevanda;
+import com.example.progettocasotto.Model.Chalet.Bar.DefaultOrdinazione;
+import com.example.progettocasotto.Model.Chalet.DefaultAttivita;
 import com.example.progettocasotto.Model.Chalet.DefaultSpiaggia;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
@@ -11,15 +14,15 @@ import java.util.Date;
 import java.util.Random;
 
 public class DefaultUserController implements UserContrllerInterface{
-    DefaultCliente currentCliente;
-    ArrayList<DefaultCliente> listaClienti=new ArrayList<>();
-    DefaultPrenotazione prenotazione;
-    DefaultaMasterController masterController;
+    private DefaultCliente currentCliente;
+    private ArrayList<DefaultCliente> listaClienti=new ArrayList<>();
+    private DefaultPrenotazione prenotazione;
+    private DefaultOrdinazione ordinazione;
+    private DefaultaMasterController masterController;
 
     public DefaultUserController(DefaultaMasterController masterController) {
-        this.masterController=new DefaultaMasterController();
-//        System.out.println(masterController.getChalet().getSpiaggia().getNomeSpiaggia());
-//        checkPrenotazioneCurrentCliente();
+        this.masterController=masterController;
+        checkPrenotazioneCurrentCliente();
     }
 
     private void checkPrenotazioneCurrentCliente() {
@@ -39,6 +42,7 @@ public class DefaultUserController implements UserContrllerInterface{
         Random random=new Random();
         String nomePrenotazione=String.valueOf(random.nextInt());
         prenotazione=new DefaultPrenotazione(nomePrenotazione,dataInizio,dataFine);
+        prenotazione.setIdUtenteAssociato(currentCliente.getID());
         masterController.getChalet().getSpiaggia().addPrenotazione(prenotazione.getID(),dataInizio,dataFine);
     }
 
@@ -58,9 +62,10 @@ public class DefaultUserController implements UserContrllerInterface{
 
     public void ordinaBibita(String bevanda,int quantita){
         Random random=new Random();
-        String nomePrenotazione=String.valueOf(random.nextInt());
-        masterController.getChalet().getBar().creaOrdinazione(nomePrenotazione);
-        masterController.getChalet().getBar().selezionaBevanda(nomePrenotazione,bevanda,quantita);
+        String nomeOrdinazione=String.valueOf(random.nextInt());
+        masterController.getChalet().getBar().creaOrdinazione(nomeOrdinazione);
+        masterController.getChalet().getBar().selezionaBevanda(nomeOrdinazione,bevanda,quantita);
+        this.ordinazione=masterController.getChalet().getBar().getOrdinazioneById(nomeOrdinazione);
 
     }
 
@@ -82,7 +87,14 @@ public class DefaultUserController implements UserContrllerInterface{
         return this.listaClienti.addAll(listaClienti);
     }
 
-    public boolean prenotaSdraio(int numSdraio) {
+    public boolean prenotaSdraio(Date dataInizio, Date dataFine){
+        Random random=new Random();
+        String nomePrenotazione=String.valueOf(random.nextInt());
+        prenotazione=new DefaultPrenotazione(nomePrenotazione,dataInizio,dataFine);
+        masterController.getChalet().getSpiaggia().addPrenotazione(prenotazione.getID(),dataInizio,dataFine);
+        return true;
+    }
+    public boolean selectNumSdraio(int numSdraio) {
         if(masterController.getChalet().getSpiaggia().getSdraioLiberi(prenotazione.getDataInizio(),prenotazione.getDataFine()).isEmpty()){
             System.out.println("non ci sono sdraio disponibili");
             return false;
@@ -95,5 +107,41 @@ public class DefaultUserController implements UserContrllerInterface{
     }
     public DefaultSpiaggia getChalet(){
         return masterController.getChalet().getSpiaggia();
+    }
+
+    public void stampaMenu() {
+        for(Bevanda bevanda:masterController.getChalet().getBar().getListaBevande()) {
+            System.out.println("|"+bevanda.getNome()+"     "+bevanda.getDescrizione()+"|");
+        }
+    }
+
+    public void getOrdinazione() {
+        ordinazione.stampaOrdinazione();
+    }
+
+    public boolean prenotaAttivita(String nomeAttivita, int numPersone) {
+
+        return masterController.addPartecipantiToAttivita(nomeAttivita,numPersone);
+    }
+
+    public void getListaAttivita() {
+        for(DefaultAttivita attivita:masterController.getChalet().getListaAttivita()){
+            System.out.println(attivita.getNome()+" data inizio "+ attivita.getDataInizio().toString()+" data fine "+attivita.getDataFine().toString()+" numero posti disponibili "+attivita.getNumeroPosti());
+        }
+    }
+
+    public boolean prenotaAttivita(String nomeAttivita) {
+        for(DefaultAttivita attivita:masterController.getChalet().getListaAttivita()){
+            if(attivita.getNome().equals(nomeAttivita)){
+                if(attivita.getNumeroPosti()<=0){
+                    System.out.println("Posti esauriti");
+                    return false;
+                }else {
+                    System.out.println("il numero di posti rimanenti e'" + attivita.getNumeroPosti());
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

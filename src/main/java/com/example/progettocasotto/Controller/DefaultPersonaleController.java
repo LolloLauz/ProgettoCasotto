@@ -1,6 +1,7 @@
 package com.example.progettocasotto.Controller;
 
 import com.example.progettocasotto.DataBase.Privilegio;
+import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
 import com.example.progettocasotto.Model.Spiaggia.Sdraio;
 import com.example.progettocasotto.Model.Spiaggia.StatoPreOrd;
@@ -73,4 +74,31 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
         return true;
     }
 
+    public void getPrenotazioniCliete(String nomeCliente) {
+        for(DefaultPrenotazione prenotazione:masterController.getChalet().getSpiaggia().getPrenotazioniCliente(nomeCliente)){
+            System.out.println("numero della prenotazione :"+prenotazione.getID()+"" +
+                    "\ndata inizio: "+ prenotazione.getDataInizio()+" dataFine:"+prenotazione.getDataFine());
+            if(!prenotazione.getListaOmbrelloni().isEmpty()){
+                for(Ombrellone ombrellone:prenotazione.getListaOmbrelloni()){
+                    System.out.println("numero dell'ombrellone prenotato: "+ ombrellone.getID());
+                }
+            }
+            if(!prenotazione.getListaSdraio().isEmpty()){
+                System.out.println("numero sdraio affittati : "+prenotazione.getListaSdraio().size());
+            }
+        }
+
+    }
+
+    public void inserimentoSdraio(String idPrenotazione, int numSdraio) {
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).removeSdraio();
+        masterController.getChalet().getSpiaggia().addSdraioToPrenotazione(idPrenotazione,numSdraio);
+    }
+
+    public void inserimentoOmbrelloni(String idPrenotazione, ArrayList<String> listaOmbrelloni) {
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).removeOmbrelloni();
+        for(String numeroOmbrellone:listaOmbrelloni) {
+            masterController.getChalet().getSpiaggia().addOmbrelloneToPrenotazione(idPrenotazione,new Ombrellone(numeroOmbrellone));
+        }
+    }
 }

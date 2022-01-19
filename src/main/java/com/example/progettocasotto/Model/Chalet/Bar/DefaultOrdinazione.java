@@ -1,7 +1,6 @@
 package com.example.progettocasotto.Model.Chalet.Bar;
 
 import com.example.progettocasotto.Model.Spiaggia.StatoPreOrd;
-import org.controlsfx.property.BeanProperty;
 
 import java.util.*;
 
@@ -9,12 +8,11 @@ public class DefaultOrdinazione implements OrdinazioneInterface {
 
     private String ID;
 
-    private HashMap<Bevanda,Integer> listaBevandaMappa;
+    private Map<Bevanda,Integer> mappaBevande=new HashMap<>();
     private StatoPreOrd statoOrdinazione;
 
     public DefaultOrdinazione(String ID) {
         this.ID = ID;
-        listaBevandaMappa=new HashMap<>();
         statoOrdinazione=StatoPreOrd.PAGATA;
     }
 
@@ -23,16 +21,17 @@ public class DefaultOrdinazione implements OrdinazioneInterface {
     }
 
     public Set<Bevanda> getListaBevande() {
-        return listaBevandaMappa.keySet();
+        return mappaBevande.keySet();
     }
 
     @Override
     public void addBevanda(Bevanda bevanda,int quantitaOrdinata) {
-        listaBevandaMappa.put(bevanda,quantitaOrdinata);
+        this.mappaBevande.put(bevanda,quantitaOrdinata);
+
     }
 
     public Bevanda getBevandaById(String nome){
-        for(Bevanda bevanda:listaBevandaMappa.keySet()){
+        for(Bevanda bevanda: mappaBevande.keySet()){
             if(bevanda.getNome().equals(nome)){
                 return bevanda;
             }
@@ -53,7 +52,13 @@ public class DefaultOrdinazione implements OrdinazioneInterface {
         return Objects.hash(ID);
     }
 
-    public HashMap<Bevanda, Integer> getListaBevandaMappa() {
-        return listaBevandaMappa;
+    public Map<Bevanda, Integer> getMappaBevande() {
+        return mappaBevande;
+    }
+
+    public void stampaOrdinazione() {
+        for(Bevanda bevanda:getListaBevande()){
+            System.out.println(bevanda.getNome()+" quantita "+ getMappaBevande().get(bevanda));
+        }
     }
 }

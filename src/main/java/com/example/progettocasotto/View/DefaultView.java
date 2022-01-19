@@ -31,6 +31,8 @@ public class DefaultView {
     private void provametodi() {
         System.out.println("BENVENUTO AL PROGETTO CASOTTO");
         String accessoRieseguito="c";
+        masterController.creaChaletDefault();
+        masterController.stampaStatoSpiaggia();
         while(accessoRieseguito!="") {
             Scanner scanner = new Scanner(System.in);
             System.out.println("INSERISCI EMAIL UTENTE");
@@ -42,18 +44,17 @@ public class DefaultView {
             Privilegio privilegio = gestoreDB.getPrivilegio(email, password);
             switch (privilegio) {
                 case SUPERADMIN:
-                    nomeCliente = gestoreDB.getNomeUtente(email, password);
+                    System.out.println(masterController.getChalet().getSpiaggia().getNomeSpiaggia());
                     IgestoreChalet gestoreChalet = new IgestoreChalet(masterController);
                     break;
                 case ADMIN:
                     IAddettoAllaSpiaggia addettoAllaSpiaggia = new IAddettoAllaSpiaggia(masterController);
                     break;
                 case USER:
-
+                    nomeCliente = gestoreDB.getNomeUtente(email, password);
 //                    ClientView clientView=new ClientView(masterController,nomeCliente);
-//                    ICliente iCliente = new ICliente(masterController, nomeCliente);
+                    ICliente iCliente = new ICliente(masterController, nomeCliente);
             }
-            System.out.println(masterController.getChalet().getSpiaggia().getNomeSpiaggia());
             System.out.println("per eseguire un nuovo accesso inserire premi una lettera qualsiasi " +
                     "\n per uscire premi invio" );
             accessoRieseguito=scanner.nextLine();
@@ -62,12 +63,12 @@ public class DefaultView {
     }
 
     public void testMetodi(){
-        DefaultChalet chalet=new DefaultChalet();
-        chalet.setNome("chalet");
+//        DefaultChalet chalet=new DefaultChalet();
+//        chalet.setNome("chalet");
         DefaultBar bar=new DefaultBar("bar");
         bar.creaBevanda("acqua","bottiglia d'acqua da 0,5lt",10,1.00);
         bar.creaOrdinazione("123");
         bar.selezionaBevanda("123","acqua",40);
-        bar.stampaListaPrenotazioni();
+//        bar.stampaListaPrenotazioni();
     }
 }

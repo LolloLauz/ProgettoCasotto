@@ -7,6 +7,7 @@ import com.example.progettocasotto.Model.Chalet.Bar.Bevanda;
 import com.example.progettocasotto.Model.Chalet.Bar.DefaultBar;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -58,9 +59,6 @@ public class IgestoreChalet {
                     break;
                 case "5":
                     modificaPrenotazione();
-                    break;
-                case "6":
-                    modificaPeriodoPrenotazione();
                     break;
                 case "7":
                     creaUtente();
@@ -138,12 +136,29 @@ public class IgestoreChalet {
         return true;
     }
 
-    public boolean inserisciMenu() {
-        //TODO: da fare
-        return false;
-    }
 
-    public boolean creaAttiva(String nome, String luogo, Date dataInizio, Date dataFine, int numMassimoPersone) {
+    public boolean creaAttiva() {
+        System.out.println("inserisci il nome dell'attivita");
+        Scanner scanner=new Scanner(System.in);
+        String nome=scanner.nextLine();
+        System.out.println("inserisci il luogo dove si svolgera l'attivita");
+        String luogo=scanner.nextLine();
+        Date dataInizio;
+        Date dataFine;
+        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+        try {
+            System.out.println("Inserire la data di inizio");
+            dataInizio=dateFormat.parse(scanner.nextLine());
+            System.out.println("Inserire la data di fine");
+            dataFine=dateFormat.parse(scanner.nextLine());
+            System.out.println("inserisci il numero di sdraio che vuoi pernotare");
+            String check=scanner.nextLine();
+            System.out.println("inserisci un numero massimo di persone che possono partecipare");
+            int numMassimoPersone=Integer.parseInt(scanner.nextLine());
+            return masterController.creaAttivita(nome,luogo,dataInizio,dataFine,numMassimoPersone);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
@@ -161,7 +176,6 @@ public class IgestoreChalet {
         String email = scanner.nextLine();
         System.out.println("password di default: password");
         gestoreController.creaUtente(nome, cognome, email, "password", Privilegio.USER);
-        scanner.close();
     }
 
     public void removePrenotazione() {
@@ -181,40 +195,73 @@ public class IgestoreChalet {
     }
 
     public void modificaPrenotazione() {
-        for(DefaultPrenotazione prenotazione:masterController.getChalet().getSpiaggia().getListaPrenotazioni()){
-            System.out.println(prenotazione.getID());
-        }
+        System.out.println("inserisci il nome utente a cui modificare la prenotazione");
+        Scanner scanner = new Scanner(System.in);
+        String nomeUtente=scanner.nextLine();
+        gestoreController.getPrenotazioniCliete(nomeUtente);
         String idPrenotazione;
         ArrayList<String> listaOmbrelloni = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
         System.out.println("inserisci l'id della prenotazione");
         idPrenotazione = scanner.nextLine();
-        Date dataInizio;
-        Date dataFine;
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
-        try {
-            System.out.println("INSERIRE LA DATA di inizio");
-            dataInizio = dateFormat.parse(scanner.nextLine());
-            System.out.println("Inserire la data di fine");
-            dataFine = dateFormat.parse(scanner.nextLine());
-            String input = "a";
-            while (!input.equals("")) {
-                System.out.println("inserisci l'ombrellone da aggiungere" +
-                        "\n altrimenti premi invio");
-                listaOmbrelloni.add(scanner.nextLine());
-            }
-            System.out.println("inserisci il numero di sdriao da aggiungere");
-            int numSdraio = Integer.parseInt(scanner.nextLine());
-            gestoreController.modificaPrenotazione(idPrenotazione, dataInizio, dataFine, listaOmbrelloni, numSdraio);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        System.out.println("che cosa vuoi fare " +
+                "\n1-Modificare il periodo della prenotazione" +
+                "\n2-Inserire altri ombrelloni alla prenotazione" +
+                "\n3-Inserire altri sdraio alla prenotazione");
+        String scelta=scanner.nextLine();
+        switch (scelta){
+            case "1":
+                modificaPeriodoPrenotazione(idPrenotazione);
+                break;
+            case "2":
+                inserimentoOmbrelloni(idPrenotazione);
+            case "3":
+                inserimentoSdriao(idPrenotazione);
         }
+//        Date dataInizio;
+//        Date dataFine;
+//        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+//        try {
+//            System.out.println("INSERIRE LA DATA di inizio");
+//            dataInizio = dateFormat.parse(scanner.nextLine());
+//            System.out.println("Inserire la data di fine");
+//            dataFine = dateFormat.parse(scanner.nextLine());
+//            String input = "a";
+//            while (!input.equals("")) {
+//                System.out.println("inserisci l'ombrellone da aggiungere" +
+//                        "\n altrimenti premi invio");
+//                input=scanner.nextLine();
+//                listaOmbrelloni.add(input);
+//            }
+//            System.out.println("inserisci il numero di sdraio da aggiungere");
+//            int numSdraio = Integer.parseInt(scanner.nextLine());
+//            gestoreController.modificaPrenotazione(idPrenotazione, dataInizio, dataFine, listaOmbrelloni, numSdraio);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
     }
 
-    public void modificaPeriodoPrenotazione() {
+    private void inserimentoSdriao(String idPrenotazione) {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("inserisci il numero di sdraio da aggiungere");
+        int numSdraio = Integer.parseInt(scanner.nextLine());
+        gestoreController.inserimentoSdraio(idPrenotazione,numSdraio);
+    }
+
+    private void inserimentoOmbrelloni(String idPrenotazione) {
+        ArrayList<String> listaOmbrelloni = new ArrayList<>();
+        Scanner scanner=new Scanner(System.in);
+        String input = "a";
+        while (!input.equals("")) {
+            System.out.println("inserisci l'ombrellone da aggiungere" +
+                    "\n altrimenti premi invio");
+            input=scanner.nextLine();
+            listaOmbrelloni.add(input);
+        }
+        gestoreController.inserimentoOmbrelloni(idPrenotazione,listaOmbrelloni);
+    }
+
+    private void modificaPeriodoPrenotazione(String idPrenotazione) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("inserisci id prentaione");
-        String idPrenotazione = scanner.nextLine();
         Date dataInizio;
         Date dataFine;
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);

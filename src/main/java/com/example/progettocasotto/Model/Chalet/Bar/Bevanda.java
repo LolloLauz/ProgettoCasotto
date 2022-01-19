@@ -53,4 +53,8 @@ public class Bevanda {
     public int hashCode() {
         return Objects.hash(nome);
     }
+
+    public double getPrezzo() {
+        return prezzo;
+    }
 }

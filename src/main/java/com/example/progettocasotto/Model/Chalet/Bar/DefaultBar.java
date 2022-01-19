@@ -61,7 +61,7 @@ public class DefaultBar implements BarInterface{
         listaBevande.add(new Bevanda(nome,descrizione,quantita,prezzo));
     }
 
-    private  DefaultOrdinazione getOrdinazioneById(String idOridnazione){
+    public  DefaultOrdinazione getOrdinazioneById(String idOridnazione){
         for(DefaultOrdinazione ordinazione:listaOrdinazioni){
             if(ordinazione.getID().equals(idOridnazione)){
                 return  ordinazione;
@@ -78,11 +78,11 @@ public class DefaultBar implements BarInterface{
         return null;
     }
 
-    public void stampaListaPrenotazioni(){
+    public void stampaListaOrdinazioni(){
         for(DefaultOrdinazione ordinazione:listaOrdinazioni){
             System.out.println(ordinazione.getID()+":");
             for (Bevanda bevanda:ordinazione.getListaBevande()){
-                System.out.println(bevanda.getNome()+" quantita "+ ordinazione.getListaBevandaMappa().get(bevanda));
+                System.out.println(bevanda.getNome()+" quantita "+ ordinazione.getMappaBevande().get(bevanda));
             }
         }
     }

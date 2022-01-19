@@ -60,24 +60,37 @@ public class ICliente {
         Scanner scanner=new Scanner(System.in);
         String check=scanner.nextLine();
         if(check!=""){
-            userController.prenotaSdraio(Integer.parseInt(check));
+            userController.selectNumSdraio(Integer.parseInt(check));
         }
         userController.confermaPernotazione();
     }
 
     private boolean ordinaBibita() {
         Scanner scanner=new Scanner(System.in);
-        System.out.println("stampa menu ");
-        //TODO: implementare metodo per stampare il menu
+        System.out.println("--MENU-- ");
+        userController.stampaMenu();
         System.out.println("Inserisci la bevanda che vuoi ordinare");
         String bevanda=scanner.nextLine();
         System.out.println("Inserisci la quantita");
         int quantita=scanner.nextInt();
         userController.ordinaBibita(bevanda,quantita);
-        return false;
+        userController.getOrdinazione();
+        return true;
     }
 
     private boolean prenotaAttivita() {
+        userController.getListaAttivita();
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("inserisci il nome dell'attivita a cui vuoi partecipare");
+        String nomeAttivita=scanner.nextLine();
+        if(userController.prenotaAttivita(nomeAttivita)){
+            System.out.println("inserisci il numero di persone che vuoi iscrivere");
+            int numPersone=Integer.parseInt(scanner.nextLine());
+            if(userController.prenotaAttivita(nomeAttivita,numPersone)){
+                return true;
+            }
+            System.out.println("ops... qualcosa sembre essere andato storto");
+        }
         return false;
     }
 
@@ -92,10 +105,11 @@ public class ICliente {
             System.out.println("Inserire la data di fine");
             dataFine=dateFormat.parse(scanner.nextLine());
             userController.mostraSdraioLiberi(dataInizio,dataFine);
+            userController.prenotaSdraio(dataInizio,dataFine);
             System.out.println("inserisci il numero di sdraio che vuoi pernotare");
             String check=scanner.nextLine();
             if(check!=""){
-                userController.prenotaSdraio(Integer.parseInt(check));
+                userController.selectNumSdraio(Integer.parseInt(check));
             }
             userController.confermaPernotazione();
             return true;
