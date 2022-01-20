@@ -32,15 +32,13 @@ public class DefaultView {
         System.out.println("BENVENUTO AL PROGETTO CASOTTO");
         String accessoRieseguito="c";
         masterController.creaChaletDefault();
-        masterController.stampaStatoSpiaggia();
-        while(accessoRieseguito!="") {
+        while(accessoRieseguito!="1") {
             Scanner scanner = new Scanner(System.in);
             System.out.println("INSERISCI EMAIL UTENTE");
             String email = scanner.nextLine();
             System.out.println("INSERISCI PASSWORD");
             String password = scanner.nextLine();
             String nomeCliente = "";
-            //eseguo un login e controllo che privilegio ha l'utente
             Privilegio privilegio = gestoreDB.getPrivilegio(email, password);
             switch (privilegio) {
                 case SUPERADMIN:
@@ -55,8 +53,8 @@ public class DefaultView {
 //                    ClientView clientView=new ClientView(masterController,nomeCliente);
                     ICliente iCliente = new ICliente(masterController, nomeCliente);
             }
-            System.out.println("per eseguire un nuovo accesso inserire premi una lettera qualsiasi " +
-                    "\n per uscire premi invio" );
+            System.out.println("per eseguire un nuovo accesso premi invio " +
+                    "\n per uscire premi 1" );
             accessoRieseguito=scanner.nextLine();
         }
         masterController.stampaStatoSpiaggia();

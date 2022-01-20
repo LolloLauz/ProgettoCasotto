@@ -46,7 +46,7 @@ public class ClientViev {
 
     public void initialize(DefaultaMasterController masterController,String nomeCliente) {
         System.out.println(masterController.getChalet().getSpiaggia().getNomeSpiaggia());
-        this.userController=new DefaultUserController(masterController);
+//        this.userController=new DefaultUserController(masterController);
         this.masterController=masterController;
         userController.setlistaClienti(masterController.getListaClienti());
         userController.setCurrentClient(nomeCliente);    }

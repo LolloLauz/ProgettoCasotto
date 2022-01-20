@@ -18,7 +18,6 @@ public class IAddettoAllaSpiaggia{
 
     public IAddettoAllaSpiaggia(DefaultaMasterController masterController) {
         addettoASController=new AddettoASController(masterController);
-
         System.out.println("1-Inserisci utente" +
                 "\n2-modifica prenotazione" +
                 "\n3-modifica periodo prenotazione" +
@@ -33,9 +32,6 @@ public class IAddettoAllaSpiaggia{
             case "2":
                 modificaPrenotazione();
                 break;
-            case "3":
-                modificaPeriodoPrenotazione();
-                break;
             case "4":
                 removePrenotazione();
                 break;
@@ -45,7 +41,6 @@ public class IAddettoAllaSpiaggia{
             default:
                 break;
         }
-        creaUtente();
     }
 
     public void creaUtente() {
@@ -78,41 +73,56 @@ public class IAddettoAllaSpiaggia{
     }
 
     public void modificaPrenotazione(){
-        System.out.println("inserisci il nome utente a cui si vuole modificare una prentoazione");
-        Scanner scanner=new Scanner(System.in);
-        String nomeCliente=scanner.nextLine();
-        addettoASController.getPrenotazioniCliete(nomeCliente);
+        System.out.println("inserisci il nome utente a cui modificare la prenotazione");
+        Scanner scanner = new Scanner(System.in);
+        String nomeUtente=scanner.nextLine();
+        addettoASController.getPrenotazioniCliete(nomeUtente);
         String idPrenotazione;
-        ArrayList<String> listaOmbrelloni=new ArrayList<>();
         System.out.println("inserisci l'id della prenotazione");
-        idPrenotazione=scanner.nextLine();
-        Date dataInizio;
-        Date dataFine;
-        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
-        try {
-            System.out.println("INSERIRE LA DATA di inizio");
-            dataInizio=dateFormat.parse(scanner.nextLine());
-            System.out.println("Inserire la data di fine");
-            dataFine=dateFormat.parse(scanner.nextLine());
-            String input="a";
-            while(!input.equals("")){
-                System.out.println("inserisci l'ombrellone da aggiungere" +
-                        "\n altrimenti premi invio");
-                listaOmbrelloni.add(scanner.nextLine());
-            }
-            System.out.println("inserisci il numero di sdriao da aggiungere");
-            int numSdraio=Integer.parseInt(scanner.nextLine());
-
-            addettoASController.modificaPrenotazione(idPrenotazione,dataInizio,dataFine,listaOmbrelloni,numSdraio);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        idPrenotazione = scanner.nextLine();
+        System.out.println("che cosa vuoi fare " +
+                "\n1-Modificare il periodo della prenotazione" +
+                "\n2-Inserire altri ombrelloni alla prenotazione" +
+                "\n3-Inserire altri sdraio alla prenotazione");
+        String scelta=scanner.nextLine();
+        switch (scelta){
+            case "1":
+                modificaPeriodoPrenotazione(idPrenotazione);
+                break;
+            case "2":
+                inserimentoOmbrelloni(idPrenotazione);
+                break;
+            case "3":
+                inserimentoSdriao(idPrenotazione);
+                break;
+            default:
+                break;
         }
     }
 
-    public void modificaPeriodoPrenotazione(){
+    private void inserimentoSdriao(String idPrenotazione) {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("inserisci il numero di sdraio da aggiungere");
+        int numSdraio = Integer.parseInt(scanner.nextLine());
+        addettoASController.inserimentoSdraio(idPrenotazione,numSdraio);
+    }
+
+    private void inserimentoOmbrelloni(String idPrenotazione) {
+        ArrayList<String> listaOmbrelloni = new ArrayList<>();
+        Scanner scanner=new Scanner(System.in);
+        String input = "a";
+        while (!input.equals("")) {
+            System.out.println("inserisci l'ombrellone da aggiungere" +
+                    "\n altrimenti premi invio");
+            input=scanner.nextLine();
+            listaOmbrelloni.add(input);
+        }
+        addettoASController.inserimentoOmbrelloni(idPrenotazione,listaOmbrelloni);
+    }
+
+    public void modificaPeriodoPrenotazione(String idPrenotazione){
         Scanner scanner=new Scanner(System.in);
         System.out.println("inserisci id prentaione");
-        String idPrenotazione=scanner.nextLine();
         Date dataInizio;
         Date dataFine;
         DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);

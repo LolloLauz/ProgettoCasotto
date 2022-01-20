@@ -91,14 +91,19 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
     }
 
     public void inserimentoSdraio(String idPrenotazione, int numSdraio) {
-        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).removeSdraio();
+//        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).removeSdraio();
         masterController.getChalet().getSpiaggia().addSdraioToPrenotazione(idPrenotazione,numSdraio);
     }
 
     public void inserimentoOmbrelloni(String idPrenotazione, ArrayList<String> listaOmbrelloni) {
-        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).removeOmbrelloni();
+//        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).removeOmbrelloni();
         for(String numeroOmbrellone:listaOmbrelloni) {
             masterController.getChalet().getSpiaggia().addOmbrelloneToPrenotazione(idPrenotazione,new Ombrellone(numeroOmbrellone));
         }
+    }
+
+    @Override
+    public void prenotazioneManuale(String utente,) {
+
     }
 }

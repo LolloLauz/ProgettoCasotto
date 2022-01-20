@@ -26,49 +26,46 @@ public class IgestoreChalet {
         Scanner scanner = new Scanner(System.in);
         System.out.println("SE E' IL TUO PRIMO ACCESSO PREMI 2");
         System.out.println("CHE COSA VUOI FARE");
-        String coseDaFare = "1-inserisci nome spiaggia" +
-                "\n2-crea chalet" +
-                "\n3-creazione chalet di default" +
-                "\n4-crea chalet di default" +
-                "\n5-modifica prenotazione" +
-                "\n6-modifica periodo prenotazione" +
-                "\n7-crea utente" +
-                "\n8-convalida pagamento" +
-                "\n9-rimuovi un prenotazione" +
+        String coseDaFare = "1-crea chalet" +
+                "\n2-crea spiaggia" +
+                "\n3-crea bar" +
+                "\n4-modifica prenotazione" +
+                "\n5-prenotazione manuale" +
+                "\n6-convalida pagamento" +
+                "\n7-rimuovi un prenotazione" +
+                "\n8-creazione attivita"+
                 "\n-invio per uscire";
         System.out.println(coseDaFare);
         String operazione = scanner.nextLine();
         while (!operazione.equals("")) {
             switch (operazione) {
                 case "1":
-                    System.out.println("HAI SELEZIONATO INSERISCI SPIAGGIA");
-                    System.out.println("INSERISCI NOME SPIAGGIA");
-                    addSpiaggia();
-                    break;
-                case "2":
-                    System.out.println("HAI SELEZIONATO CREA CHALET ");
+                    System.out.println("HAI SELEZIONATO CREA CHALET");
                     System.out.println("INSERISCI NOME CHALET");
                     creaChalet();
+                    break;
+                case "2":
+                    System.out.println("HAI SELEZIONATO CREA SPIAGGIA ");
+                    System.out.println("INSERISCI NOME SPIAGGIA");
+                    addSpiaggia();
                     break;
                 case "3":
                     System.out.println("Hai selezionato crea Bar");
                     creaBar();
                 case "4":
-                    creaChaletDefault();
-                    System.out.println("chalet di default creato");
-                    break;
-                case "5":
                     modificaPrenotazione();
                     break;
-                case "7":
-                    creaUtente();
+                case "5":
+                    prenotazioneManuale();
                     break;
-                case"8":
+                case"6":
                     convalidaPagamento();
                     break;
-                case"9":
+                case"7":
                     removePrenotazione();
                     break;
+                case "8":
+                    crazioneAttivita();
                 default:
                     break;
             }
@@ -76,6 +73,34 @@ public class IgestoreChalet {
             System.out.println(coseDaFare);
             operazione = scanner.nextLine();
         }
+    }
+
+    private void crazioneAttivita() {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("inserisci un nume per l'attivita");
+        String nome=scanner.nextLine();
+        System.out.println("inserisci il luogo in cui verra svolta l'attivita");
+        String luogo=scanner.nextLine();
+        Date dataInizio;
+        Date dataFine;
+        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+        try {
+            System.out.println("inserisci la data di inizio dell'attivita");
+            dataInizio = dateFormat.parse(scanner.nextLine());
+            System.out.println("inserisci la data di fine attivita");
+            dataFine = dateFormat.parse(scanner.nextLine());
+            System.out.println("inserisci il numero massimo di persone che possono partecipare");
+            int numMassimoPersone=Integer.parseInt(scanner.nextLine());
+            masterController.creaAttivita(nome,luogo,dataInizio,dataFine,numMassimoPersone);
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
+        masterController.stampaListaAttivita();
+    }
+
+    private void prenotazioneManuale() {
+
+
     }
 
     public boolean addSpiaggia() {

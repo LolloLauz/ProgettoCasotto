@@ -18,7 +18,7 @@ public class ICliente {
 
 
     public ICliente(DefaultaMasterController masterController, String currentUser ) {
-        this.userController = new DefaultUserController(masterController);
+        this.userController = new DefaultUserController(masterController,currentUser);
         this.masterController=masterController;
         userController.setlistaClienti(masterController.getListaClienti());
         userController.setCurrentClient(currentUser);
@@ -130,6 +130,7 @@ public class ICliente {
             dataInizio=dateFormat.parse(scanner.nextLine());
             System.out.println("Inserire la data di fine");
             dataFine=dateFormat.parse(scanner.nextLine());
+            System.out.println("ecco la lista degli ombrelloni che puoi prenotare");
             userController.mostraOmbrelloniLiberi(dataInizio,dataFine);
             userController.prenotaOmbrellone(dataInizio,dataInizio);
             System.out.println("Seleziona ombrellone");

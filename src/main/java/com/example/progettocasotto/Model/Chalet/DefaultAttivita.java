@@ -59,7 +59,7 @@ public class DefaultAttivita {
         if(numPersone>numeroPosti){
             return false;
         }
-        System.out.println(numeroPosti);
+        numeroPosti-=numPersone;
         return true;
     }
 }

@@ -17,4 +17,6 @@ public interface PersonaleInterface {
     void removePrenotazione(String idPrenotazione);
 
     void convalidaPagamento(String idPrenotazione);
+
+    void prenotazioneManuale();
 }

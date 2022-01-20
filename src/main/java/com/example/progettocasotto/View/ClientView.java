@@ -23,7 +23,7 @@ public class ClientView {
     }
 
     public void initialize(DefaultaMasterController masterController,String nomeCliente) {
-        this.userController=new DefaultUserController(masterController);
+//        this.userController=new DefaultUserController(masterController);
         this.masterController=masterController;
         userController.setlistaClienti(masterController.getListaClienti());
         userController.setCurrentClient(nomeCliente);    }

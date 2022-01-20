@@ -7,6 +7,7 @@ import com.example.progettocasotto.Model.Spiaggia.StatoPreOrd;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class DefaultSpiaggia implements SpiaggiaInterface{
     private String nomeSpiaggia;
@@ -43,8 +44,16 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
 
     @Override
     public boolean addSdraioToPrenotazione(String idPrenotazione, int numSdraio) {
-        for(int i=0;i<numSdraio;i++){
-            getPrenotaizioneById(idPrenotazione).getListaSdraio().add(getSdraioLiberi(getPrenotaizioneById(idPrenotazione).getDataInizio(),getPrenotaizioneById(idPrenotazione).getDataFine()).get(i));
+        Random random=new Random();
+        int numero =random.nextInt(listaSdraio.size());
+        int i=0;
+        while(i<numSdraio){
+            if(!getPrenotaizioneById(idPrenotazione).getListaSdraio().contains(getSdraioLiberi(getPrenotaizioneById(idPrenotazione).getDataInizio(),getPrenotaizioneById(idPrenotazione).getDataFine()).get(numero))) {
+                getPrenotaizioneById(idPrenotazione).getListaSdraio().add(getSdraioLiberi(getPrenotaizioneById(idPrenotazione).getDataInizio(), getPrenotaizioneById(idPrenotazione).getDataFine()).get(numero));
+                i++;
+            }
+            numero=random.nextInt(listaSdraio.size());
+
         }
         return true;
     }
@@ -136,8 +145,14 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
         }
     }
     public void stampaOmbrelloniLiberi(Date dataInizo, Date dataFine){
+        int i=0;
         for(Ombrellone ombrellone:getOmbrelloniLiberi(dataInizo,dataFine)){
-            System.out.println(ombrellone.getID());
+            System.out.print("|"+ombrellone.getID());
+            i++;
+            if(i>10){
+                System.out.println("");
+                i=0;
+            }
         }
     }
     public void stampaSdraioLiberi(Date dataInizio,Date dataFine){

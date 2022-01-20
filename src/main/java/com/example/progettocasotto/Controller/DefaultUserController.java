@@ -20,15 +20,13 @@ public class DefaultUserController implements UserContrllerInterface{
     private DefaultOrdinazione ordinazione;
     private DefaultaMasterController masterController;
 
-    public DefaultUserController(DefaultaMasterController masterController) {
+    public DefaultUserController(DefaultaMasterController masterController,String nomeCurrentUser) {
         this.masterController=masterController;
+        this.currentCliente=new DefaultCliente(nomeCurrentUser);
         checkPrenotazioneCurrentCliente();
     }
 
     private void checkPrenotazioneCurrentCliente() {
-        for (DefaultPrenotazione prenotazione:masterController.getChalet().getSpiaggia().getListaPrenotazioni()){
-            System.out.println(prenotazione.getID());
-        }
         if(!masterController.getChalet().getSpiaggia().getListaPrenotazioni().isEmpty()) {
             if (masterController.getChalet().getSpiaggia().getListaPrenotazioni().containsAll(currentCliente.getPrenotazioniAssociate())) {
                 System.out.println("le prenotazioni del cliente sono in pari con quelle della spiaggia");

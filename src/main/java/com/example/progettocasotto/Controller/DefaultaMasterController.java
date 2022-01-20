@@ -103,13 +103,18 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
     }
 
     public boolean creaAttivita(String nome, String luogo, Date dataInizio, Date dataFine, int numMassimoPersone) {
-        DefaultAttivita attivita=new DefaultAttivita(nome,luogo,dataInizio,dataFine,numMassimoPersone);
-        return chalet.creaAttivita(attivita);
+        return chalet.creaAttivita(new DefaultAttivita(nome,luogo,dataInizio,dataFine,numMassimoPersone));
     }
 
     public boolean addPartecipantiToAttivita(String nomeAttivita, int numPersone) {
 
         return chalet.addPartecipantiToAttivta(nomeAttivita,numPersone);
+    }
+
+    public void stampaListaAttivita() {
+        for(DefaultAttivita attivita:chalet.getListaAttivita()){
+            System.out.println("nome attivita: "+attivita.getNome());
+        }
     }
 }
 
