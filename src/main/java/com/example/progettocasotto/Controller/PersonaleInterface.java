@@ -18,5 +18,5 @@ public interface PersonaleInterface {
 
     void convalidaPagamento(String idPrenotazione);
 
-    void prenotazioneManuale();
+    void prenotazioneManuale(String idUtente,Date dataInizio,Date dataFine,ArrayList<String> listaOmbrelloni,int numSdraio);
 }

@@ -99,8 +99,68 @@ public class IgestoreChalet {
     }
 
     private void prenotazioneManuale() {
-
-
+        System.out.println("inserisci il nome del cliente");
+        Scanner scanner=new Scanner(System.in);
+        String nome=scanner.nextLine();
+        System.out.println("inserisci cognome utente");
+        String cognome=scanner.nextLine();
+        System.out.println("inserisci un email");
+        String email=scanner.nextLine();
+        System.out.println("inserisci un password");
+        String password=scanner.nextLine();
+        gestoreController.creaUtente(nome,cognome,email,password,Privilegio.USER);
+        ArrayList<String> nomiOmbrelloni=new ArrayList<>();
+        int numeroSdraio=0;
+        Date dataInizio;
+        Date dataFine;
+        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+        try {
+            System.out.println("Inserire la data di inizio della prenotazione");
+            dataInizio=dateFormat.parse(scanner.nextLine());
+            System.out.println("Inserire la data di fine prenotazione");
+            dataFine=dateFormat.parse(scanner.nextLine());
+            System.out.println("1 se vuoi inserire degli ombrelloni" +
+                    "\n2 se vuoi inserire degli sdraio");
+            String input=scanner.nextLine();
+            boolean flag=true;
+            while(input.equals("1") && flag){
+                if(!gestoreController.getOmbrelloniLiberi(dataInizio,dataFine)){
+                    System.out.println("non ci sono ombrelloni disponibili");
+                    System.out.println("vuoi rimuovere la prenotazione");
+                    input=scanner.nextLine();
+                    if(input.equals("si")){
+                        flag=false;
+                    }
+                }else {
+                    System.out.println("inserisci il numero di ombrellone che vuoi aggiungere");
+                    nomiOmbrelloni.add(scanner.nextLine());
+                    System.out.println("1 se vuoi inserire degli ombrelloni" +
+                            "\n2 se vuoi inserire degli sdraio");
+                    input = scanner.nextLine();
+                }
+            }
+            boolean flag2=true;
+            if(input.equals("2")){
+                if(gestoreController.getSdraioLiberi(dataInizio,dataFine)){
+                System.out.println("inserisci il numero di ombrelloni");
+                input=scanner.nextLine();
+                numeroSdraio = Integer.parseInt(input);
+                }else{
+                    System.out.println("non ci sono sdriao disponibili");
+                    input=scanner.nextLine();
+                    if(input.equals("si")){
+                        flag2=false;
+                    }
+                }
+            }
+            if(!flag && flag2){
+                System.out.println("prenotazione rimossa");
+//                gestoreController.removePrenotazione();
+            }
+            gestoreController.prenotazioneManuale(nome,dataInizio,dataFine,nomiOmbrelloni,numeroSdraio);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean addSpiaggia() {

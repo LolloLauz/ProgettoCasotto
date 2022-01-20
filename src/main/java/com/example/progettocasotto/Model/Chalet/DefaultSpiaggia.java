@@ -65,6 +65,10 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
         for(DefaultPrenotazione prenotazione:listaPrenotazioni){
             if(prenotazione.getStatoPrenotazione()== StatoPreOrd.PAGATA){
                 if((prenotazione.getDataInizio().equals(dataInizio) && prenotazione.getDataFine().equals(dataFine))||
+                        (prenotazione.getDataInizio().equals(dataInizio) && prenotazione.getDataFine().before(dataFine)) ||
+                        (prenotazione.getDataInizio().equals(dataInizio) && dataFine.before(prenotazione.getDataFine())) ||
+                        (prenotazione.getDataInizio().before(dataInizio) && dataFine.equals(prenotazione.getDataFine())) ||
+                        (dataInizio.before(prenotazione.getDataInizio()) && dataFine.equals(prenotazione.getDataFine())) ||
                         ( prenotazione.getDataInizio().before(dataInizio) && dataInizio.before(prenotazione.getDataFine())) ||
                         (prenotazione.getDataInizio().before(dataFine) && dataFine.before(prenotazione.getDataFine()) ||
                                 (dataInizio.before(prenotazione.getDataInizio()) && prenotazione.getDataInizio().before(dataFine))||
@@ -102,8 +106,12 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
         ArrayList<Sdraio> sdraioOccupati=new ArrayList<>();
         for(DefaultPrenotazione prenotazione:listaPrenotazioni){
             if(prenotazione.getStatoPrenotazione()== StatoPreOrd.PAGATA){
-                if((prenotazione.getDataInizio().equals(dataInizio) || prenotazione.getDataFine().equals(dataFine))||
-                        (prenotazione.getDataInizio().before(dataInizio) && dataInizio.before(prenotazione.getDataFine())) ||
+                if((prenotazione.getDataInizio().equals(dataInizio) && prenotazione.getDataFine().equals(dataFine))||
+                        (prenotazione.getDataInizio().equals(dataInizio) && prenotazione.getDataFine().before(dataFine)) ||
+                        (prenotazione.getDataInizio().equals(dataInizio) && dataFine.before(prenotazione.getDataFine())) ||
+                        (prenotazione.getDataInizio().before(dataInizio) && dataFine.equals(prenotazione.getDataFine())) ||
+                        (dataInizio.before(prenotazione.getDataInizio()) && dataFine.equals(prenotazione.getDataFine())) ||
+                        ( prenotazione.getDataInizio().before(dataInizio) && dataInizio.before(prenotazione.getDataFine())) ||
                         (prenotazione.getDataInizio().before(dataFine) && dataFine.before(prenotazione.getDataFine()) ||
                                 (dataInizio.before(prenotazione.getDataInizio()) && prenotazione.getDataInizio().before(dataFine))||
                                 (dataFine.before(prenotazione.getDataFine()) && prenotazione.getDataFine().before(dataFine)))){
@@ -154,12 +162,10 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
                 i=0;
             }
         }
+        System.out.println("");
     }
     public void stampaSdraioLiberi(Date dataInizio,Date dataFine){
-        for(Sdraio sdraio:getSdraioLiberi(dataInizio,dataFine)){
-            System.out.println(sdraio.getID());
-        }
-
+        System.out.println("sono disponibili ancora :"+getSdraioLiberi(dataInizio,dataFine).size()+" sdraio");
     }
 
     public boolean removePrenotazione(String idPrenotazione) {

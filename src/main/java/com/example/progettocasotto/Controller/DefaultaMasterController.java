@@ -49,7 +49,6 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
     }
 
     private void getListaClientiFromDb(){
-        System.out.println("lista clienti caricate");
         listaClienti.addAll(gestoreDB.getListaClienti());
     }
 
@@ -73,7 +72,7 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
         chalet=new DefaultChalet("chalet");
         chalet.addSpiaggia("spiaggia");
         chalet.getSpiaggia().setNumeroSdraio(50);
-        chalet.getSpiaggia().setNumeroOmbrelloni(50);
+        chalet.getSpiaggia().setNumeroOmbrelloni(10);
         chalet.addBar(new DefaultBar("bar"));
         chalet.getBar().creaBevanda("acqua","bottiglia da 0,5lt",10,1.00);
         chalet.getBar().creaBevanda("birra","bottiglia da 0,5lt",10,3.00);

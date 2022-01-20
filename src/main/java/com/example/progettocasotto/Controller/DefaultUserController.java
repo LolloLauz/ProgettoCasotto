@@ -118,7 +118,6 @@ public class DefaultUserController implements UserContrllerInterface{
     }
 
     public boolean prenotaAttivita(String nomeAttivita, int numPersone) {
-
         return masterController.addPartecipantiToAttivita(nomeAttivita,numPersone);
     }
 

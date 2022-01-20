@@ -24,8 +24,6 @@ public class GestoreDB {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
-
-
             if (resultSet.next()) {
                 System.out.println("LOG IN AVVENUTO CORRETTAMENTE");
                 privilegio = resultSet.getString("privilegio");

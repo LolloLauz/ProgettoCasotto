@@ -5,9 +5,11 @@ import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
 import com.example.progettocasotto.Model.Spiaggia.Sdraio;
 import com.example.progettocasotto.Model.Spiaggia.StatoPreOrd;
+import com.example.progettocasotto.Model.Utenti.DefaultCliente;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public abstract class DefaultPersonaleController implements PersonaleInterface{
     DefaultaMasterController masterController;
@@ -19,6 +21,7 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
     @Override
     public boolean creaUtente(String nome, String cognome, String email, String password, Privilegio pri) {
         String privilegio = pri.name();
+        masterController.getChalet().getListaClienti().add(new DefaultCliente(nome));
         return masterController.getGestoreDB().insertUtente(nome, cognome, email, password, privilegio);
     }
 
@@ -103,7 +106,37 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
     }
 
     @Override
-    public void prenotazioneManuale(String utente,) {
+    public void prenotazioneManuale(String idUtente,Date dataInizio,Date dataFine,ArrayList<String> listaOmbrelloni,int numSdraio) {
+        Random random=new Random();
+        int numeroPrenotazione=random.nextInt(1000);
+        masterController.getChalet().getSpiaggia().addPrenotazione(String.valueOf(numeroPrenotazione),dataInizio,dataFine);
+        if(!listaOmbrelloni.isEmpty()) {
+            for (String nomeOmbrellone : listaOmbrelloni) {
+            masterController.getChalet().getSpiaggia().addOmbrelloneToPrenotazione(String.valueOf(numeroPrenotazione),new Ombrellone((nomeOmbrellone)));
+            }
+        }
+        if(numSdraio!=0){
+            masterController.getChalet().getSpiaggia().addSdraioToPrenotazione(String.valueOf(numeroPrenotazione),numSdraio);
+        }
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(String.valueOf(numeroPrenotazione)).setIdUtenteAssociato(idUtente);
+
+    }
+    public boolean getOmbrelloniLiberi(Date dataInizio,Date dataFine){
+        if(masterController.getChalet().getSpiaggia().getOmbrelloniLiberi(dataInizio,dataFine).size()>0){
+            masterController.getChalet().getSpiaggia().stampaOmbrelloniLiberi(dataInizio,dataFine);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean getSdraioLiberi(Date dataInizio,Date dataFine) {
+        if (masterController.getChalet().getSpiaggia().getSdraioLiberi(dataInizio, dataFine).size() > 0){
+            masterController.getChalet().getSpiaggia().stampaSdraioLiberi(dataInizio, dataFine);
+            return true;
+        }else{
+            return false;
+        }
 
     }
 }
