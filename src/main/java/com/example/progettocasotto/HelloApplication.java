@@ -12,8 +12,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.*;
 
 public class HelloApplication extends Application {
 
@@ -37,5 +38,22 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         DefaultView defaultView=new DefaultView();
 //        launch();
+//        Date dataInizio;
+//        Date dataFine;
+//        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+//        try {
+//            dataInizio=dateFormat.parse("12/06/20");
+//            dataFine=dateFormat.parse("12/07/20");
+//            Calendar calendarInizio=Calendar.getInstance();
+//            calendarInizio.setTime(dataInizio);
+//            Calendar calendarFine=Calendar.getInstance();
+//            calendarFine.setTime(dataFine);
+//            if(calendarFine.get(Calendar.MONTH)-calendarInizio.get(Calendar.MONTH)>=1){
+//            System.out.println("sconto");
+//
+//            }
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
     }
 }

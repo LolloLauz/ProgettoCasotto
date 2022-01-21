@@ -18,7 +18,7 @@ public class DefaultPrenotazione implements PrenotazioneInterface{
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
         listaSdraio=new ArrayList<>();
-        statoPrenotazione= StatoPreOrd.PAGATA;
+        statoPrenotazione= StatoPreOrd.IN_ATTESA_DI_PAGAMENTO;
     }
 
     @Override
@@ -96,4 +96,5 @@ public class DefaultPrenotazione implements PrenotazioneInterface{
     public void removeSdraio() {
         listaSdraio.clear();
     }
+
 }

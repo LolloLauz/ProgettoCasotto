@@ -7,6 +7,7 @@ import com.example.progettocasotto.Model.Chalet.DefaultChalet;
 import com.example.progettocasotto.Model.Chalet.DefaultSpiaggia;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
+import com.example.progettocasotto.Model.Spiaggia.StatoPreOrd;
 import com.example.progettocasotto.Model.Utenti.DefaultCliente;
 
 import java.text.DateFormat;
@@ -77,6 +78,9 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
         chalet.getBar().creaBevanda("acqua","bottiglia da 0,5lt",10,1.00);
         chalet.getBar().creaBevanda("birra","bottiglia da 0,5lt",10,3.00);
         chalet.getBar().creaBevanda("coca-cola","bottiglia da 0,5lt",10,2.50);
+        chalet.getBar().creaOrdinazione("3");
+        chalet.getBar().selezionaBevanda("3","birra",2);
+        chalet.getBar().getOrdinazioneById("3").setUtenteAssociato("Andrea");
         chalet.addCliente(new DefaultCliente("Andrea"));
         chalet.addCliente(new DefaultCliente("Mario"));
         chalet.addCliente(new DefaultCliente("Lorenzo"));
@@ -96,6 +100,8 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
             chalet.getSpiaggia().addOmbrelloneToPrenotazione("2",new Ombrellone("7"));
             chalet.getSpiaggia().getPrenotaizioneById("1").setIdUtenteAssociato("Andrea");
             chalet.getSpiaggia().getPrenotaizioneById("2").setIdUtenteAssociato("Luigi");
+            chalet.getSpiaggia().getPrenotaizioneById("1").setStatoPrenotazione(StatoPreOrd.PAGATA);
+            chalet.getSpiaggia().getPrenotaizioneById("2").setStatoPrenotazione(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO);
         }catch (ParseException e) {
             e.printStackTrace();
         }

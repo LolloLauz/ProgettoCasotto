@@ -22,7 +22,8 @@ public class IAddettoAllaSpiaggia{
                 "\n2-modifica prenotazione" +
                 "\n3-modifica periodo prenotazione" +
                 "\n4-rimuovi prenotazione" +
-                "\5-conferma pagamento");
+                "\n5-pagamento contante" +
+                "\ninvio per uscire");
         Scanner scanner=new Scanner(System.in);
         String input=scanner.nextLine();
         switch (input){
@@ -36,7 +37,7 @@ public class IAddettoAllaSpiaggia{
                 removePrenotazione();
                 break;
             case "5":
-                convalidaPagamento();
+                pagamentoContante();
                 break;
             default:
                 break;
@@ -63,15 +64,6 @@ public class IAddettoAllaSpiaggia{
         addettoASController.removePrenotazione(idPrenotazione);
     }
 
-
-    public void convalidaPagamento() {
-        System.out.println("inserisci l'id della prenotazione");
-        Scanner scanner=new Scanner(System.in);
-        String idPrenotazione=scanner.nextLine();
-        addettoASController.convalidaPagamento(idPrenotazione);
-
-    }
-
     public void modificaPrenotazione(){
         System.out.println("inserisci il nome utente a cui modificare la prenotazione");
         Scanner scanner = new Scanner(System.in);
@@ -83,7 +75,8 @@ public class IAddettoAllaSpiaggia{
         System.out.println("che cosa vuoi fare " +
                 "\n1-Modificare il periodo della prenotazione" +
                 "\n2-Inserire altri ombrelloni alla prenotazione" +
-                "\n3-Inserire altri sdraio alla prenotazione");
+                "\n3-Inserire altri sdraio alla prenotazione" +
+                "\ninvio per uscire");
         String scelta=scanner.nextLine();
         switch (scelta){
             case "1":
@@ -100,6 +93,26 @@ public class IAddettoAllaSpiaggia{
         }
     }
 
+    private void pagamentoContante() {
+        System.out.println("inserisci il nome del cliente che deve pagare");
+        Scanner scanner=new Scanner(System.in);
+        String nome=scanner.nextLine();
+        addettoASController.gestisciPagamento(nome);
+        System.out.println("1 per pagare una prenotazione" +
+                "\n2 per pagare un'ordinazione");
+        nome=scanner.nextLine();
+        if(nome.equals("1")){
+            System.out.println("inserisci l'identificativo della prentoazione");
+            nome=scanner.nextLine();
+            addettoASController.getScontrinoPrenotazione(nome);
+            addettoASController.confermaAvvenutoPagamentoPrenotazione(nome);
+        }else if(nome.equals("2")){
+            System.out.println("inserisci l'identificativo della prenotazione");
+            nome=scanner.nextLine();
+            addettoASController.getScontrinoOrdinazione(nome);
+            addettoASController.confermaAvvenutoPagamentoOrdinazione(nome);
+        }
+    }
     private void inserimentoSdriao(String idPrenotazione) {
         Scanner scanner=new Scanner(System.in);
         System.out.println("inserisci il numero di sdraio da aggiungere");

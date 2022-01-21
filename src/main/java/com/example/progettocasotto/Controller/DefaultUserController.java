@@ -7,6 +7,7 @@ import com.example.progettocasotto.Model.Chalet.DefaultAttivita;
 import com.example.progettocasotto.Model.Chalet.DefaultSpiaggia;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
+import com.example.progettocasotto.Model.Spiaggia.StatoPreOrd;
 import com.example.progettocasotto.Model.Utenti.DefaultCliente;
 
 import java.util.ArrayList;
@@ -38,10 +39,10 @@ public class DefaultUserController implements UserContrllerInterface{
 
     public void prenotaOmbrellone(Date dataInizio, Date dataFine){
         Random random=new Random();
-        String nomePrenotazione=String.valueOf(random.nextInt());
+        String nomePrenotazione=String.valueOf(random.nextInt(1000));
         prenotazione=new DefaultPrenotazione(nomePrenotazione,dataInizio,dataFine);
-        prenotazione.setIdUtenteAssociato(currentCliente.getID());
         masterController.getChalet().getSpiaggia().addPrenotazione(prenotazione.getID(),dataInizio,dataFine);
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione.getID()).setIdUtenteAssociato(currentCliente.getID());
     }
 
     public void mostraOmbrelloniLiberi(Date dataInizio, Date dataFine) {
@@ -59,12 +60,7 @@ public class DefaultUserController implements UserContrllerInterface{
     }
 
     public void ordinaBibita(String bevanda,int quantita){
-        Random random=new Random();
-        String nomeOrdinazione=String.valueOf(random.nextInt());
-        masterController.getChalet().getBar().creaOrdinazione(nomeOrdinazione);
-        masterController.getChalet().getBar().selezionaBevanda(nomeOrdinazione,bevanda,quantita);
-        this.ordinazione=masterController.getChalet().getBar().getOrdinazioneById(nomeOrdinazione);
-
+        masterController.getChalet().getBar().selezionaBevanda(ordinazione.getID(),bevanda,quantita);
     }
 
     public boolean setCurrentClient(String nomeCliente) {
@@ -87,9 +83,10 @@ public class DefaultUserController implements UserContrllerInterface{
 
     public boolean prenotaSdraio(Date dataInizio, Date dataFine){
         Random random=new Random();
-        String nomePrenotazione=String.valueOf(random.nextInt());
+        String nomePrenotazione=String.valueOf(random.nextInt(1000));
         prenotazione=new DefaultPrenotazione(nomePrenotazione,dataInizio,dataFine);
         masterController.getChalet().getSpiaggia().addPrenotazione(prenotazione.getID(),dataInizio,dataFine);
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).setIdUtenteAssociato(currentCliente.getID());
         return true;
     }
     public boolean selectNumSdraio(int numSdraio) {
@@ -140,5 +137,29 @@ public class DefaultUserController implements UserContrllerInterface{
             }
         }
         return false;
+    }
+
+    public void getPrenotazioneCliente() {
+        for(DefaultPrenotazione prenotazione:masterController.getChalet().getSpiaggia().getPrenotazioniCliente(currentCliente.getID())){
+            if(prenotazione.getStatoPrenotazione().equals(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO)) {
+                System.out.println("prenotazione id :" + prenotazione.getID());
+            }
+        }
+
+    }
+
+    public void pagaPrenotazione(String idPrenotazione) {
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaOmbrelloni();
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaSdraio();
+        System.out.println("\nil totale della prenotazione e' "+masterController.getChalet().getSpiaggia().getListinoPrezzi().calcolaPrezzo(masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione)));
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).setStatoPrenotazione(StatoPreOrd.PAGATA);
+    }
+
+    public void creaOrdinazione() {
+        Random random=new Random();
+        String nomeOrdinazione=String.valueOf(random.nextInt(1000));
+        masterController.getChalet().getBar().creaOrdinazione(nomeOrdinazione);
+        this.ordinazione=new DefaultOrdinazione(nomeOrdinazione);
+        masterController.getChalet().getBar().getOrdinazioneById(nomeOrdinazione).setUtenteAssociato(currentCliente.getID());
     }
 }

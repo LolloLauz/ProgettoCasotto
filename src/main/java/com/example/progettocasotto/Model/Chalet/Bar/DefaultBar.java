@@ -90,4 +90,14 @@ public class DefaultBar implements BarInterface{
     public ArrayList<Bevanda> getListaBevande() {
         return listaBevande;
     }
+
+    public ArrayList<DefaultOrdinazione> getOrdinazioniCliente(String idCliente) {
+        ArrayList<DefaultOrdinazione> ordinazioniCliente=new ArrayList<>();
+        for (DefaultOrdinazione ordinazione:listaOrdinazioni){
+            if (ordinazione.getUtenteAssociato().equals(idCliente)){
+                ordinazioniCliente.add(ordinazione);
+            }
+        }
+        return ordinazioniCliente;
+    }
 }

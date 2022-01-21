@@ -16,7 +16,11 @@ public interface PersonaleInterface {
 
     void removePrenotazione(String idPrenotazione);
 
-    void convalidaPagamento(String idPrenotazione);
+    void gestisciPagamento(String idCliente);
+
+    void getScontrinoPrenotazione(String idPrenotazione);
 
     void prenotazioneManuale(String idUtente,Date dataInizio,Date dataFine,ArrayList<String> listaOmbrelloni,int numSdraio);
+
+    void confermaAvvenutoPagamentoPrenotazione(String idPrenotazione);
 }

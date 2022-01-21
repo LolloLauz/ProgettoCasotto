@@ -1,9 +1,6 @@
 package com.example.progettocasotto.Model.Chalet;
 
-import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
-import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
-import com.example.progettocasotto.Model.Spiaggia.Sdraio;
-import com.example.progettocasotto.Model.Spiaggia.StatoPreOrd;
+import com.example.progettocasotto.Model.Spiaggia.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +12,7 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
     private ArrayList<Ombrellone> listaOmbrelloni;
     private ArrayList<Sdraio> listaSdraio;
     private ArrayList<DefaultAttivita> listaAttivita;
+    private ListinoPrezzi listinoPrezzi=new ListinoPrezzi();
 
     public DefaultSpiaggia(String nomeSpiaggia) {
         this.nomeSpiaggia = nomeSpiaggia;
@@ -184,6 +182,10 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
             }
         }
         return prenotazioneUtente;
+    }
+
+    public ListinoPrezzi getListinoPrezzi() {
+        return listinoPrezzi;
     }
 }
 

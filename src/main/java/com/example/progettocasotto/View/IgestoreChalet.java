@@ -31,9 +31,9 @@ public class IgestoreChalet {
                 "\n3-crea bar" +
                 "\n4-modifica prenotazione" +
                 "\n5-prenotazione manuale" +
-                "\n6-convalida pagamento" +
+                "\n6-pagamento contanti" +
                 "\n7-rimuovi un prenotazione" +
-                "\n8-creazione attivita"+
+                "\n8-creazione attivita" +
                 "\n-invio per uscire";
         System.out.println(coseDaFare);
         String operazione = scanner.nextLine();
@@ -59,19 +59,41 @@ public class IgestoreChalet {
                     prenotazioneManuale();
                     break;
                 case"6":
-                    convalidaPagamento();
+                    pagamentoContante();
                     break;
                 case"7":
                     removePrenotazione();
                     break;
                 case "8":
                     crazioneAttivita();
+
                 default:
                     break;
             }
             System.out.println("CHE COSA VUOI FARE");
             System.out.println(coseDaFare);
             operazione = scanner.nextLine();
+        }
+    }
+
+    private void pagamentoContante() {
+        System.out.println("inserisci il nome del cliente che deve pagare");
+        Scanner scanner=new Scanner(System.in);
+        String nome=scanner.nextLine();
+        gestoreController.gestisciPagamento(nome);
+        System.out.println("1 per pagare una prenotazione" +
+                "\n2 per pagare un'ordinazione");
+        nome=scanner.nextLine();
+        if(nome.equals("1")){
+            System.out.println("inserisci l'identificativo della prentoazione");
+            nome=scanner.nextLine();
+            gestoreController.getScontrinoPrenotazione(nome);
+            gestoreController.confermaAvvenutoPagamentoPrenotazione(nome);
+        }else if(nome.equals("2")){
+            System.out.println("inserisci l'identificativo della prenotazione");
+            nome=scanner.nextLine();
+            gestoreController.getScontrinoOrdinazione(nome);
+            gestoreController.confermaAvvenutoPagamentoOrdinazione(nome);
         }
     }
 
@@ -270,14 +292,6 @@ public class IgestoreChalet {
         gestoreController.removePrenotazione(idPrenotazione);
     }
 
-
-    public void convalidaPagamento() {
-        System.out.println("inserisci l'id della prenotazione");
-        Scanner scanner = new Scanner(System.in);
-        String idPrenotazione = scanner.nextLine();
-        gestoreController.convalidaPagamento(idPrenotazione);
-
-    }
 
     public void modificaPrenotazione() {
         System.out.println("inserisci il nome utente a cui modificare la prenotazione");

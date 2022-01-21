@@ -1,6 +1,7 @@
 package com.example.progettocasotto.Controller;
 
 import com.example.progettocasotto.DataBase.Privilegio;
+import com.example.progettocasotto.Model.Chalet.Bar.DefaultOrdinazione;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
 import com.example.progettocasotto.Model.Spiaggia.Sdraio;
@@ -47,8 +48,17 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
     }
 
     @Override
-    public void convalidaPagamento(String idPrenotazione) {
-        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).setStatoPrenotazione(StatoPreOrd.PAGATA);
+    public void gestisciPagamento(String idCliente) {
+        for(DefaultPrenotazione prenotazione:masterController.getChalet().getSpiaggia().getPrenotazioniCliente(idCliente)){
+            if(prenotazione.getStatoPrenotazione().equals(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO)){
+                System.out.println("id prenotazione da pagare :"+ prenotazione.getID());
+            }
+        }
+        for(DefaultOrdinazione ordinazione:masterController.getChalet().getBar().getOrdinazioniCliente(idCliente)){
+            if(ordinazione.getStatoOrdinazione().equals(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO)){
+                System.out.println("id dell'ordinazione da pagare: "+ordinazione.getID());
+            }
+        }
     }
 
     public void modificaPrenotazione(String idPrenotazione,Date dataInizio, Date dataFine,ArrayList<String> ombrelloni,int numSdraio){
@@ -138,5 +148,24 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
             return false;
         }
 
+    }
+
+    public void getScontrinoPrenotazione(String idPrenotazione) {
+        System.out.println("l'identificativo della prenotazione e' :"+ idPrenotazione);
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaOmbrelloni();
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaSdraio();
+
+        System.out.println("\nil totale e':"+masterController.getChalet().getSpiaggia().getListinoPrezzi().calcolaPrezzo(masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione)));
+    }
+
+    public void confermaAvvenutoPagamentoPrenotazione(String idPrenotazione){
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).setStatoPrenotazione(StatoPreOrd.PAGATA);
+    }
+
+    public void getScontrinoOrdinazione(String nome) {
+        masterController.getChalet().getBar().getOrdinazioneById(nome).getTotaleOrdinazione();
+    }
+    public void confermaAvvenutoPagamentoOrdinazione(String idOrdinazione){
+        masterController.getChalet().getBar().getOrdinazioneById(idOrdinazione).setStatoOrdinazione(StatoPreOrd.PAGATA);
     }
 }

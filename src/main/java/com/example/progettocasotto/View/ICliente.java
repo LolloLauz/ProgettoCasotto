@@ -26,31 +26,60 @@ public class ICliente {
                 "\n2-per prenotare uno sdraio" +
                 "\n3- prenota attivita" +
                 "\n4-ordina bibita" +
+                "\n5-paga un prenotazione" +
                 "\n-invio per uscire");
         Scanner scanner=new Scanner(System.in);
         String i=scanner.nextLine();
-        switch (i){
-            case "1":
-                prenotaOmbrellone();
-                System.out.println("per aggiungere delle sdraio alla tua prenotazione premi una lettera qualsiasi" +
-                        "\n altrimenti premi invio");
-                String input=scanner.nextLine();
-                if(input!=""){
-                    System.out.println("entra");
-                    prenotaSdraio(userController.getCurrentPrenotazione());
-                }
-                break;
-            case "2":
-                prenotaSdraio();
-                break;
-            case "3":
-                prenotaAttivita();
-                break;
-            case "4":
-                ordinaBibita();
-                break;
-            default:
-                break;
+        while(!i.equals("")) {
+            switch (i) {
+                case "1":
+                    prenotaOmbrellone();
+                    System.out.println("per aggiungere delle sdraio alla tua prenotazione premi una lettera qualsiasi" +
+                            "\n altrimenti premi invio");
+                    String input = scanner.nextLine();
+                    if (input != "") {
+                        System.out.println("entra");
+                        prenotaSdraio(userController.getCurrentPrenotazione());
+                    }
+                    break;
+                case "2":
+                    prenotaSdraio();
+                    break;
+                case "3":
+                    prenotaAttivita();
+                    break;
+                case "4":
+                    ordinaBibita();
+                    break;
+                case "5":
+                    pagaUnaPrenotazione();
+                default:
+                    break;
+
+            }
+            System.out.println("1-Per prenotare l'ombrellone" +
+                    "\n2-per prenotare uno sdraio" +
+                    "\n3- prenota attivita" +
+                    "\n4-ordina bibita" +
+                    "\n5-paga un prenotazione" +
+                    "\n-invio per uscire");
+            i=scanner.nextLine();
+        }
+    }
+
+    private void pagaUnaPrenotazione() {
+        userController.getPrenotazioneCliente();
+        System.out.println("inserisci l'identificativo della prenotazione che vuoi pagare");
+        Scanner scanner =new Scanner(System.in);
+        String idPrenotazione=scanner.nextLine();
+        System.out.println("come desideri pagare la prenotazione" +
+                "\n1-con carta" +
+                "\n2-contanti");
+        String input=scanner.nextLine();
+        if(input.equals("1")){
+            userController.pagaPrenotazione(idPrenotazione);
+        }else{
+            System.out.println("Rivolgersi al personale della spiaggia per il pagamento");
         }
     }
 
@@ -69,12 +98,19 @@ public class ICliente {
         Scanner scanner=new Scanner(System.in);
         System.out.println("--MENU-- ");
         userController.stampaMenu();
-        System.out.println("Inserisci la bevanda che vuoi ordinare");
-        String bevanda=scanner.nextLine();
-        System.out.println("Inserisci la quantita");
-        int quantita=scanner.nextInt();
-        userController.ordinaBibita(bevanda,quantita);
-        userController.getOrdinazione();
+        String input="1";
+        userController.creaOrdinazione();
+        while(!input.equals("")) {
+            System.out.println("Inserisci la bevanda che vuoi ordinare");
+            String bevanda = scanner.nextLine();
+            System.out.println("Inserisci la quantita");
+            String quantita = scanner.nextLine();
+            userController.ordinaBibita(bevanda, Integer.parseInt(quantita));
+            System.out.println("1-per continuare" +
+                    "\ninvio per uscire");
+            input=scanner.nextLine();
+        }
+            userController.getOrdinazione();
         return true;
     }
 
@@ -132,12 +168,13 @@ public class ICliente {
             dataFine=dateFormat.parse(scanner.nextLine());
             System.out.println("ecco la lista degli ombrelloni che puoi prenotare");
             userController.mostraOmbrelloniLiberi(dataInizio,dataFine);
-            userController.prenotaOmbrellone(dataInizio,dataInizio);
+            userController.prenotaOmbrellone(dataInizio,dataFine);
             System.out.println("Seleziona ombrellone");
             String check=scanner.nextLine();
-            while(check!=""){
+            while(!check.equals("")){
                 userController.selectOmbrellone(check);
-                System.out.println("Seleziona ombrellone");
+                System.out.println("Seleziona ombrellone" +
+                        "\ninvio per uscire");
                 check=scanner.nextLine();
             }
             userController.confermaPernotazione();
