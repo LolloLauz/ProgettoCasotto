@@ -1,6 +1,7 @@
 package com.example.progettocasotto.Controller;
 
 import com.example.progettocasotto.DataBase.GestoreDB;
+import com.example.progettocasotto.Model.Chalet.Bar.Bevanda;
 import com.example.progettocasotto.Model.Chalet.Bar.DefaultBar;
 import com.example.progettocasotto.Model.Chalet.DefaultAttivita;
 import com.example.progettocasotto.Model.Chalet.DefaultChalet;
@@ -71,13 +72,15 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
 
     public void creaChaletDefault(){
         chalet=new DefaultChalet("chalet");
-        chalet.addSpiaggia("spiaggia");
-        chalet.getSpiaggia().setNumeroSdraio(50);
-        chalet.getSpiaggia().setNumeroOmbrelloni(10);
+        chalet.addSpiaggia(gestoreDB.getNomeSpiaggia());
+        chalet.getSpiaggia().setNumeroSdraio(gestoreDB.getNumeroSdraio());
+        chalet.getSpiaggia().setNumeroOmbrelloni(gestoreDB.getNumeroOmbrelloni());
+        chalet.getSpiaggia().getListaPrenotazioni().addAll(gestoreDB.getPrenotazioniFromDB());
         chalet.addBar(new DefaultBar("bar"));
-        chalet.getBar().creaBevanda("acqua","bottiglia da 0,5lt",10,1.00);
-        chalet.getBar().creaBevanda("birra","bottiglia da 0,5lt",10,3.00);
-        chalet.getBar().creaBevanda("coca-cola","bottiglia da 0,5lt",10,2.50);
+        for(Bevanda bevanda:gestoreDB.getBevande()){
+            chalet.getBar().creaBevanda(bevanda.getNome(),bevanda.getDescrizione(),bevanda.getQuantita(), bevanda.getPrezzo());
+        }
+
         chalet.getBar().creaOrdinazione("3");
         chalet.getBar().selezionaBevanda("3","birra",2);
         chalet.getBar().getOrdinazioneById("3").setUtenteAssociato("Andrea");
@@ -85,26 +88,28 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
         chalet.addCliente(new DefaultCliente("Mario"));
         chalet.addCliente(new DefaultCliente("Lorenzo"));
         chalet.addCliente(new DefaultCliente("Luigi"));
-        Date dataInizio;
-        Date dataFine;
-        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
-        try {
-            dataInizio=dateFormat.parse("12/10/20");
-            dataFine=dateFormat.parse("13/10/20");
-            chalet.creaAttivita(new DefaultAttivita("beach","campo",dataInizio,dataFine,30));
-            chalet.getSpiaggia().addPrenotazione("1",dataInizio,dataFine);
-            chalet.getSpiaggia().addPrenotazione("2",dataInizio,dataFine);
-            chalet.getSpiaggia().addOmbrelloneToPrenotazione("1",new Ombrellone("4"));
-            chalet.getSpiaggia().addOmbrelloneToPrenotazione("1",new Ombrellone("5"));
-            chalet.getSpiaggia().addOmbrelloneToPrenotazione("2",new Ombrellone("6"));
-            chalet.getSpiaggia().addOmbrelloneToPrenotazione("2",new Ombrellone("7"));
-            chalet.getSpiaggia().getPrenotaizioneById("1").setIdUtenteAssociato("Andrea");
-            chalet.getSpiaggia().getPrenotaizioneById("2").setIdUtenteAssociato("Luigi");
-            chalet.getSpiaggia().getPrenotaizioneById("1").setStatoPrenotazione(StatoPreOrd.PAGATA);
-            chalet.getSpiaggia().getPrenotaizioneById("2").setStatoPrenotazione(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO);
-        }catch (ParseException e) {
-            e.printStackTrace();
-        }
+        chalet.getSpiaggia().getPrenotaizioneById("3").setStatoPrenotazione(StatoPreOrd.PAGATA);
+        gestoreDB.getPrenotazioniCliente("Mario");
+//        Date dataInizio;
+//        Date dataFine;
+//        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+//        try {
+//            dataInizio=dateFormat.parse("12/10/20");
+//            dataFine=dateFormat.parse("13/10/20");
+//            chalet.creaAttivita(new DefaultAttivita("beach","campo",dataInizio,dataFine,30));
+//            chalet.getSpiaggia().addPrenotazione("1",dataInizio,dataFine);
+//            chalet.getSpiaggia().addPrenotazione("2",dataInizio,dataFine);
+//            chalet.getSpiaggia().addOmbrelloneToPrenotazione("1",new Ombrellone("4"));
+//            chalet.getSpiaggia().addOmbrelloneToPrenotazione("1",new Ombrellone("5"));
+//            chalet.getSpiaggia().addOmbrelloneToPrenotazione("2",new Ombrellone("6"));
+//            chalet.getSpiaggia().addOmbrelloneToPrenotazione("2",new Ombrellone("7"));
+//            chalet.getSpiaggia().getPrenotaizioneById("1").setIdUtenteAssociato("Andrea");
+//            chalet.getSpiaggia().getPrenotaizioneById("2").setIdUtenteAssociato("Luigi");
+//            chalet.getSpiaggia().getPrenotaizioneById("1").setStatoPrenotazione(StatoPreOrd.PAGATA);
+//            chalet.getSpiaggia().getPrenotaizioneById("2").setStatoPrenotazione(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO);
+//        }catch (ParseException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public boolean creaAttivita(String nome, String luogo, Date dataInizio, Date dataFine, int numMassimoPersone) {

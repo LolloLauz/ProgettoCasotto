@@ -1,6 +1,7 @@
 package com.example.progettocasotto;
 
 import com.example.progettocasotto.Controller.DefaultaMasterController;
+import com.example.progettocasotto.DataBase.GestoreDB;
 import com.example.progettocasotto.Model.Chalet.Bar.Bevanda;
 import com.example.progettocasotto.View.DefaultView;
 import javafx.application.Application;
@@ -38,22 +39,6 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         DefaultView defaultView=new DefaultView();
 //        launch();
-//        Date dataInizio;
-//        Date dataFine;
-//        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
-//        try {
-//            dataInizio=dateFormat.parse("12/06/20");
-//            dataFine=dateFormat.parse("12/07/20");
-//            Calendar calendarInizio=Calendar.getInstance();
-//            calendarInizio.setTime(dataInizio);
-//            Calendar calendarFine=Calendar.getInstance();
-//            calendarFine.setTime(dataFine);
-//            if(calendarFine.get(Calendar.MONTH)-calendarInizio.get(Calendar.MONTH)>=1){
-//            System.out.println("sconto");
-//
-//            }
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
+
     }
 }

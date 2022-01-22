@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="casottodb@localhost" uuid="ae21f948-7829-4d5e-b546-ea1e58368623">
+    <data-source source="LOCAL" name="dbcasotto@localhost" uuid="3c2b4331-ffe5-404b-b327-7f7016626083">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/casottodb</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/dbcasotto</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

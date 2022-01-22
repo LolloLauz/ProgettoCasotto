@@ -5,24 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="369511c7-3b04-4661-a84c-3136840b0599" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ae21f948-7829-4d5e-b546-ea1e58368623.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ae21f948-7829-4d5e-b546-ea1e58368623/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ae21f948-7829-4d5e-b546-ea1e58368623/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ae21f948-7829-4d5e-b546-ea1e58368623/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Casotto.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/Casotto.vpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultPersonaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultPersonaleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Casotto.vpp.bak_000f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Casotto.vpp.bak_001d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Casotto.vpp.bak_002d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Casotto.vpp.bak_003d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Casotto.vpp.bak_004d" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultaMasterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultaMasterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/PersonaleInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/PersonaleInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/DataBase/GestoreDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/DataBase/GestoreDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/Bar/DefaultBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/Bar/DefaultBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/Bar/DefaultOrdinazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/Bar/DefaultOrdinazione.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/DefaultSpiaggia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/DefaultSpiaggia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/PersonaleDellaSpiaggia/Personale.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Spiaggia/DefaultPrenotazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Spiaggia/DefaultPrenotazione.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Spiaggia/StatoPreOrd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Spiaggia/StatoPreOrd.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/IAddettoAllaSpiaggia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/IAddettoAllaSpiaggia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/ICliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/ICliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/IgestoreChalet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/IgestoreChalet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultPersonaleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultPersonaleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/Chalet/DefaultSpiaggia.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/Chalet/DefaultSpiaggia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Spiaggia/Ombrellone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Spiaggia/Ombrellone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultaMasterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultaMasterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/DataBase/GestoreDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/DataBase/GestoreDB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/HelloApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/HelloApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/Spiaggia/Ombrellone.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/Spiaggia/Ombrellone.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,6 +153,9 @@
       <workItem from="1642690798849" duration="3228000" />
       <workItem from="1642696402027" duration="4741000" />
       <workItem from="1642705040819" duration="11171000" />
+      <workItem from="1642843710820" duration="1216000" />
+      <workItem from="1642859407161" duration="5795000" />
+      <workItem from="1642865292471" duration="1256000" />
     </task>
     <servers />
   </component>

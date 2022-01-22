@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Ombrellone {
 
     private String ID;
+    private String QRCode;
 
     public Ombrellone(String ID) {
         this.ID = ID;
@@ -12,6 +13,14 @@ public class Ombrellone {
 
     public String getID() {
         return ID;
+    }
+
+    public String getQRCode() {
+        return QRCode;
+    }
+
+    public void setQRCode(String QRCode) {
+        this.QRCode = QRCode;
     }
 
     @Override
