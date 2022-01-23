@@ -9,20 +9,15 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultPersonaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultPersonaleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultaMasterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/DefaultaMasterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/PersonaleInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Controller/PersonaleInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/DataBase/GestoreDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/DataBase/GestoreDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/Bar/DefaultBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/Bar/DefaultBar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/Bar/DefaultOrdinazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/Bar/DefaultOrdinazione.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/DefaultSpiaggia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Chalet/DefaultSpiaggia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Spiaggia/DefaultPrenotazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/Model/Spiaggia/DefaultPrenotazione.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/IAddettoAllaSpiaggia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/IAddettoAllaSpiaggia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/ICliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/ICliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/IgestoreChalet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/progettocasotto/View/IgestoreChalet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultPersonaleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultPersonaleController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultUserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultUserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultaMasterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Controller/DefaultaMasterController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/DataBase/GestoreDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/DataBase/GestoreDB.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/Chalet/DefaultSpiaggia.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/Model/Chalet/DefaultSpiaggia.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/View/ICliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/progettocasotto/View/ICliente.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,6 +149,7 @@
       <workItem from="1642859407161" duration="5795000" />
       <workItem from="1642865292471" duration="12356000" />
       <workItem from="1642933021469" duration="17840000" />
+      <workItem from="1642955725601" duration="8547000" />
     </task>
     <servers />
   </component>

@@ -27,7 +27,6 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
     }
 
     private ArrayList<Ombrellone> selezionaPeriodoOmbrelloni(Date dataInizio, Date dataFine) {
-
         return masterController.getChalet().getSpiaggia().getOmbrelloniLiberi(dataInizio,dataFine);
     }
 
@@ -54,7 +53,7 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
             System.out.println("id prenotazione da pagare :"+masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getID());
         }
         for(String nomeOrdinazione:masterController.getGestoreDB().getOrdinazioneClientedaPagare(idCliente)){
-            System.out.println("id dell'ordinazione da pagare"+masterController.getChalet().getBar().getOrdinazioneById(nomeOrdinazione));
+            System.out.println("id dell'ordinazione da pagare "+masterController.getChalet().getBar().getOrdinazioneById(nomeOrdinazione).getID());
         }
 //        for(PrenotazioniCliente(idCliente)){
 //            if(prenotazione.getStatoPrenotazione().equals(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO)){
@@ -138,7 +137,7 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
     }
 
     @Override
-    public void prenotazioneManuale(String idUtente,Date dataInizio,Date dataFine,ArrayList<String> listaOmbrelloni,int numSdraio) {
+    public int prenotazioneManuale(String idUtente,Date dataInizio,Date dataFine,ArrayList<String> listaOmbrelloni,int numSdraio) {
         Random random=new Random();
         int numeroPrenotazione=random.nextInt(1000);
         masterController.getChalet().getSpiaggia().addPrenotazione(String.valueOf(numeroPrenotazione),dataInizio,dataFine);
@@ -151,7 +150,9 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
             masterController.getChalet().getSpiaggia().addSdraioToPrenotazione(String.valueOf(numeroPrenotazione),numSdraio);
         }
         masterController.getChalet().getSpiaggia().getPrenotaizioneById(String.valueOf(numeroPrenotazione)).setIdUtenteAssociato(idUtente);
-        masterController.getChalet().getSpiaggia().getPrenotaizioneById(String.valueOf(numeroPrenotazione)).setID(String.valueOf(masterController.getGestoreDB().addPrenotazioneToDb(idUtente,dataInizio,dataFine,listaOmbrelloni,numSdraio)));
+        int idPrenotazione=masterController.getGestoreDB().addPrenotazioneToDb(idUtente,dataInizio,dataFine,listaOmbrelloni,numSdraio);
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(String.valueOf(numeroPrenotazione)).setID(String.valueOf(idPrenotazione));
+        return idPrenotazione;
     }
     public boolean getOmbrelloniLiberi(Date dataInizio,Date dataFine){
         if(masterController.getChalet().getSpiaggia().getOmbrelloniLiberi(dataInizio,dataFine).size()>0){
@@ -176,7 +177,6 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
         System.out.println("l'identificativo della prenotazione e' :"+ idPrenotazione);
         masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaOmbrelloni();
         masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaSdraio();
-
         System.out.println("\nil totale e':"+masterController.getChalet().getSpiaggia().getListinoPrezzi().calcolaPrezzo(masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione)));
     }
 

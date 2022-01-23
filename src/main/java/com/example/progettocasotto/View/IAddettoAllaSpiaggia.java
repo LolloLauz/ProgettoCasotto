@@ -20,9 +20,8 @@ public class IAddettoAllaSpiaggia{
         addettoASController=new AddettoASController(masterController);
         System.out.println("1-prenotazione manuale" +
                 "\n2-modifica prenotazione" +
-                "\n3-modifica periodo prenotazione" +
-                "\n4-rimuovi prenotazione" +
-                "\n5-pagamento contante" +
+                "\n3-rimuovi prenotazione" +
+                "\n4-pagamento contante" +
                 "\ninvio per uscire");
         Scanner scanner=new Scanner(System.in);
         String input=scanner.nextLine();
@@ -33,10 +32,10 @@ public class IAddettoAllaSpiaggia{
             case "2":
                 modificaPrenotazione();
                 break;
-            case "4":
+            case "3":
                 removePrenotazione();
                 break;
-            case "5":
+            case "4":
                 pagamentoContante();
                 break;
             default:
@@ -93,11 +92,11 @@ public class IAddettoAllaSpiaggia{
                     }
                 }
             }
+            int num=addettoASController.prenotazioneManuale(nome,dataInizio,dataFine,nomiOmbrelloni,numeroSdraio);
             if(!flag && flag2){
                 System.out.println("prenotazione rimossa");
-//                gestoreController.removePrenotazione();
+                addettoASController.removePrenotazione(String.valueOf(num));
             }
-            addettoASController.prenotazioneManuale(nome,dataInizio,dataFine,nomiOmbrelloni,numeroSdraio);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -113,7 +112,6 @@ public class IAddettoAllaSpiaggia{
         String email=scanner.nextLine();
         System.out.println("password di default: password");
         addettoASController.creaUtente(nome,cognome,email,"password", Privilegio.USER);
-        scanner.close();
         return nome;
     }
 
@@ -170,7 +168,7 @@ public class IAddettoAllaSpiaggia{
             addettoASController.getScontrinoPrenotazione(nome);
             addettoASController.confermaAvvenutoPagamentoPrenotazione(nome);
         }else if(nome.equals("2")){
-            System.out.println("inserisci l'identificativo della prenotazione");
+            System.out.println("inserisci l'identificativo dell'ordinazione");
             nome=scanner.nextLine();
             addettoASController.getScontrinoOrdinazione(nome);
             addettoASController.confermaAvvenutoPagamentoOrdinazione(nome);
@@ -207,7 +205,6 @@ public class IAddettoAllaSpiaggia{
             dataInizio=dateFormat.parse(scanner.nextLine());
             System.out.println("Inserire la data di fine");
             dataFine=dateFormat.parse(scanner.nextLine());
-            System.out.println("inserisci il numero di sdriao da aggiungere");
             addettoASController.modificaPeriodoPrenotazione(idPrenotazione,dataInizio,dataFine);
         } catch (ParseException e) {
             e.printStackTrace();

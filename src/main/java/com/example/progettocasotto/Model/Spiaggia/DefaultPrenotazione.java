@@ -37,7 +37,8 @@ public class DefaultPrenotazione implements PrenotazioneInterface{
 
     @Override
     public void setPeriodo(Date dataInizio, Date dataFine) {
-
+        this.dataInizio=dataInizio;
+        this.dataFine=dataFine;
     }
 
     public String getIdUtenteAssociato() {

@@ -20,7 +20,7 @@ public interface PersonaleInterface {
 
     void getScontrinoPrenotazione(String idPrenotazione);
 
-    void prenotazioneManuale(String idUtente,Date dataInizio,Date dataFine,ArrayList<String> listaOmbrelloni,int numSdraio);
+    int prenotazioneManuale(String idUtente,Date dataInizio,Date dataFine,ArrayList<String> listaOmbrelloni,int numSdraio);
 
     void confermaAvvenutoPagamentoPrenotazione(String idPrenotazione);
 }

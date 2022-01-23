@@ -9,6 +9,10 @@ public class DefaultBar implements BarInterface{
     private ArrayList<DefaultOrdinazione> listaOrdinazioni;
     private ArrayList<Bevanda> listaBevande;
 
+    public ArrayList<DefaultOrdinazione> getListaOrdinazioni() {
+        return listaOrdinazioni;
+    }
+
     public DefaultBar(String nome) {
         this.nome = nome;
         listaOrdinazioni=new ArrayList<>();

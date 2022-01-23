@@ -101,4 +101,8 @@ public class DefaultOrdinazione implements OrdinazioneInterface {
     public int getQuantitaOrdinata(Bevanda bevanda){
         return mappaBevande.get(bevanda);
     }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
 }

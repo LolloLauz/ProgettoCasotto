@@ -11,6 +11,7 @@ import com.example.progettocasotto.Model.Utenti.DefaultCliente;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Random;
 
 public class GestoreDB {
@@ -257,10 +258,10 @@ public class GestoreDB {
             e.printStackTrace();
         }
     }
-    public void convalidaPagamentoOrdinazione(String idPrenotazione){
+    public void convalidaPagamentoOrdinazione(String idOrdinazione){
         try {
             PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("UPDATE ordinazioni SET stato = 'PAGATA' WHERE ID = ?");
-            preparedStatement.setString(1, idPrenotazione);
+            preparedStatement.setString(1, idOrdinazione);
             if(preparedStatement.executeUpdate()==0){
                 System.out.println("errore nell'esecuzione della query");
             }
@@ -283,13 +284,13 @@ public class GestoreDB {
         }
         return id;
     }
-    public void prenotaOmbrellone(DefaultPrenotazione prenotazione,DefaultCliente currentUser){
+
+    public int prenotaOmbrellone(DefaultPrenotazione prenotazione,DefaultCliente currentUser){
         Random random=new Random();
         int numeroPrenotazione=random.nextInt(1000);
         boolean flag=false;
         try {
             PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO prenotazioni (id_cliente,num_sdraio,data_Inizio,data_Fine,StatoPrenotazione,id) VALUES (?,?,?,?,?,?)");
-
             preparedStatement.setString(1,getIdUtente(currentUser));
             preparedStatement.setInt(2,prenotazione.getListaSdraio().size());
             Calendar cal = Calendar.getInstance();
@@ -318,7 +319,7 @@ public class GestoreDB {
         try {
             PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO dettaglioprenotazione (id_prenotazione,id_ombrellone) VALUES (?,?)");
             for(Ombrellone ombrellone:prenotazione.getListaOmbrelloni()){
-                preparedStatement.setString(1,prenotazione.getID());
+                preparedStatement.setInt(1,numeroPrenotazione);
                 preparedStatement.setString(2,ombrellone.getID());
                 if(preparedStatement.executeUpdate()==0){
                     System.out.println("errore nell'esecuzione della query");
@@ -327,6 +328,7 @@ public class GestoreDB {
         }catch (SQLException e){
             e.printStackTrace();
         }
+        return numeroPrenotazione;
     }
     public void caricaOmbrelloni(){
         try {
@@ -344,7 +346,7 @@ public class GestoreDB {
         }
     }
 
-    public void prenotaSdraio(DefaultPrenotazione prenotaizioneById, DefaultCliente currentCliente) {
+    public int prenotaSdraio(DefaultPrenotazione prenotaizioneById, DefaultCliente currentCliente) {
         Random random=new Random();
         int numeroPrenotazione=random.nextInt(1000);
         boolean flag=false;
@@ -368,17 +370,17 @@ public class GestoreDB {
                     flag=false;
                 }
             }while(flag);
-            preparedStatement.setString(6,String.valueOf(prenotaizioneById.getStatoPrenotazione()));
+            preparedStatement.setInt(6,numeroPrenotazione);
             if(preparedStatement.executeUpdate()==0){
                 System.out.println("errore nell'esecuzione della query");
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
-
+        return numeroPrenotazione;
     }
 
-    public void ordinazioneBar(DefaultOrdinazione ordinazione, DefaultCliente currentCliente) {
+    public int ordinazioneBar(DefaultOrdinazione ordinazione, DefaultCliente currentCliente) {
         Random random=new Random();
         int numeroOrdinazione=random.nextInt(1000);
         boolean flag=false;
@@ -395,6 +397,7 @@ public class GestoreDB {
                     flag=false;
                 }
             }while(flag);
+            preparedStatement.setInt(4,numeroOrdinazione);
             if(preparedStatement.executeUpdate()==0){
                 System.out.println("errore nell'esecuzione della query");
             }
@@ -405,7 +408,7 @@ public class GestoreDB {
             PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO dettagli_ordini (id_prodotto,id_ordinazione,quantita) VALUES (?,?,?)");
             for(Bevanda bevanda:ordinazione.getListaBevande()){
                 preparedStatement.setString(1,getIdBevanda(bevanda.getNome()));
-                preparedStatement.setString(2,ordinazione.getID());
+                preparedStatement.setInt(2,numeroOrdinazione);
                 preparedStatement.setInt(3,ordinazione.getQuantitaOrdinata(bevanda));
                 if(preparedStatement.executeUpdate()==0){
                     System.out.println("errore nell'esecuzione della query");
@@ -414,6 +417,7 @@ public class GestoreDB {
         }catch (SQLException e){
             e.printStackTrace();
         }
+        return  numeroOrdinazione;
     }
 
     private boolean checkNumeroOrdinazione(int numeroOrdinazione) {
@@ -702,6 +706,56 @@ public class GestoreDB {
            }
     }
 
+    public ArrayList<DefaultOrdinazione> getOrdinazioniDb() {
+        ArrayList<DefaultOrdinazione> listaOrdinazioni=new ArrayList<>();
+        try {
+            Statement statement=connection.createStatement();
+            ResultSet resultSet=statement.executeQuery("SELECT * FROM ordinazioni");
+            while(resultSet.next()) {
+                listaOrdinazioni.add(new DefaultOrdinazione(resultSet.getString("id")));
+                for(DefaultOrdinazione ordinazione:listaOrdinazioni){
+                    if(ordinazione.getID().equals(resultSet.getString("id"))){
+                        ordinazione.setStatoOrdinazione(StatoPreOrd.valueOf(resultSet.getString("StatoPrenotazione")));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        popolaOrdinazioni(listaOrdinazioni);
+        return listaOrdinazioni;
+    }
+
+    private void popolaOrdinazioni(ArrayList<DefaultOrdinazione> listaOrdinazioni) {
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT prodotti.nome,dettagli_ordini.quantita FROM dettagli_ordine,prodotti WHERE dettagli_ordini.id_prodotto=prodotti.id AND id_ordinazione=?");
+            for (DefaultOrdinazione ordinazione:listaOrdinazioni) {
+                preparedStatement.setString(1, ordinazione.getID());
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    ordinazione.addBevanda(getBevanda(resultSet.getString("prodotti.nome")), resultSet.getInt("quantita"));
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private Bevanda getBevanda(String id) {
+        Bevanda bevanda = null;
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT * FROM prodotti WHERE id=?");
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    bevanda=new Bevanda(resultSet.getString("nome"),resultSet.getString("categoria"),resultSet.getInt("quantita_disponibile"),resultSet.getFloat("prezzo"));
+                }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return bevanda;
+    }
 }
 
 
