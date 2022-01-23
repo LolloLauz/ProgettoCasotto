@@ -18,7 +18,7 @@ public class IAddettoAllaSpiaggia{
 
     public IAddettoAllaSpiaggia(DefaultaMasterController masterController) {
         addettoASController=new AddettoASController(masterController);
-        System.out.println("1-Inserisci utente" +
+        System.out.println("1-prenotazione manuale" +
                 "\n2-modifica prenotazione" +
                 "\n3-modifica periodo prenotazione" +
                 "\n4-rimuovi prenotazione" +
@@ -28,7 +28,7 @@ public class IAddettoAllaSpiaggia{
         String input=scanner.nextLine();
         switch (input){
             case "1":
-                creaUtente();
+                prenotazioneManuale();
                 break;
             case "2":
                 modificaPrenotazione();
@@ -44,7 +44,66 @@ public class IAddettoAllaSpiaggia{
         }
     }
 
-    public void creaUtente() {
+    private void prenotazioneManuale() {
+        String nome=creaUtente();
+        Scanner scanner=new Scanner(System.in);
+        ArrayList<String> nomiOmbrelloni=new ArrayList<>();
+        int numeroSdraio=0;
+        Date dataInizio;
+        Date dataFine;
+        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+        try {
+            System.out.println("Inserire la data di inizio della prenotazione");
+            dataInizio=dateFormat.parse(scanner.nextLine());
+            System.out.println("Inserire la data di fine prenotazione");
+            dataFine=dateFormat.parse(scanner.nextLine());
+            System.out.println("1 se vuoi inserire degli ombrelloni" +
+                    "\n2 se vuoi inserire degli sdraio");
+            String input=scanner.nextLine();
+            boolean flag=true;
+            addettoASController.stampaSdraioOmbrelloni(dataInizio,dataFine);
+            while(input.equals("1") && flag){
+                if(!addettoASController.getOmbrelloniLiberi(dataInizio,dataFine)){
+                    System.out.println("non ci sono ombrelloni disponibili");
+                    System.out.println("vuoi rimuovere la prenotazione");
+                    input=scanner.nextLine();
+                    if(input.equals("si")){
+                        flag=false;
+                    }
+                }else {
+                    System.out.println("inserisci il numero di ombrellone che vuoi aggiungere");
+                    nomiOmbrelloni.add(scanner.nextLine());
+                    System.out.println("1 se vuoi inserire degli ombrelloni" +
+                            "\n2 se vuoi inserire degli sdraio");
+                    input = scanner.nextLine();
+                }
+            }
+            boolean flag2=true;
+            if(input.equals("2")){
+                addettoASController.stampaSdraioLiberi(dataInizio,dataFine);
+                if(addettoASController.getSdraioLiberi(dataInizio,dataFine)){
+                    System.out.println("inserisci il numero di sdraio");
+                    input=scanner.nextLine();
+                    numeroSdraio = Integer.parseInt(input);
+                }else{
+                    System.out.println("non ci sono sdriao disponibili");
+                    input=scanner.nextLine();
+                    if(input.equals("si")){
+                        flag2=false;
+                    }
+                }
+            }
+            if(!flag && flag2){
+                System.out.println("prenotazione rimossa");
+//                gestoreController.removePrenotazione();
+            }
+            addettoASController.prenotazioneManuale(nome,dataInizio,dataFine,nomiOmbrelloni,numeroSdraio);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String creaUtente() {
         Scanner scanner=new Scanner(System.in);
         System.out.println("Inserisci nome utente");
         String nome=scanner.nextLine();
@@ -55,10 +114,14 @@ public class IAddettoAllaSpiaggia{
         System.out.println("password di default: password");
         addettoASController.creaUtente(nome,cognome,email,"password", Privilegio.USER);
         scanner.close();
+        return nome;
     }
 
     public void removePrenotazione() {
         Scanner scanner=new Scanner(System.in);
+        System.out.println("inserisci il nome utente");
+        String nome=scanner.nextLine();
+        addettoASController.getPrenotazioniCliete(nome);
         System.out.println("inserisci l'id della prenotazione che vuoi rimuovere");
         String idPrenotazione=scanner.nextLine();
         addettoASController.removePrenotazione(idPrenotazione);

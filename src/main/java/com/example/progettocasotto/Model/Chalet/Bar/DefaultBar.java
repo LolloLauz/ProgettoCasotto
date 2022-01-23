@@ -100,4 +100,11 @@ public class DefaultBar implements BarInterface{
         }
         return ordinazioniCliente;
     }
+
+    public void stampaOrdinazionebyID(String id) {
+        System.out.println("id ordinazione :"+id);
+        for(Bevanda bevanda:getOrdinazioneById(id).getListaBevande()){
+            System.out.println("bevanda "+bevanda.getNome()+" quantita ordinata "+getOrdinazioneById(id).getQuantitaOrdinata(bevanda)+" prezzo :"+bevanda.getPrezzo());
+        }
+    }
 }

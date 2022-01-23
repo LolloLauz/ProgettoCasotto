@@ -45,20 +45,27 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
     @Override
     public void removePrenotazione(String idPrenotazione) {
         masterController.getChalet().getSpiaggia().removePrenotazione(idPrenotazione);
+        masterController.getGestoreDB().removePrenotazione(idPrenotazione);
     }
 
     @Override
     public void gestisciPagamento(String idCliente) {
-        for(DefaultPrenotazione prenotazione:masterController.getChalet().getSpiaggia().getPrenotazioniCliente(idCliente)){
-            if(prenotazione.getStatoPrenotazione().equals(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO)){
-                System.out.println("id prenotazione da pagare :"+ prenotazione.getID());
-            }
+        for(String nomePrenotazione:masterController.getGestoreDB().getPrenotazioniClientedaPagare(idCliente)){
+            System.out.println("id prenotazione da pagare :"+masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getID());
         }
-        for(DefaultOrdinazione ordinazione:masterController.getChalet().getBar().getOrdinazioniCliente(idCliente)){
-            if(ordinazione.getStatoOrdinazione().equals(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO)){
-                System.out.println("id dell'ordinazione da pagare: "+ordinazione.getID());
-            }
+        for(String nomeOrdinazione:masterController.getGestoreDB().getOrdinazioneClientedaPagare(idCliente)){
+            System.out.println("id dell'ordinazione da pagare"+masterController.getChalet().getBar().getOrdinazioneById(nomeOrdinazione));
         }
+//        for(PrenotazioniCliente(idCliente)){
+//            if(prenotazione.getStatoPrenotazione().equals(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO)){
+//                System.out.println("id prenotazione da pagare :"+ prenotazione.getID());
+//            }
+//        }
+//        for(DefaultOrdinazione ordinazione:masterController.getChalet().getBar().getOrdinazioniCliente(idCliente)){
+//            if(ordinazione.getStatoOrdinazione().equals(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO)){
+//                System.out.println("id dell'ordinazione da pagare: "+ordinazione.getID());
+//            }
+//        }
     }
 
     public void modificaPrenotazione(String idPrenotazione,Date dataInizio, Date dataFine,ArrayList<String> ombrelloni,int numSdraio){
@@ -84,28 +91,42 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
             }
         }
         masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).setPeriodo(dataInizio,dataFine);
+        masterController.getGestoreDB().modificaPeriodoPrenotazione(prenotazione,dataInizio,dataFine);
         return true;
     }
 
     public void getPrenotazioniCliete(String nomeCliente) {
-        for(DefaultPrenotazione prenotazione:masterController.getChalet().getSpiaggia().getPrenotazioniCliente(nomeCliente)){
-            System.out.println("numero della prenotazione :"+prenotazione.getID()+"" +
-                    "\ndata inizio: "+ prenotazione.getDataInizio()+" dataFine:"+prenotazione.getDataFine());
-            if(!prenotazione.getListaOmbrelloni().isEmpty()){
-                for(Ombrellone ombrellone:prenotazione.getListaOmbrelloni()){
-                    System.out.println("numero dell'ombrellone prenotato: "+ ombrellone.getID());
+//        for(DefaultPrenotazione prenotazione:masterController.getChalet().getSpiaggia().getPrenotazioniCliente(nomeCliente)){
+//            System.out.println("numero della prenotazione :"+prenotazione.getID()+"" +
+//                    "\ndata inizio: "+ prenotazione.getDataInizio()+" dataFine:"+prenotazione.getDataFine());
+//            if(!prenotazione.getListaOmbrelloni().isEmpty()){
+//                for(Ombrellone ombrellone:prenotazione.getListaOmbrelloni()){
+//                    System.out.println("numero dell'ombrellone prenotato: "+ ombrellone.getID());
+//                }
+//            }
+//            if(!prenotazione.getListaSdraio().isEmpty()){
+//                System.out.println("numero sdraio affittati : "+prenotazione.getListaSdraio().size());
+//            }
+//        }
+        for(String nomePrenotazione:masterController.getGestoreDB().getPrenotazioniCliente(nomeCliente)){
+            System.out.println("numero della prenotazione: "+nomePrenotazione+
+                    "\n data inizio :"+masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getDataInizio()+
+                    " data fine: "+masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getDataFine());
+            if(!masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getListaOmbrelloni().isEmpty()){
+                for(Ombrellone ombrellone: masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getListaOmbrelloni()){
+                    System.out.println("numero ombrellone prenotato: "+ombrellone.getID());
                 }
             }
-            if(!prenotazione.getListaSdraio().isEmpty()){
-                System.out.println("numero sdraio affittati : "+prenotazione.getListaSdraio().size());
+            if(!masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getListaSdraio().isEmpty()){
+                System.out.println("numero sdraio affittati: "+ masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getListaSdraio().size());
             }
         }
-
     }
 
     public void inserimentoSdraio(String idPrenotazione, int numSdraio) {
 //        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).removeSdraio();
         masterController.getChalet().getSpiaggia().addSdraioToPrenotazione(idPrenotazione,numSdraio);
+        masterController.getGestoreDB().modificaNumeroSdraio(idPrenotazione,numSdraio);
     }
 
     public void inserimentoOmbrelloni(String idPrenotazione, ArrayList<String> listaOmbrelloni) {
@@ -113,6 +134,7 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
         for(String numeroOmbrellone:listaOmbrelloni) {
             masterController.getChalet().getSpiaggia().addOmbrelloneToPrenotazione(idPrenotazione,new Ombrellone(numeroOmbrellone));
         }
+        masterController.getGestoreDB().modificaOmbrelloniPrenotazione(idPrenotazione,listaOmbrelloni);
     }
 
     @Override
@@ -129,7 +151,7 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
             masterController.getChalet().getSpiaggia().addSdraioToPrenotazione(String.valueOf(numeroPrenotazione),numSdraio);
         }
         masterController.getChalet().getSpiaggia().getPrenotaizioneById(String.valueOf(numeroPrenotazione)).setIdUtenteAssociato(idUtente);
-
+        masterController.getChalet().getSpiaggia().getPrenotaizioneById(String.valueOf(numeroPrenotazione)).setID(String.valueOf(masterController.getGestoreDB().addPrenotazioneToDb(idUtente,dataInizio,dataFine,listaOmbrelloni,numSdraio)));
     }
     public boolean getOmbrelloniLiberi(Date dataInizio,Date dataFine){
         if(masterController.getChalet().getSpiaggia().getOmbrelloniLiberi(dataInizio,dataFine).size()>0){
@@ -159,13 +181,23 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
     }
 
     public void confermaAvvenutoPagamentoPrenotazione(String idPrenotazione){
-        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).setStatoPrenotazione(StatoPreOrd.PAGATA);
+//        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).setStatoPrenotazione(StatoPreOrd.PAGATA);
+        masterController.getGestoreDB().convalidaPagamentoPrenotazione(idPrenotazione);
     }
 
     public void getScontrinoOrdinazione(String nome) {
         masterController.getChalet().getBar().getOrdinazioneById(nome).getTotaleOrdinazione();
     }
     public void confermaAvvenutoPagamentoOrdinazione(String idOrdinazione){
-        masterController.getChalet().getBar().getOrdinazioneById(idOrdinazione).setStatoOrdinazione(StatoPreOrd.PAGATA);
+        masterController.getGestoreDB().convalidaPagamentoOrdinazione(idOrdinazione);
+//        masterController.getChalet().getBar().getOrdinazioneById(idOrdinazione).setStatoOrdinazione(StatoPreOrd.PAGATA);
+    }
+
+    public void stampaSdraioLiberi(Date dataInizio, Date dataFine){
+        masterController.getChalet().getSpiaggia().stampaSdraioLiberi(dataInizio,dataFine);
+    }
+
+    public void stampaSdraioOmbrelloni(Date dataInizio, Date dataFine) {
+        masterController.getChalet().getSpiaggia().getOmbrelloniLiberi(dataInizio,dataFine);
     }
 }

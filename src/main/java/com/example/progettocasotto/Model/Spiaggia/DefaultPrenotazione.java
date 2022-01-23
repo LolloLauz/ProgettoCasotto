@@ -21,6 +21,10 @@ public class DefaultPrenotazione implements PrenotazioneInterface{
         statoPrenotazione= StatoPreOrd.IN_ATTESA_DI_PAGAMENTO;
     }
 
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
     @Override
     public boolean addOmbrellone(Ombrellone ombrellone) {
         return listaOmbrelloni.add(ombrellone);

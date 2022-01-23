@@ -80,16 +80,9 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
         for(Bevanda bevanda:gestoreDB.getBevande()){
             chalet.getBar().creaBevanda(bevanda.getNome(),bevanda.getDescrizione(),bevanda.getQuantita(), bevanda.getPrezzo());
         }
+        setQrCode();
+//        chalet.getSpiaggia().getPrenotaizioneById("3").setStatoPrenotazione(StatoPreOrd.PAGATA);
 
-        chalet.getBar().creaOrdinazione("3");
-        chalet.getBar().selezionaBevanda("3","birra",2);
-        chalet.getBar().getOrdinazioneById("3").setUtenteAssociato("Andrea");
-        chalet.addCliente(new DefaultCliente("Andrea"));
-        chalet.addCliente(new DefaultCliente("Mario"));
-        chalet.addCliente(new DefaultCliente("Lorenzo"));
-        chalet.addCliente(new DefaultCliente("Luigi"));
-        chalet.getSpiaggia().getPrenotaizioneById("3").setStatoPrenotazione(StatoPreOrd.PAGATA);
-        gestoreDB.getPrenotazioniCliente("Mario");
 //        Date dataInizio;
 //        Date dataFine;
 //        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
@@ -124,6 +117,11 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
     public void stampaListaAttivita() {
         for(DefaultAttivita attivita:chalet.getListaAttivita()){
             System.out.println("nome attivita: "+attivita.getNome());
+        }
+    }
+    public void setQrCode(){
+        for(Ombrellone ombrellone:chalet.getSpiaggia().getListaOmbrelloni()){
+            ombrellone.setQRCode(getGestoreDB().getqrCode(ombrellone.getID()));
         }
     }
 }

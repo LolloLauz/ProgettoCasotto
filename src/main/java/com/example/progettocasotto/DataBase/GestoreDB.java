@@ -1,15 +1,16 @@
 package com.example.progettocasotto.DataBase;
 
 import com.example.progettocasotto.Model.Chalet.Bar.Bevanda;
+import com.example.progettocasotto.Model.Chalet.Bar.DefaultOrdinazione;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
 import com.example.progettocasotto.Model.Spiaggia.Sdraio;
+import com.example.progettocasotto.Model.Spiaggia.StatoPreOrd;
 import com.example.progettocasotto.Model.Utenti.DefaultCliente;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Calendar;
 import java.util.Random;
 
 public class GestoreDB {
@@ -50,6 +51,7 @@ public class GestoreDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return numeroSdraio;
     }
     private void popolaPrenotazioneOmbrelloni(ArrayList<DefaultPrenotazione> listaprenotazioni){
@@ -74,7 +76,11 @@ public class GestoreDB {
             ResultSet resultSet=statement.executeQuery("SELECT * FROM prenotazioni");
             while(resultSet.next()) {
                 listaPrenotazioni.add(new DefaultPrenotazione(resultSet.getString("id"),resultSet.getDate("data_inizio"),resultSet.getDate("data_fine")));
-
+                for(DefaultPrenotazione prenotazione:listaPrenotazioni){
+                    if(prenotazione.getID().equals(resultSet.getString("id"))){
+                        prenotazione.setStatoPrenotazione(StatoPreOrd.valueOf(resultSet.getString("StatoPrenotazione")));
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -164,7 +170,6 @@ public class GestoreDB {
 
 
     public  boolean insertUtente(String nome,String cognome,String email,String password,String pri){
-
         try {
             PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO utenti (nome,cognome,email,password,privilegio) VALUES (?,?,?,?,?)");
             preparedStatement.setString(1,nome);
@@ -211,33 +216,492 @@ public class GestoreDB {
         return listaBevande;
     }
 
-    public void getOrdinazioneCliente(String idCLiente){
-        String risultato="";
+    public ArrayList<String> getOrdinazioneClientedaPagare(String idCLiente){
+        ArrayList<String> listaOrdinazioni=new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT ordinazioni.id FROM ordinazioni,utenti WHERE ordinazioni.id_cliente=utenti.id AND utenti.nome=?");
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT ordinazioni.id FROM ordinazioni,utenti WHERE ordinazioni.id_cliente=utenti.id AND utenti.nome=? AND ordinazioni.stato='IN_ATTESA_DI_PAGAMENTO'");
             preparedStatement.setString(1, idCLiente);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
-                 risultato=resultSet.getString("id");
+            while(resultSet.next()){
+                 listaOrdinazioni.add(resultSet.getString("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaOrdinazioni;
+    }
+
+    public ArrayList<String> getPrenotazioniClientedaPagare(String idCliente){
+        ArrayList<String> listaPrenotazioi=new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT prenotazioni.id FROM prenotazioni,utenti WHERE prenotazioni.id_cliente=utenti.id AND utenti.nome=? AND StatoPrenotazione='IN_ATTESA_DI_PAGAMENTO'");
+            preparedStatement.setString(1, idCliente);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                listaPrenotazioi.add(resultSet.getString("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaPrenotazioi;
+    }
+    public void convalidaPagamentoPrenotazione(String idPrenotazione){
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("UPDATE prenotazioni SET StatoPrenotazione = 'PAGATA' WHERE ID = ?");
+            preparedStatement.setString(1, idPrenotazione);
+            if(preparedStatement.executeUpdate()==0){
+                System.out.println("errore nell'esecuzione della query");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void convalidaPagamentoOrdinazione(String idPrenotazione){
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("UPDATE ordinazioni SET stato = 'PAGATA' WHERE ID = ?");
+            preparedStatement.setString(1, idPrenotazione);
+            if(preparedStatement.executeUpdate()==0){
+                System.out.println("errore nell'esecuzione della query");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void getPrenotazioniCliente(String idCliente){
-        String risultato="";
+    public String getIdUtente(DefaultCliente cliente){
+        String id="";
         try {
-            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT prenotazioni.id FROM prenotazioni,utenti WHERE prenotazioni.id_cliente=utenti.id AND utenti.nome=?");
-            preparedStatement.setString(1, idCliente);
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT id FROM utenti WHERE nome=?");
+            preparedStatement.setString(1, cliente.getID());
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
-                risultato=resultSet.getString("id");
+                id=resultSet.getString("id");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("la prenotazione di "+idCliente+" ha numero "+risultato);
+        return id;
     }
+    public void prenotaOmbrellone(DefaultPrenotazione prenotazione,DefaultCliente currentUser){
+        Random random=new Random();
+        int numeroPrenotazione=random.nextInt(1000);
+        boolean flag=false;
+        try {
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO prenotazioni (id_cliente,num_sdraio,data_Inizio,data_Fine,StatoPrenotazione,id) VALUES (?,?,?,?,?,?)");
+
+            preparedStatement.setString(1,getIdUtente(currentUser));
+            preparedStatement.setInt(2,prenotazione.getListaSdraio().size());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(prenotazione.getDataInizio());
+            java.sql.Date dataInizio=new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(3, dataInizio);
+            cal.setTime(prenotazione.getDataFine());
+            java.sql.Date dataFine=new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(4, dataFine);
+            preparedStatement.setString(5, String.valueOf(prenotazione.getStatoPrenotazione()));
+            do {
+                if(checkNumeroPrenotazione(numeroPrenotazione)){
+                    flag=true;
+                    numeroPrenotazione=random.nextInt(1000);
+                }else{
+                    flag=false;
+                }
+            }while(flag);
+            preparedStatement.setInt(6,numeroPrenotazione);
+            if(preparedStatement.executeUpdate()==0){
+                System.out.println("errore nell'esecuzione della query");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        try {
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO dettaglioprenotazione (id_prenotazione,id_ombrellone) VALUES (?,?)");
+            for(Ombrellone ombrellone:prenotazione.getListaOmbrelloni()){
+                preparedStatement.setString(1,prenotazione.getID());
+                preparedStatement.setString(2,ombrellone.getID());
+                if(preparedStatement.executeUpdate()==0){
+                    System.out.println("errore nell'esecuzione della query");
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void caricaOmbrelloni(){
+        try {
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO ombrelloni (id_ombrellone,id_qrcode) VALUES (?,?)");
+            Random random=new Random();
+            for(int i=0;i<getNumeroOmbrelloni();i++){
+                preparedStatement.setString(1, String.valueOf(i));
+                preparedStatement.setString(2, String.valueOf(random.nextInt(1000)));
+                if(preparedStatement.executeUpdate()==0){
+                    System.out.println("errore nell'esecuzione della query");
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void prenotaSdraio(DefaultPrenotazione prenotaizioneById, DefaultCliente currentCliente) {
+        Random random=new Random();
+        int numeroPrenotazione=random.nextInt(1000);
+        boolean flag=false;
+        try {
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO prenotazioni (id_cliente,num_sdraio,data_Inizio,data_Fine,StatoPrenotazione,id) VALUES (?,?,?,?,?,?)");
+            preparedStatement.setString(1,getIdUtente(currentCliente));
+            preparedStatement.setInt(2,prenotaizioneById.getListaSdraio().size());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(prenotaizioneById.getDataInizio());
+            java.sql.Date dataInizio=new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(3, dataInizio);
+            cal.setTime(prenotaizioneById.getDataFine());
+            java.sql.Date dataFine=new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(4, dataFine);
+            preparedStatement.setString(5, String.valueOf(prenotaizioneById.getStatoPrenotazione()));
+            do {
+                if(checkNumeroPrenotazione(numeroPrenotazione)){
+                    flag=true;
+                    numeroPrenotazione=random.nextInt(1000);
+                }else{
+                    flag=false;
+                }
+            }while(flag);
+            preparedStatement.setString(6,String.valueOf(prenotaizioneById.getStatoPrenotazione()));
+            if(preparedStatement.executeUpdate()==0){
+                System.out.println("errore nell'esecuzione della query");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void ordinazioneBar(DefaultOrdinazione ordinazione, DefaultCliente currentCliente) {
+        Random random=new Random();
+        int numeroOrdinazione=random.nextInt(1000);
+        boolean flag=false;
+        try {
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO ordinazioni (id_qrcode,id_cliente,stato,id) VALUES (?,?,?,?)");
+            preparedStatement.setString(1,ordinazione.getQr_code());
+            preparedStatement.setString(2,getIdUtente(currentCliente));
+            preparedStatement.setString(3, String.valueOf(ordinazione.getStatoOrdinazione()));
+            do{
+                if(checkNumeroOrdinazione(numeroOrdinazione)){
+                    flag=true;
+                    numeroOrdinazione=random.nextInt(1000);
+                }else{
+                    flag=false;
+                }
+            }while(flag);
+            if(preparedStatement.executeUpdate()==0){
+                System.out.println("errore nell'esecuzione della query");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        try {
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO dettagli_ordini (id_prodotto,id_ordinazione,quantita) VALUES (?,?,?)");
+            for(Bevanda bevanda:ordinazione.getListaBevande()){
+                preparedStatement.setString(1,getIdBevanda(bevanda.getNome()));
+                preparedStatement.setString(2,ordinazione.getID());
+                preparedStatement.setInt(3,ordinazione.getQuantitaOrdinata(bevanda));
+                if(preparedStatement.executeUpdate()==0){
+                    System.out.println("errore nell'esecuzione della query");
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    private boolean checkNumeroOrdinazione(int numeroOrdinazione) {
+        try{
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT * FROM ordinazioni WHERE id=?");
+            preparedStatement.setInt(1, numeroOrdinazione);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private String getIdBevanda(String nome) {
+        String bevandaid="";
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT id FROM prodotti WHERE nome=?");
+            preparedStatement.setString(1, nome);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                bevandaid=resultSet.getString("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bevandaid;
+    }
+
+    public String getqrCode(String idOmbrellone) {
+        String codice="";
+        try{
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("SELECT id_qrcode FROM ombrelloni WHERE id_ombrellone=?");
+            preparedStatement.setString(1,idOmbrellone);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()){
+                codice=resultSet.getString("id_qrcode");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return codice;
+    }
+
+    public void decrementaBevandaOrdinata(String bevanda, int quantita) {
+        int quantitaDisponibile=getQuantita(bevanda);
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("UPDATE prodotti SET  quantita_disponibile=? WHERE nome = ?");
+            preparedStatement.setInt(1, quantitaDisponibile-quantita);
+            preparedStatement.setString(2, bevanda);
+            if(preparedStatement.executeUpdate()==0){
+                System.out.println("errore nell'esecuzione della query");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getQuantita(String bevanda) {
+        int quantita=0;
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT quantita_disponibile FROM prodotti WHERE nome = ?");
+            preparedStatement.setString(1, bevanda);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()){
+                quantita=resultSet.getInt("quantita_disponibile");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return quantita;
+
+    }
+
+    public void modificaOmbrelloniPrenotazione(String idPrenotazione, ArrayList<String> listaOmbrelloni) {
+        try {
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO dettaglioprenotazione (id_prenotazione,id_ombrellone) VALUES (?,?)");
+            for(String ombrellone:listaOmbrelloni){
+                preparedStatement.setString(1,idPrenotazione);
+                preparedStatement.setString(2,ombrellone);
+                if(preparedStatement.executeUpdate()==0){
+                    System.out.println("errore nell'esecuzione della query");
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void modificaPeriodoPrenotazione(String idPrenotazione, java.util.Date dataInizio, java.util.Date dataFine){
+        try {
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("UPDATE prenotazioni SET  data_inizio=?, data_fine=? WHERE id = ?");
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dataInizio);
+            java.sql.Date data=new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(1,data);
+            cal.setTime(dataFine);
+            data=new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(2,data);
+            preparedStatement.setString(3,idPrenotazione);
+            if(preparedStatement.executeUpdate()==0){
+                System.out.println("errore nell'esecuzione della query");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void modificaNumeroSdraio(String idPrenotazione,int numSdraio){
+        int numeroSdraio=getNumeroSdarioPrenotazione(idPrenotazione);
+        try {
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("UPDATE prenotazioni SET  num_sdraio=? WHERE id = ?");
+            preparedStatement.setInt(1,numSdraio+numeroSdraio);
+            preparedStatement.setString(2,idPrenotazione);
+            if(preparedStatement.executeUpdate()==0){
+                System.out.println("errore nell'esecuzione della query");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    private int getNumeroSdarioPrenotazione(String idPrenotazione) {
+        try {
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("SELECT num_sdraio FROM prenotazioni WHERE id=?");
+            preparedStatement.setString(1,idPrenotazione);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return resultSet.getInt("num_sdraio");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public ArrayList<String> getPrenotazioniCliente(String nomeCliente) {
+        ArrayList<String> listaPrenotazioi=new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT prenotazioni.id FROM prenotazioni,utenti WHERE prenotazioni.id_cliente=utenti.id AND utenti.nome=?");
+            preparedStatement.setString(1, nomeCliente);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                listaPrenotazioi.add(resultSet.getString("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaPrenotazioi;
+    }
+
+    public void prenotazioneManuale(DefaultPrenotazione prenotazione, String idUtente) {
+        try {
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO prenotazioni (id_cliente,num_sdraio,data_Inizio,data_Fine,StatoPrenotazione,id) VALUES (?,?,?,?,?,?)");
+            preparedStatement.setString(1,getIdUtente(idUtente));
+            preparedStatement.setInt(2,prenotazione.getListaSdraio().size());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(prenotazione.getDataInizio());
+            java.sql.Date dataInizio=new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(3, dataInizio);
+            cal.setTime(prenotazione.getDataFine());
+            java.sql.Date dataFine=new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(4, dataFine);
+            preparedStatement.setString(5, String.valueOf(prenotazione.getStatoPrenotazione()));
+            checkNumeroPrenotazione(Integer.parseInt(prenotazione.getID()));
+            if(preparedStatement.executeUpdate()==0){
+                System.out.println("errore nell'esecuzione della query");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        if(prenotazione.getListaOmbrelloni().size()>0) {
+            Random random = new Random();
+            try {
+                PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("INSERT INTO dettaglioprenotazione (id_prenotazione,id_ombrellone) VALUES (?,?)");
+                for (Ombrellone ombrellone : prenotazione.getListaOmbrelloni()) {
+                    preparedStatement.setString(1, prenotazione.getID());
+                    preparedStatement.setString(2, ombrellone.getID());
+                    if (preparedStatement.executeUpdate() == 0) {
+                        System.out.println("errore nell'esecuzione della query");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String getIdUtente(String idUtente) {
+        String id="";
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT id FROM utenti WHERE nome=?");
+            preparedStatement.setString(1, idUtente);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                id=resultSet.getString("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public void removePrenotazione(String idPrenotazione) {
+        try{
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("DELETE FROM dettaglioprenotazione WHERE id_prenotazione=?");
+            preparedStatement.setString(1,idPrenotazione);
+            if(preparedStatement.executeUpdate()==0){
+                System.out.println("errore nella cancellazione in dettagli prenotazioni");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        try{
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("DELETE FROM prenotazioni WHERE id=?");
+            preparedStatement.setString(1,idPrenotazione);
+            if(preparedStatement.executeUpdate()==0){
+                System.out.println("errore nella cancellazione in prenotazioni");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public int addPrenotazioneToDb(String idUtente, java.util.Date dataInizio, java.util.Date dataFine, ArrayList<String> listaOmbrelloni, int numSdraio) {
+        Random random=new Random();
+        int numeroPrenotazione=random.nextInt(1000);
+        boolean flag=false;
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("INSERT INTO prenotazioni (id_cliente,num_sdraio,data_Inizio,data_Fine,StatoPrenotazione,id) VALUES (?,?,?,?,?,?)");
+            preparedStatement.setString(1, getIdUtente(idUtente));
+            preparedStatement.setInt(2, numSdraio);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dataInizio);
+            java.sql.Date dataIn = new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(3, dataIn);
+            cal.setTime(dataFine);
+            java.sql.Date dataFi = new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(4, dataFi);
+            preparedStatement.setString(5, String.valueOf(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO));
+            do {
+                if(checkNumeroPrenotazione(numeroPrenotazione)){
+                    flag=true;
+                    numeroPrenotazione=random.nextInt(1000);
+                }else{
+                    flag=false;
+                }
+            }while(flag);
+            preparedStatement.setInt(6,numeroPrenotazione);
+            if (preparedStatement.executeUpdate() == 0) {
+                System.out.println("errore nell'esecuzione della query");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        insertIntoDettaglioOrdinazioni(numeroPrenotazione,listaOmbrelloni);
+        return numeroPrenotazione;
+    }
+
+    private boolean checkNumeroPrenotazione(int numeroPrenotazione) {
+        try{
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT * FROM prenotazioni WHERE id=?");
+            preparedStatement.setInt(1, numeroPrenotazione);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void insertIntoDettaglioOrdinazioni(int numeroPrenotazione,ArrayList<String>listaOmbrelloni){
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("INSERT INTO dettaglioprenotazione (id_prenotazione,id_ombrellone) VALUES (?,?)");
+            for (String ombrellone : listaOmbrelloni) {
+                preparedStatement.setInt(1, numeroPrenotazione);
+                preparedStatement.setString(2, ombrellone);
+                if (preparedStatement.executeUpdate() == 0) {
+                    System.out.println("errore nell'esecuzione della query");
+                }
+            }
+           } catch (SQLException e) {
+                e.printStackTrace();
+           }
+    }
+
 }
+
 

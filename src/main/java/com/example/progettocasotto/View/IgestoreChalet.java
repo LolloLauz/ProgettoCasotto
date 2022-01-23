@@ -145,6 +145,7 @@ public class IgestoreChalet {
                     "\n2 se vuoi inserire degli sdraio");
             String input=scanner.nextLine();
             boolean flag=true;
+            gestoreController.stampaSdraioLiberi(dataInizio,dataFine);
             while(input.equals("1") && flag){
                 if(!gestoreController.getOmbrelloniLiberi(dataInizio,dataFine)){
                     System.out.println("non ci sono ombrelloni disponibili");
@@ -163,8 +164,9 @@ public class IgestoreChalet {
             }
             boolean flag2=true;
             if(input.equals("2")){
+                gestoreController.stampaSdraioLiberi(dataInizio,dataFine);
                 if(gestoreController.getSdraioLiberi(dataInizio,dataFine)){
-                System.out.println("inserisci il numero di ombrelloni");
+                System.out.println("inserisci il numero di sdraio");
                 input=scanner.nextLine();
                 numeroSdraio = Integer.parseInt(input);
                 }else{
@@ -287,6 +289,9 @@ public class IgestoreChalet {
 
     public void removePrenotazione() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("inserisci nome utente");
+        String nome=scanner.nextLine();
+        gestoreController.getPrenotazioniCliete(nome);
         System.out.println("inserisci l'id della prenotazione che vuoi rimuovere");
         String idPrenotazione = scanner.nextLine();
         gestoreController.removePrenotazione(idPrenotazione);
@@ -313,8 +318,10 @@ public class IgestoreChalet {
                 break;
             case "2":
                 inserimentoOmbrelloni(idPrenotazione);
+                break;
             case "3":
                 inserimentoSdriao(idPrenotazione);
+                break;
         }
 //        Date dataInizio;
 //        Date dataFine;
@@ -350,11 +357,14 @@ public class IgestoreChalet {
         ArrayList<String> listaOmbrelloni = new ArrayList<>();
         Scanner scanner=new Scanner(System.in);
         String input = "a";
+        System.out.println("inserisci l'ombrellone da aggiungere" +
+                "\n altrimenti premi invio");
+        input=scanner.nextLine();
         while (!input.equals("")) {
+            listaOmbrelloni.add(input);
             System.out.println("inserisci l'ombrellone da aggiungere" +
                     "\n altrimenti premi invio");
             input=scanner.nextLine();
-            listaOmbrelloni.add(input);
         }
         gestoreController.inserimentoOmbrelloni(idPrenotazione,listaOmbrelloni);
     }

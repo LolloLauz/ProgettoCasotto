@@ -7,13 +7,23 @@ import java.util.*;
 public class DefaultOrdinazione implements OrdinazioneInterface {
 
     private String ID;
+    private String qr_code;
 
     private Map<Bevanda,Integer> mappaBevande=new HashMap<>();
     private StatoPreOrd statoOrdinazione;
     private String utenteAssociato;
 
+    public String getQr_code() {
+        return qr_code;
+    }
+
+    public void setQr_code(String qr_code) {
+        this.qr_code = qr_code;
+    }
+
     public DefaultOrdinazione(String ID) {
         this.ID = ID;
+        this.qr_code="";
         this.utenteAssociato="";
         statoOrdinazione=StatoPreOrd.IN_ATTESA_DI_PAGAMENTO;
     }
@@ -87,5 +97,8 @@ public class DefaultOrdinazione implements OrdinazioneInterface {
             System.out.println("bevande :"+bevanda.getNome()+" quantita selezionata: "+mappaBevande.get(bevanda)+" prezzp :"+bevanda.getPrezzo());
         }
         System.out.println("il totale: "+ totale);
+    }
+    public int getQuantitaOrdinata(Bevanda bevanda){
+        return mappaBevande.get(bevanda);
     }
 }

@@ -41,9 +41,11 @@ public class ICliente {
                         System.out.println("entra");
                         prenotaSdraio(userController.getCurrentPrenotazione());
                     }
+                    userController.caricaPrenotazione();
                     break;
                 case "2":
                     prenotaSdraio();
+                    userController.caricaPrenotazioneSdraio();
                     break;
                 case "3":
                     prenotaAttivita();
@@ -91,7 +93,7 @@ public class ICliente {
         if(check!=""){
             userController.selectNumSdraio(Integer.parseInt(check));
         }
-        userController.confermaPernotazione();
+
     }
 
     private boolean ordinaBibita() {
@@ -110,8 +112,29 @@ public class ICliente {
                     "\ninvio per uscire");
             input=scanner.nextLine();
         }
-            userController.getOrdinazione();
+        userController.getQrCodeOmbrelloni();
+        System.out.println("scannerizza il qr_code");
+        input=scanner.nextLine();
+        userController.setqrCode(input);
+        userController.getOrdinazione();
+        userController.caricaOrdinazione();
+        pagaOrdinazione();
         return true;
+    }
+
+    private void pagaOrdinazione() {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("STAMPA SCONTRINO ORDINAZIONE");
+        userController.getTOtaleOrdinazione();
+        System.out.println("1 per pagamento con carta" +
+                "\n2 per pagamento contate");
+        String input=scanner.nextLine();
+        if(input.equals("1")) {
+            userController.pagaOrdinazione();
+            System.out.println("TRANSAZIONE ESEGUITA CON SUCCESSO");
+        }else{
+            System.out.println("rivolgersi al personale della spiaggia");
+        }
     }
 
     private boolean prenotaAttivita() {
@@ -148,12 +171,11 @@ public class ICliente {
                 userController.selectNumSdraio(Integer.parseInt(check));
             }
             userController.confermaPernotazione();
-            return true;
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        return false;
+        return true;
     }
 
     private boolean prenotaOmbrellone() {
@@ -178,11 +200,11 @@ public class ICliente {
                 check=scanner.nextLine();
             }
             userController.confermaPernotazione();
-            return true;
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return false;
+
+        return true;
     }
 
 }

@@ -42,7 +42,8 @@ public class DefaultUserController implements UserContrllerInterface{
         String nomePrenotazione=String.valueOf(random.nextInt(1000));
         prenotazione=new DefaultPrenotazione(nomePrenotazione,dataInizio,dataFine);
         masterController.getChalet().getSpiaggia().addPrenotazione(prenotazione.getID(),dataInizio,dataFine);
-        masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione.getID()).setIdUtenteAssociato(currentCliente.getID());
+        System.out.println("current prenotazione prenota ombrelloni"+prenotazione.getID());
+//        masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione.getID()).setIdUtenteAssociato(currentCliente.getID());
     }
 
     public void mostraOmbrelloniLiberi(Date dataInizio, Date dataFine) {
@@ -61,6 +62,7 @@ public class DefaultUserController implements UserContrllerInterface{
 
     public void ordinaBibita(String bevanda,int quantita){
         masterController.getChalet().getBar().selezionaBevanda(ordinazione.getID(),bevanda,quantita);
+        masterController.getGestoreDB().decrementaBevandaOrdinata(bevanda,quantita);
     }
 
     public boolean setCurrentClient(String nomeCliente) {
@@ -111,7 +113,7 @@ public class DefaultUserController implements UserContrllerInterface{
     }
 
     public void getOrdinazione() {
-        ordinazione.stampaOrdinazione();
+        masterController.getChalet().getBar().stampaOrdinazionebyID(ordinazione.getID());
     }
 
     public boolean prenotaAttivita(String nomeAttivita, int numPersone) {
@@ -140,11 +142,14 @@ public class DefaultUserController implements UserContrllerInterface{
     }
 
     public void getPrenotazioneCliente() {
-        for(DefaultPrenotazione prenotazione:masterController.getChalet().getSpiaggia().getPrenotazioniCliente(currentCliente.getID())){
-            if(prenotazione.getStatoPrenotazione().equals(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO)) {
-                System.out.println("prenotazione id :" + prenotazione.getID());
-            }
+       for(String idPrenotazione: masterController.getGestoreDB().getPrenotazioniClientedaPagare(currentCliente.getID())){
+            System.out.println("prenotazione id: "+masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).getID());
         }
+//        for(DefaultPrenotazione prenotazione:masterController.getChalet().getSpiaggia().getPrenotazioniCliente(currentCliente.getID())){
+//            if(prenotazione.getStatoPrenotazione().equals(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO)) {
+//                System.out.println("prenotazione id :" + prenotazione.getID());
+//            }
+//        }
 
     }
 
@@ -153,6 +158,7 @@ public class DefaultUserController implements UserContrllerInterface{
         masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaSdraio();
         System.out.println("\nil totale della prenotazione e' "+masterController.getChalet().getSpiaggia().getListinoPrezzi().calcolaPrezzo(masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione)));
         masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).setStatoPrenotazione(StatoPreOrd.PAGATA);
+        masterController.gestoreDB.convalidaPagamentoPrenotazione(idPrenotazione);
     }
 
     public void creaOrdinazione() {
@@ -161,5 +167,37 @@ public class DefaultUserController implements UserContrllerInterface{
         masterController.getChalet().getBar().creaOrdinazione(nomeOrdinazione);
         this.ordinazione=new DefaultOrdinazione(nomeOrdinazione);
         masterController.getChalet().getBar().getOrdinazioneById(nomeOrdinazione).setUtenteAssociato(currentCliente.getID());
+    }
+    public DefaultPrenotazione getPrenotazione(){
+        return this.prenotazione;
+    }
+    public void caricaPrenotazione(){
+        masterController.getGestoreDB().prenotaOmbrellone(masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione.getID()),currentCliente);
+    }
+
+    public void caricaPrenotazioneSdraio() {
+        masterController.getGestoreDB().prenotaSdraio(masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione.getID()),currentCliente);
+    }
+
+    public void caricaOrdinazione() {
+        masterController.getGestoreDB().ordinazioneBar(masterController.getChalet().getBar().getOrdinazioneById(ordinazione.getID()),currentCliente);
+    }
+
+    public void getQrCodeOmbrelloni() {
+        for(Ombrellone ombrellone:masterController.getChalet().getSpiaggia().getListaOmbrelloni()){
+            System.out.println("qr_code ombrellone: "+ombrellone.getQRCode());
+        }
+    }
+
+    public void setqrCode(String input) {
+        masterController.getChalet().getBar().getOrdinazioneById(ordinazione.getID()).setQr_code(input);
+    }
+
+    public void pagaOrdinazione() {
+
+        masterController.getGestoreDB().convalidaPagamentoOrdinazione(ordinazione.getID());
+    }
+    public void getTOtaleOrdinazione(){
+        masterController.getChalet().getBar().getOrdinazioneById(ordinazione.getID()).getTotaleOrdinazione();
     }
 }
