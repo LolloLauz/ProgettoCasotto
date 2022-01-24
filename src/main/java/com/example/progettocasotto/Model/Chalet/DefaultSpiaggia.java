@@ -43,6 +43,7 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
     public boolean addSdraioToPrenotazione(String idPrenotazione, int numSdraio) {
         Random random=new Random();
         int numero =random.nextInt(listaSdraio.size());
+        System.out.println(getSdraioLiberi(getPrenotaizioneById(idPrenotazione).getDataInizio(),getPrenotaizioneById(idPrenotazione).getDataFine()).size());
         int i=0;
         while(i<numSdraio){
             if(!getPrenotaizioneById(idPrenotazione).getListaSdraio().contains(getSdraioLiberi(getPrenotaizioneById(idPrenotazione).getDataInizio(),getPrenotaizioneById(idPrenotazione).getDataFine()).get(numero))) {

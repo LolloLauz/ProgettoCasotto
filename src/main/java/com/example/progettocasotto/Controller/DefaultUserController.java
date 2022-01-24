@@ -106,6 +106,7 @@ public class DefaultUserController implements UserContrllerInterface{
     }
 
     public void stampaMenu() {
+        System.out.println(masterController.getChalet().getBar().getListaBevande().size());
         for(Bevanda bevanda:masterController.getChalet().getBar().getListaBevande()) {
             System.out.println("|"+bevanda.getNome()+"     "+bevanda.getDescrizione()+"|");
         }

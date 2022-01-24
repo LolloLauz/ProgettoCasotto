@@ -46,7 +46,7 @@ public class GestoreDB {
         try {
             Statement statement=connection.createStatement();
             ResultSet resultSet=statement.executeQuery("SELECT numero_sdraio FROM spiaggia");
-            while(resultSet.next()) {
+            if(resultSet.next()) {
                 numeroSdraio=(resultSet.getInt("numero_sdraio"));
             }
         } catch (SQLException e) {
@@ -715,7 +715,7 @@ public class GestoreDB {
                 listaOrdinazioni.add(new DefaultOrdinazione(resultSet.getString("id")));
                 for(DefaultOrdinazione ordinazione:listaOrdinazioni){
                     if(ordinazione.getID().equals(resultSet.getString("id"))){
-                        ordinazione.setStatoOrdinazione(StatoPreOrd.valueOf(resultSet.getString("StatoPrenotazione")));
+                        ordinazione.setStatoOrdinazione(StatoPreOrd.valueOf(resultSet.getString("stato")));
                     }
                 }
             }
@@ -728,12 +728,12 @@ public class GestoreDB {
 
     private void popolaOrdinazioni(ArrayList<DefaultOrdinazione> listaOrdinazioni) {
         try {
-            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT prodotti.nome,dettagli_ordini.quantita FROM dettagli_ordine,prodotti WHERE dettagli_ordini.id_prodotto=prodotti.id AND id_ordinazione=?");
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT dettagli_ordini.id_prodotto,dettagli_ordini.quantita FROM dettagli_ordini,prodotti WHERE dettagli_ordini.id_prodotto=prodotti.id AND id_ordinazione=?");
             for (DefaultOrdinazione ordinazione:listaOrdinazioni) {
                 preparedStatement.setString(1, ordinazione.getID());
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
-                    ordinazione.addBevanda(getBevanda(resultSet.getString("prodotti.nome")), resultSet.getInt("quantita"));
+                    ordinazione.addBevanda(getBevanda(resultSet.getString("dettagli_ordini.id_prodotto")), resultSet.getInt("quantita"));
                 }
             }
         } catch (SQLException ex) {

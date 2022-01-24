@@ -80,8 +80,10 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
         for(Bevanda bevanda:gestoreDB.getBevande()){
             chalet.getBar().creaBevanda(bevanda.getNome(),bevanda.getDescrizione(),bevanda.getQuantita(), bevanda.getPrezzo());
         }
-        chalet.getBar().getListaOrdinazioni().addAll(gestoreDB.getOrdinazioniDb());
         setQrCode();
+        chalet.getBar().getListaOrdinazioni().addAll(getGestoreDB().getOrdinazioniDb());
+//        chalet.getBar().getListaBevande().addAll(getGestoreDB().getBevandeFromDB());
+//        getGestoreDB().caricaOmbrelloni();
 //        chalet.getSpiaggia().getPrenotaizioneById("3").setStatoPrenotazione(StatoPreOrd.PAGATA);
 
 //        Date dataInizio;

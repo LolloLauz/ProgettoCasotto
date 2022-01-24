@@ -1,6 +1,7 @@
 package com.example.progettocasotto.Controller;
 
 import com.example.progettocasotto.DataBase.Privilegio;
+import com.example.progettocasotto.Model.Chalet.Bar.Bevanda;
 import com.example.progettocasotto.Model.Chalet.Bar.DefaultOrdinazione;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
@@ -190,7 +191,7 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
     }
     public void confermaAvvenutoPagamentoOrdinazione(String idOrdinazione){
         masterController.getGestoreDB().convalidaPagamentoOrdinazione(idOrdinazione);
-//        masterController.getChalet().getBar().getOrdinazioneById(idOrdinazione).setStatoOrdinazione(StatoPreOrd.PAGATA);
+        masterController.getChalet().getBar().getOrdinazioneById(idOrdinazione).setStatoOrdinazione(StatoPreOrd.PAGATA);
     }
 
     public void stampaSdraioLiberi(Date dataInizio, Date dataFine){

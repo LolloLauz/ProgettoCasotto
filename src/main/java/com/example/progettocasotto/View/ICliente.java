@@ -116,8 +116,8 @@ public class ICliente {
         System.out.println("scannerizza il qr_code");
         input=scanner.nextLine();
         userController.setqrCode(input);
-        userController.getOrdinazione();
         userController.caricaOrdinazione();
+        userController.getOrdinazione();
         pagaOrdinazione();
         return true;
     }
