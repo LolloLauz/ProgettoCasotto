@@ -3,10 +3,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.DefaultFXView">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.DefaultFXView">
    <children>
       <Button fx:id="loginButton" layoutX="274.0" layoutY="234.0" mnemonicParsing="false" onAction="#loginButtonPressed" text="Button" />
       <TextField fx:id="passwordLabel" layoutX="217.0" layoutY="187.0" promptText="password" />
       <TextField fx:id="emailLabel" layoutX="218.0" layoutY="147.0" promptText="email" />
+      <Label layoutX="242.0" layoutY="105.0" text="Schermata di logIn" />
    </children>
 </AnchorPane>

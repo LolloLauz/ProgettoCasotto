@@ -24,7 +24,6 @@ public class IgestoreChalet {
         this.masterController = masterController;
         this.gestoreController = new DefaultGestoreController(masterController);
         Scanner scanner = new Scanner(System.in);
-        System.out.println("SE E' IL TUO PRIMO ACCESSO PREMI 2");
         System.out.println("CHE COSA VUOI FARE");
         String coseDaFare = "1-crea chalet" +
                 "\n2-crea spiaggia" +
@@ -66,7 +65,7 @@ public class IgestoreChalet {
                     break;
                 case "8":
                     crazioneAttivita();
-
+                    break;
                 default:
                     break;
             }
@@ -322,6 +321,8 @@ public class IgestoreChalet {
             case "3":
                 inserimentoSdriao(idPrenotazione);
                 break;
+            default:
+                break;
         }
 //        Date dataInizio;
 //        Date dataFine;
@@ -348,6 +349,7 @@ public class IgestoreChalet {
 
     private void inserimentoSdriao(String idPrenotazione) {
         Scanner scanner=new Scanner(System.in);
+        gestoreController.stampaSdraioLiberi(idPrenotazione);
         System.out.println("inserisci il numero di sdraio da aggiungere");
         int numSdraio = Integer.parseInt(scanner.nextLine());
         gestoreController.inserimentoSdraio(idPrenotazione,numSdraio);
@@ -357,6 +359,7 @@ public class IgestoreChalet {
         ArrayList<String> listaOmbrelloni = new ArrayList<>();
         Scanner scanner=new Scanner(System.in);
         String input = "a";
+        gestoreController.stampaOmbrelloniLiberi(idPrenotazione);
         System.out.println("inserisci l'ombrellone da aggiungere" +
                 "\n altrimenti premi invio");
         input=scanner.nextLine();
@@ -380,7 +383,9 @@ public class IgestoreChalet {
             System.out.println("Inserire la data di fine");
             dataFine = dateFormat.parse(scanner.nextLine());
             System.out.println("inserisci il numero di sdriao da aggiungere");
-            gestoreController.modificaPeriodoPrenotazione(idPrenotazione, dataInizio, dataFine);
+            if(!gestoreController.modificaPeriodoPrenotazione(idPrenotazione, dataInizio, dataFine)){
+                System.out.println("gli ombrelloni e o gli sdraio non erano più disponibili nel nuovo periodo perciò sono stati rimossi");
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }

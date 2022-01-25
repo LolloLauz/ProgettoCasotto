@@ -756,6 +756,27 @@ public class GestoreDB {
         }
         return bevanda;
     }
+
+    public void removePrenotazioneFromDettagliOrdinazione(String prenotazione) {
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("DELETE FROM dettaglioprenotazione WHERE dettaglioprenotazione.id_prenotazione=?");
+                preparedStatement.setString(1, prenotazione);
+                if(preparedStatement.executeUpdate()==0) {
+                    System.out.println("errore nell'esecuzione della delete");
+                }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("UPDATE prenotazioni SET  num_sdraio=0 WHERE id = ?");
+            preparedStatement.setString(1, prenotazione);
+            if(preparedStatement.executeUpdate()==0) {
+                System.out.println("errore nell'esecuzione della update");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
 
 

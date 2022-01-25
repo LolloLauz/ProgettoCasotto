@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class ClientViev {
     @FXML
@@ -28,14 +27,12 @@ public class ClientViev {
     public void handlePrenotaOmbrellone(ActionEvent actionEvent) {
         //apri finestra scelta ombrellone
         try{
-            URL url=getClass().getResource("SceltaOmbrellone.fxml");
-            System.out.println(url);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SceltaOmbrellone.fxml"));
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(new Scene(loader.load()));
         SelectOmbrellone controller = loader.getController();
-        controller.initialize();
+        controller.initialize(userController);
         stage.showAndWait();
         } catch (
         IOException e) {
@@ -45,17 +42,43 @@ public class ClientViev {
     }
 
     public void initialize(DefaultaMasterController masterController,String nomeCliente) {
-        System.out.println(masterController.getChalet().getSpiaggia().getNomeSpiaggia());
-//        this.userController=new DefaultUserController(masterController);
+        this.userController=new DefaultUserController(masterController,nomeCliente);
         this.masterController=masterController;
         userController.setlistaClienti(masterController.getListaClienti());
-        userController.setCurrentClient(nomeCliente);    }
+        userController.setCurrentClient(nomeCliente);
+    }
 
     public void handlePrenotaSdraio(ActionEvent actionEvent) {
-
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SceltaSdraio.fxml"));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(loader.load()));
+            SceltaSdraioView controller = loader.getController();
+            controller.initialize(userController);
+            stage.showAndWait();
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handlePrenotaAttivita(ActionEvent actionEvent) {
 
+    }
+
+    public void handleOrdinaDalBar(ActionEvent actionEvent) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OrdinazioneBar.fxml"));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(loader.load()));
+            OrdinazioneBarView controller = loader.getController();
+            controller.initialize(userController);
+            stage.showAndWait();
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
     }
 }

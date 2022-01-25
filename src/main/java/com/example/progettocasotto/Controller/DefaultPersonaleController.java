@@ -80,19 +80,22 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
 
     }
     public boolean modificaPeriodoPrenotazione(String prenotazione,Date dataInizio,Date dataFine){
-        for(Ombrellone ombrellone:masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).getListaOmbrelloni()){
-            if(!selezionaPeriodoOmbrelloni(dataInizio,dataFine).contains(ombrellone)){
-                return false;
-            }
+        boolean flag=true;
+        System.out.println(masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).getListaOmbrelloni().size());
+        if(!selezionaPeriodoOmbrelloni(dataInizio,dataFine).containsAll(masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).getListaOmbrelloni())){
+            masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).removeOmbrelloni();
+            flag= false;
         }
-        for(Sdraio sdraio:masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).getListaSdraio()){
-            if(!selezionaPeriodoSdraio(dataInizio,dataFine).contains(sdraio)){
-                return false;
-            }
+        if(!selezionaPeriodoSdraio(dataInizio,dataFine).containsAll(masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).getListaSdraio())){
+            masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).removeSdraio();
+            flag= false;
         }
-        masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).setPeriodo(dataInizio,dataFine);
+           masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).setPeriodo(dataInizio,dataFine);
+        if(!flag){
+            masterController.getGestoreDB().removePrenotazioneFromDettagliOrdinazione(prenotazione);
+        }
         masterController.getGestoreDB().modificaPeriodoPrenotazione(prenotazione,dataInizio,dataFine);
-        return true;
+        return flag;
     }
 
     public void getPrenotazioniCliete(String nomeCliente) {
@@ -125,6 +128,7 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
 
     public void inserimentoSdraio(String idPrenotazione, int numSdraio) {
 //        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).removeSdraio();
+
         masterController.getChalet().getSpiaggia().addSdraioToPrenotazione(idPrenotazione,numSdraio);
         masterController.getGestoreDB().modificaNumeroSdraio(idPrenotazione,numSdraio);
     }
@@ -200,5 +204,12 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
 
     public void stampaSdraioOmbrelloni(Date dataInizio, Date dataFine) {
         masterController.getChalet().getSpiaggia().getOmbrelloniLiberi(dataInizio,dataFine);
+    }
+
+    public void stampaSdraioLiberi(String idPrenotazione) {
+        masterController.getChalet().getSpiaggia().stampaSdraioLiberi(masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).getDataInizio(),masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).getDataFine());
+    }
+    public void stampaOmbrelloniLiberi(String idPrenotazione){
+        masterController.getChalet().getSpiaggia().stampaOmbrelloniLiberi(masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).getDataInizio(),masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).getDataFine());
     }
 }

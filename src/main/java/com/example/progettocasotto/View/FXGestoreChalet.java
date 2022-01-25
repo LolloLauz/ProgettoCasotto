@@ -19,4 +19,25 @@ public class FXGestoreChalet {
         masterController.creaChaletDefault();
     }
 
+    public void handlePagamentoContanti(ActionEvent actionEvent) {
+
+    }
+
+    public void handleEliminaPrenotazione(ActionEvent actionEvent) {
+    }
+
+    public void handleModificaPrenotazione(ActionEvent actionEvent) {
+    }
+
+    public void handleCreaAttivita(ActionEvent actionEvent) {
+    }
+
+    public void handlePrenotazioneManule(ActionEvent actionEvent) {
+    }
+
+    public void handleCreaBar(ActionEvent actionEvent) {
+    }
+
+    public void handleCreaSpiaggia(ActionEvent actionEvent) {
+    }
 }

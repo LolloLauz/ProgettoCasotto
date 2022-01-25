@@ -3,9 +3,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.View.FXGestoreChalet">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.View.FXGestoreChalet">
    <children>
-      <Button fx:id="creaChaletDiDefault" layoutX="75.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleDefaultChalet" text="creaChaletDiDefault" />
+      <Button fx:id="creaChaletDiDefault" layoutX="43.0" layoutY="38.0" mnemonicParsing="false" onAction="#handleDefaultChalet" text="creaChaletDiDefault" />
+      <Button fx:id="creaSpiaggia" layoutX="43.0" layoutY="98.0" mnemonicParsing="false" onAction="#handleCreaSpiaggia" text="crea spiaggia" />
+      <Button fx:id="creaBar" layoutX="43.0" layoutY="149.0" mnemonicParsing="false" onAction="#handleCreaBar" text="crea bar" />
+      <Button fx:id="prenotazioneManuale" layoutX="43.0" layoutY="200.0" mnemonicParsing="false" onAction="#handlePrenotazioneManule" text="prenotazione manuale" />
+      <Button fx:id="creaAttivita" layoutX="43.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleCreaAttivita" text="crea attivita" />
+      <Button fx:id="modificaPrenotazione" layoutX="232.0" layoutY="38.0" mnemonicParsing="false" onAction="#handleModificaPrenotazione" text="modifica prenotazione" />
+      <Button fx:id="eliminaPrenotazione" layoutX="236.0" layoutY="98.0" mnemonicParsing="false" onAction="#handleEliminaPrenotazione" text="elimina prenotazione" />
+      <Button fx:id="pagamentoContanti" layoutX="232.0" layoutY="162.0" mnemonicParsing="false" onAction="#handlePagamentoContanti" text="pagamento contanti" />
    </children>
 </AnchorPane>

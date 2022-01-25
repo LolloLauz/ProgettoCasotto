@@ -29,7 +29,6 @@ public class DefaultFXView {
     GestoreDB gestoreDB =new GestoreDB();
 
     public void loginButtonPressed(ActionEvent actionEvent) {
-
         Privilegio privilegio=gestoreDB.getPrivilegio(emailLabel.getText(),passwordLabel.getText());
         String nomeCliente;
 
@@ -57,8 +56,6 @@ public class DefaultFXView {
                 masterController.creaChaletDefault();
                 nomeCliente = gestoreDB.getNomeUtente(emailLabel.getText(), passwordLabel.getText());
                 try {
-                    URL url=getClass().getResource("ClientView.fxml");
-                    System.out.println(url);
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientView.fxml"));
                     Stage stage = new Stage(StageStyle.DECORATED);
                     stage.initModality(Modality.APPLICATION_MODAL);

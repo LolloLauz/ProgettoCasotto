@@ -37,8 +37,8 @@ public class HelloApplication extends Application {
 
 
     public static void main(String[] args) {
-        DefaultView defaultView=new DefaultView();
-//        launch();
+//        DefaultView defaultView=new DefaultView();
+        launch();
 
     }
 }

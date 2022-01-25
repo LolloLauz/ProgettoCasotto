@@ -89,7 +89,7 @@ public class DefaultOrdinazione implements OrdinazioneInterface {
             System.out.println(bevanda.getNome()+" quantita "+ getMappaBevande().get(bevanda));
         }
     }
-    public void getTotaleOrdinazione(){
+    public double getTotaleOrdinazione(){
         double totale=0;
         System.out.println("identificativo della prenotazione: "+getID());
         for(Bevanda bevanda:mappaBevande.keySet()){
@@ -97,6 +97,7 @@ public class DefaultOrdinazione implements OrdinazioneInterface {
             System.out.println("bevande :"+bevanda.getNome()+" quantita selezionata: "+mappaBevande.get(bevanda)+" prezzp :"+bevanda.getPrezzo());
         }
         System.out.println("il totale: "+ totale);
+        return totale;
     }
     public int getQuantitaOrdinata(Bevanda bevanda){
         return mappaBevande.get(bevanda);

@@ -176,6 +176,7 @@ public class IAddettoAllaSpiaggia{
     }
     private void inserimentoSdriao(String idPrenotazione) {
         Scanner scanner=new Scanner(System.in);
+        addettoASController.stampaSdraioLiberi(idPrenotazione);
         System.out.println("inserisci il numero di sdraio da aggiungere");
         int numSdraio = Integer.parseInt(scanner.nextLine());
         addettoASController.inserimentoSdraio(idPrenotazione,numSdraio);
@@ -185,6 +186,7 @@ public class IAddettoAllaSpiaggia{
         ArrayList<String> listaOmbrelloni = new ArrayList<>();
         Scanner scanner=new Scanner(System.in);
         String input = "a";
+        addettoASController.stampaOmbrelloniLiberi(idPrenotazione);
         while (!input.equals("")) {
             System.out.println("inserisci l'ombrellone da aggiungere" +
                     "\n altrimenti premi invio");
@@ -205,7 +207,9 @@ public class IAddettoAllaSpiaggia{
             dataInizio=dateFormat.parse(scanner.nextLine());
             System.out.println("Inserire la data di fine");
             dataFine=dateFormat.parse(scanner.nextLine());
-            addettoASController.modificaPeriodoPrenotazione(idPrenotazione,dataInizio,dataFine);
+            if(!addettoASController.modificaPeriodoPrenotazione(idPrenotazione,dataInizio,dataFine)){
+                System.out.println("gli ombrelloni e o gli sdraio non erano più disponibili in quel periodo quindi sono stati rimossi");
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }

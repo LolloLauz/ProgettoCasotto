@@ -7,6 +7,7 @@ import com.example.progettocasotto.Model.Chalet.DefaultAttivita;
 import com.example.progettocasotto.Model.Chalet.DefaultSpiaggia;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
+import com.example.progettocasotto.Model.Spiaggia.Sdraio;
 import com.example.progettocasotto.Model.Spiaggia.StatoPreOrd;
 import com.example.progettocasotto.Model.Utenti.DefaultCliente;
 
@@ -60,6 +61,11 @@ public class DefaultUserController implements UserContrllerInterface{
     }
 
     public void ordinaBibita(String bevanda,int quantita){
+        for(Bevanda bev:masterController.getChalet().getBar().getListaBevande()){
+            if(bev.getNome().equals(bevanda)){
+                ordinazione.addBevanda(bev,quantita);
+            }
+        }
         masterController.getChalet().getBar().selezionaBevanda(ordinazione.getID(),bevanda,quantita);
         masterController.getGestoreDB().decrementaBevandaOrdinata(bevanda,quantita);
     }
@@ -106,7 +112,6 @@ public class DefaultUserController implements UserContrllerInterface{
     }
 
     public void stampaMenu() {
-        System.out.println(masterController.getChalet().getBar().getListaBevande().size());
         for(Bevanda bevanda:masterController.getChalet().getBar().getListaBevande()) {
             System.out.println("|"+bevanda.getNome()+"     "+bevanda.getDescrizione()+"|");
         }
@@ -184,6 +189,7 @@ public class DefaultUserController implements UserContrllerInterface{
     }
 
     public void caricaOrdinazione() {
+        System.out.println(ordinazione.getID()+" utente "+currentCliente.getID());
         int numero=masterController.getGestoreDB().ordinazioneBar(masterController.getChalet().getBar().getOrdinazioneById(ordinazione.getID()),currentCliente);
         masterController.getChalet().getBar().getOrdinazioneById(ordinazione.getID()).setID(String.valueOf(numero));
         ordinazione.setID(String.valueOf(numero));
@@ -202,7 +208,52 @@ public class DefaultUserController implements UserContrllerInterface{
         masterController.getGestoreDB().convalidaPagamentoOrdinazione(ordinazione.getID());
         masterController.getChalet().getBar().getOrdinazioneById(ordinazione.getID()).setStatoOrdinazione(StatoPreOrd.PAGATA);
     }
-    public void getTOtaleOrdinazione(){
-        masterController.getChalet().getBar().getOrdinazioneById(ordinazione.getID()).getTotaleOrdinazione();
+    public double getTOtaleOrdinazione(){
+        return masterController.getChalet().getBar().getOrdinazioneById(ordinazione.getID()).getTotaleOrdinazione();
+    }
+
+    public String getListOmbrelloniLiberi(Date dataInizio, Date dataFine) {
+        String result="";
+        int i=0;
+        for(Ombrellone ombrellone:masterController.getChalet().getSpiaggia().getOmbrelloniLiberi(dataInizio,dataFine)){
+            result=result+ombrellone.getID()+"|";
+            if(i>=10){
+                i=0;
+                result=result+"\n";
+            }
+            i++;
+        }
+        return result;
+    }
+
+    public String getListSdraioLiberi(Date dataInizio, Date dataFine) {
+        return String.valueOf(masterController.getChalet().getSpiaggia().getSdraioLiberi(dataInizio,dataFine).size());
+    }
+
+    public String mostraMenu() {
+
+        String result="";
+        int i=0;
+        for(Bevanda bevanda:masterController.getChalet().getBar().getListaBevande()) {
+            result=result+"|"+bevanda.getNome()+"     "+bevanda.getDescrizione()+ "prezzo : "+bevanda.getPrezzo()+"|\n";
+
+        }
+        return result;
+    }
+
+    public ArrayList<String> getlistaQrCode() {
+        ArrayList<String>qrCode=new ArrayList<>();
+        for(Ombrellone ombrellone:masterController.getChalet().getSpiaggia().getListaOmbrelloni()) {
+            qrCode.add(ombrellone.getQRCode());
+        }
+        return qrCode;
+    }
+
+    public String getStringaOrdinazione() {
+        String reuslt=ordinazione.getID()+"\n";
+        for(Bevanda bevanda:masterController.getChalet().getBar().getOrdinazioneById(ordinazione.getID()).getListaBevande()){
+            reuslt=reuslt+"bevanda "+bevanda.getNome()+" quantita ordinata "+ordinazione.getQuantitaOrdinata(bevanda)+" prezzo :"+bevanda.getPrezzo()+"\n";
+        }
+        return reuslt;
     }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.PagaOrdinazioneView">
+   <children>
+      <Button fx:id="close" layoutX="55.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleClose" text="back" />
+      <Label fx:id="mostraOrdinazione" layoutX="19.0" layoutY="131.0" prefHeight="151.0" prefWidth="179.0" textAlignment="JUSTIFY" />
+      <Button fx:id="pagaConCarta" layoutX="330.0" layoutY="119.0" mnemonicParsing="false" onAction="#handlePagaConCarta" text="Paga con carta" />
+      <Button fx:id="pagaInContante" layoutX="324.0" layoutY="174.0" mnemonicParsing="false" onAction="#handlePagaInContate" text="Paga in contante" />
+      <Label fx:id="warningLabel" layoutX="317.0" layoutY="232.0" prefHeight="86.0" prefWidth="119.0" />
+   </children>
+</AnchorPane>
