@@ -10,5 +10,6 @@
       <Button fx:id="prenotaAttivita" layoutX="68.0" layoutY="243.0" mnemonicParsing="false" onAction="#handlePrenotaAttivita" text="Prenota attivita" />
       <Button layoutX="70.0" layoutY="296.0" mnemonicParsing="false" text="back" />
       <Button fx:id="ordinaDalBar" layoutX="70.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleOrdinaDalBar" text="OrdinaDalBar" />
+      <Button fx:id="pagaUnaPrenotazione" layoutX="248.0" layoutY="200.0" mnemonicParsing="false" onAction="#handlePagaUnaPrenotazione" text="Paga un prenotazione" />
    </children>
 </AnchorPane>

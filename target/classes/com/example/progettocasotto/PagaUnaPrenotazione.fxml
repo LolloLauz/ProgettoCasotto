@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.PagaUnaPrenotazioneView">
+   <children>
+      <ComboBox fx:id="sceltaPrenotazione" layoutX="225.0" layoutY="118.0" onAction="#handlePrenotazioneSelezionata" prefWidth="150.0" promptText="Prenotazione da pagare" />
+      <Label layoutX="162.0" layoutY="71.0" text="Seleziona una premotazione che devi ancora pagare" />
+      <Button fx:id="pagaButton" layoutX="36.0" layoutY="264.0" mnemonicParsing="false" onAction="#handlePagaConCarta" text="Paga con carta" />
+      <Button fx:id="pagaContanti" layoutX="479.0" layoutY="264.0" mnemonicParsing="false" onAction="#handlePagaContanti" text="Paga contani" />
+      <Label fx:id="warningLabel" layoutX="263.0" layoutY="317.0" prefHeight="18.0" prefWidth="202.0" />
+      <TextArea fx:id="mostraScontrino" layoutX="200.0" layoutY="164.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button fx:id="closeButton" layoutX="496.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
+   </children>
+</AnchorPane>

@@ -60,7 +60,6 @@ public class IAddettoAllaSpiaggia{
                     "\n2 se vuoi inserire degli sdraio");
             String input=scanner.nextLine();
             boolean flag=true;
-            addettoASController.stampaSdraioOmbrelloni(dataInizio,dataFine);
             while(input.equals("1") && flag){
                 if(!addettoASController.getOmbrelloniLiberi(dataInizio,dataFine)){
                     System.out.println("non ci sono ombrelloni disponibili");

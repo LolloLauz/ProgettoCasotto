@@ -31,11 +31,7 @@ public class SelectOmbrellone {
 
 
     public void handleOmbrelloneSelezionato(ActionEvent actionEvent) {
-        if(!ombrellone.getText().equals("")) {
             userController.selectOmbrellone(ombrellone.getText());
-            ombrellone.setText("");
-        }
-
     }
 
     public void initialize(DefaultUserController userController) {
@@ -45,13 +41,13 @@ public class SelectOmbrellone {
     public void handleMostraOmbrelloniLiberi(ActionEvent actionEvent) {
         LocalDate dataIn = dataInizio.getValue();
         Calendar c =  Calendar.getInstance();
-        c.set(dataIn.getYear(), dataIn.getMonthValue() - 1, dataIn.getDayOfMonth());
+        c.set(dataIn.getYear(), dataIn.getMonthValue(), dataIn.getDayOfMonth());
         Date dataInizio = c.getTime();
         LocalDate dataFin = dataFine.getValue();
-        c.set(dataIn.getYear(), dataIn.getMonthValue() - 1, dataIn.getDayOfMonth());
+        c.set(dataFin.getYear(), dataIn.getMonthValue(), dataIn.getDayOfMonth());
         Date dataFine = c.getTime();
+        userController.mostraOmbrelloniLiberi(dataInizio,dataFine);
         displayOmbrelloniLiberi.setText(userController.getListOmbrelloniLiberi(dataInizio,dataFine));
-        System.out.println(userController.getListOmbrelloniLiberi(dataInizio,dataFine));
         userController.prenotaOmbrellone(dataInizio,dataFine);
     }
 

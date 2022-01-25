@@ -202,8 +202,8 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
         masterController.getChalet().getSpiaggia().stampaSdraioLiberi(dataInizio,dataFine);
     }
 
-    public void stampaSdraioOmbrelloni(Date dataInizio, Date dataFine) {
-        masterController.getChalet().getSpiaggia().getOmbrelloniLiberi(dataInizio,dataFine);
+    public ArrayList<Ombrellone> getListaOmbrelloni(Date dataInizio, Date dataFine) {
+        return masterController.getChalet().getSpiaggia().getOmbrelloniLiberi(dataInizio,dataFine);
     }
 
     public void stampaSdraioLiberi(String idPrenotazione) {
@@ -211,5 +211,17 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
     }
     public void stampaOmbrelloniLiberi(String idPrenotazione){
         masterController.getChalet().getSpiaggia().stampaOmbrelloniLiberi(masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).getDataInizio(),masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).getDataFine());
+    }
+
+    public String getListaOmbrelloniLiberi(Date dataInizio, Date dataFine) {
+        String result="";
+        for(Ombrellone ombrellone:masterController.getChalet().getSpiaggia().getOmbrelloniLiberi(dataInizio,dataFine)){
+            result=result+ombrellone.getID()+"|";
+        }
+        return result;
+    }
+
+    public int getListaSdraio(Date dataInizio, Date dataFine) {
+        return masterController.getChalet().getSpiaggia().getSdraioLiberi(dataInizio,dataFine).size();
     }
 }

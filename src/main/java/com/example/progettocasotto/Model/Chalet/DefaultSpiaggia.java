@@ -70,7 +70,6 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
                                 (dataInizio.before(prenotazione.getDataInizio()) && prenotazione.getDataInizio().before(dataFine))||
                                 (dataFine.before(prenotazione.getDataFine()) && prenotazione.getDataFine().before(dataFine)))){
                     ombrelloniOccupati.addAll(prenotazione.getListaOmbrelloni());
-
                 }
         }
         return ombrelloniOccupati;

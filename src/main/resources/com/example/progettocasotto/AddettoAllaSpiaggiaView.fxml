@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.AddettoAllaSpiaggiaView">
+   <children>
+      <Button fx:id="prenotazioneManuale" layoutX="83.0" layoutY="88.0" mnemonicParsing="false" onAction="#handlePrenotazioneManuale" text="Prenotazione Manuale" />
+      <Button fx:id="eliminazionePrenotazione" layoutX="83.0" layoutY="151.0" mnemonicParsing="false" onAction="#handleEliminaPrenotazione" text="Elimina Prenotazione" />
+      <Button fx:id="pagamentoContante" layoutX="83.0" layoutY="216.0" mnemonicParsing="false" onAction="#handlePagamentoContante" text="Pagamento Contante" />
+      <Button fx:id="modificaPrenotazione" layoutX="83.0" layoutY="306.0" mnemonicParsing="false" onAction="#handleModificaPrenotazione" text="Modifica Prenotazione" />
+      <Button layoutX="494.0" layoutY="332.0" mnemonicParsing="false" text="Button" />
+   </children>
+</AnchorPane>

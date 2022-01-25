@@ -31,10 +31,9 @@ public class DefaultFXView {
     public void loginButtonPressed(ActionEvent actionEvent) {
         Privilegio privilegio=gestoreDB.getPrivilegio(emailLabel.getText(),passwordLabel.getText());
         String nomeCliente;
-
+        masterController.creaChaletDefault();
         switch (privilegio) {
             case SUPERADMIN:
-                nomeCliente = gestoreDB.getNomeUtente(emailLabel.getText(), passwordLabel.getText());
                 try {
                     URL url=getClass().getResource("FXGestoreChalet.fxml");
                     System.out.println(url);
@@ -50,10 +49,20 @@ public class DefaultFXView {
                 }
                 break;
             case ADMIN:
-                IAddettoAllaSpiaggia addettoAllaSpiaggia = new IAddettoAllaSpiaggia(masterController);
+//                IAddettoAllaSpiaggia addettoAllaSpiaggia = new IAddettoAllaSpiaggia(masterController);
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("AddettoAllaSpiaggiaView.fxml"));
+                    Stage stage = new Stage(StageStyle.DECORATED);
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setScene(new Scene(loader.load()));
+                    AddettoAllaSpiaggiaView controller = loader.getController();
+                    controller.initialize(masterController);
+                    stage.showAndWait();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             case USER:
-                masterController.creaChaletDefault();
                 nomeCliente = gestoreDB.getNomeUtente(emailLabel.getText(), passwordLabel.getText());
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientView.fxml"));

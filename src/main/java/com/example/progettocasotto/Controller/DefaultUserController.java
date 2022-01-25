@@ -7,7 +7,6 @@ import com.example.progettocasotto.Model.Chalet.DefaultAttivita;
 import com.example.progettocasotto.Model.Chalet.DefaultSpiaggia;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
-import com.example.progettocasotto.Model.Spiaggia.Sdraio;
 import com.example.progettocasotto.Model.Spiaggia.StatoPreOrd;
 import com.example.progettocasotto.Model.Utenti.DefaultCliente;
 
@@ -255,5 +254,20 @@ public class DefaultUserController implements UserContrllerInterface{
             reuslt=reuslt+"bevanda "+bevanda.getNome()+" quantita ordinata "+ordinazione.getQuantitaOrdinata(bevanda)+" prezzo :"+bevanda.getPrezzo()+"\n";
         }
         return reuslt;
+    }
+
+    public ArrayList<String> getPrenotazioneClient() {
+        return masterController.getGestoreDB().getPrenotazioniClientedaPagare(currentCliente.getID());
+    }
+
+    public String getScontrinoPrenotazione(String value) {
+        String result="gli ombrelloni prenotati sono\n";
+        for(Ombrellone ombrellone:masterController.getChalet().getSpiaggia().getPrenotaizioneById(value).getListaOmbrelloni()){
+            result=result+ombrellone.getID()+"\n";
+        }
+        if(masterController.getChalet().getSpiaggia().getPrenotaizioneById(value).getListaSdraio().size()>0){
+            result="il numero di sdriao prenotate : "+masterController.getChalet().getSpiaggia().getPrenotaizioneById(value).getListaSdraio().size();
+        }
+        return result;
     }
 }

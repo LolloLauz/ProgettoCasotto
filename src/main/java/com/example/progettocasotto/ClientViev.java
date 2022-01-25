@@ -81,4 +81,19 @@ public class ClientViev {
             e.printStackTrace();
         }
     }
+
+    public void handlePagaUnaPrenotazione(ActionEvent actionEvent) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PagaUnaPrenotazione.fxml"));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(loader.load()));
+            PagaUnaPrenotazioneView controller = loader.getController();
+            controller.initialize(userController);
+            stage.showAndWait();
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
