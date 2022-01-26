@@ -61,6 +61,17 @@ public class AddettoAllaSpiaggiaView {
     }
 
     public void handleModificaPrenotazione(ActionEvent actionEvent) {
-
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ModificaPrenotazione.fxml"));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(loader.load()));
+            ModificaPrenotazioneView controller = loader.getController();
+            controller.initialize(asController);
+            stage.showAndWait();
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
     }
 }

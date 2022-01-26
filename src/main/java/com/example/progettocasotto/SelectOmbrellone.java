@@ -44,7 +44,7 @@ public class SelectOmbrellone {
         c.set(dataIn.getYear(), dataIn.getMonthValue(), dataIn.getDayOfMonth());
         Date dataInizio = c.getTime();
         LocalDate dataFin = dataFine.getValue();
-        c.set(dataFin.getYear(), dataIn.getMonthValue(), dataIn.getDayOfMonth());
+        c.set(dataFin.getYear(), dataFin.getMonthValue(), dataIn.getDayOfMonth());
         Date dataFine = c.getTime();
         userController.mostraOmbrelloniLiberi(dataInizio,dataFine);
         displayOmbrelloniLiberi.setText(userController.getListOmbrelloniLiberi(dataInizio,dataFine));

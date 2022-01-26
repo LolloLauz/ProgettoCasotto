@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.ModificaPrenotazioneView">
+   <children>
+      <Button fx:id="modificaPeriodo" layoutX="50.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleModificaPeriodo" text="ModificaPeriodo" />
+      <DatePicker fx:id="selezioneDataInizio" layoutX="14.0" layoutY="102.0" promptText="data Inizio nuovo periodo" />
+      <DatePicker fx:id="selezioneDataFine" layoutX="14.0" layoutY="174.0" promptText="data fine nuovo periodo" />
+      <TextArea fx:id="prenotazioniCliente" layoutX="386.0" layoutY="42.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextField fx:id="nomeCliente" layoutX="213.0" layoutY="102.0" onAction="#handleNomeClienteSelezionato" promptText="nome del CLiente" />
+      <TextField fx:id="identificativoPrenotazione" layoutX="213.0" layoutY="174.0" promptText="Numero della prenotazione" />
+      <Button fx:id="aggiungiOmbrelloni" layoutX="213.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleAggiungiOmbrelloni" text="Aggiungi ombrelloni" />
+      <Button fx:id="aggiungiSdraio" layoutX="213.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleAggiungiSdraio" text="Aggiungi sdraio" />
+   </children>
+</AnchorPane>

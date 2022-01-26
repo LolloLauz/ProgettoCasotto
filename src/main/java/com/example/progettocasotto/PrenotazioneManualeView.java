@@ -42,7 +42,7 @@ public class PrenotazioneManualeView {
         c.set(dataIn.getYear(), dataIn.getMonthValue() - 1, dataIn.getDayOfMonth());
         Date dataInizio = c.getTime();
         LocalDate dataFin = dataFinePrenotazione.getValue();
-        c.set(dataFin.getYear(), dataIn.getMonthValue() - 1, dataIn.getDayOfMonth());
+        c.set(dataFin.getYear(), dataFin.getMonthValue() - 1, dataIn.getDayOfMonth());
         Date dataFine = c.getTime();
         mostraOmbrelloniLiberi.setText(asController.getListaOmbrelloniLiberi(dataInizio,dataFine));
         numeroSdriao.setText("sono disponibili :"+asController.getListaSdraio(dataInizio,dataFine)+" sdraio");
@@ -59,7 +59,7 @@ public class PrenotazioneManualeView {
         c.set(dataIn.getYear(), dataIn.getMonthValue() - 1, dataIn.getDayOfMonth());
         Date dataInizio = c.getTime();
         LocalDate dataFin = dataFinePrenotazione.getValue();
-        c.set(dataFin.getYear(), dataIn.getMonthValue() - 1, dataIn.getDayOfMonth());
+        c.set(dataFin.getYear(), dataFin.getMonthValue() - 1, dataIn.getDayOfMonth());
         Date dataFine = c.getTime();
         mostraOmbrelloniLiberi.setText(asController.getListaOmbrelloniLiberi(dataInizio,dataFine));
         numeroSdriao.setText("sono disponibili :"+asController.getListaSdraio(dataInizio,dataFine)+" sdraio");

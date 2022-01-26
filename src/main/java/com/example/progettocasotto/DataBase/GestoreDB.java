@@ -513,10 +513,10 @@ public class GestoreDB {
             PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("UPDATE prenotazioni SET  data_inizio=?, data_fine=? WHERE id = ?");
             Calendar cal = Calendar.getInstance();
             cal.setTime(dataInizio);
-            java.sql.Date data=new java.sql.Date(cal.getTime().getTime());
-            preparedStatement.setDate(1,data);
+            java.sql.Date datain=new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(1,datain);
             cal.setTime(dataFine);
-            data=new java.sql.Date(cal.getTime().getTime());
+            java.sql.Date data=new java.sql.Date(cal.getTime().getTime());
             preparedStatement.setDate(2,data);
             preparedStatement.setString(3,idPrenotazione);
             if(preparedStatement.executeUpdate()==0){

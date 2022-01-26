@@ -81,7 +81,7 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
     }
     public boolean modificaPeriodoPrenotazione(String prenotazione,Date dataInizio,Date dataFine){
         boolean flag=true;
-        System.out.println(masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).getListaOmbrelloni().size());
+//        System.out.println(masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).getListaOmbrelloni().size());
         if(!selezionaPeriodoOmbrelloni(dataInizio,dataFine).containsAll(masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).getListaOmbrelloni())){
             masterController.getChalet().getSpiaggia().getPrenotaizioneById(prenotazione).removeOmbrelloni();
             flag= false;
@@ -215,13 +215,44 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
 
     public String getListaOmbrelloniLiberi(Date dataInizio, Date dataFine) {
         String result="";
+        int i=0;
         for(Ombrellone ombrellone:masterController.getChalet().getSpiaggia().getOmbrelloniLiberi(dataInizio,dataFine)){
-            result=result+ombrellone.getID()+"|";
+            if(i>=10) {
+                i=0;
+                result=result+"\n";
+            }
+            result = result + ombrellone.getID() + "|";
+            i++;
         }
         return result;
     }
 
     public int getListaSdraio(Date dataInizio, Date dataFine) {
         return masterController.getChalet().getSpiaggia().getSdraioLiberi(dataInizio,dataFine).size();
+    }
+
+    public String mostraPrenotazioniCliente(String text) {
+        String result="";
+        for(String nomePrenotazione:masterController.getGestoreDB().getPrenotazioniCliente(text)){
+            result=result+"\nnumero della prenotazione: "+nomePrenotazione+
+                    "\n data inizio :"+masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getDataInizio()+
+                    " data fine: "+masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getDataFine();
+            if(!masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getListaOmbrelloni().isEmpty()){
+                for(Ombrellone ombrellone: masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getListaOmbrelloni()){
+                    result=result+"numero ombrellone prenotato: "+ombrellone.getID();
+                }
+            }
+            if(!masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getListaSdraio().isEmpty()){
+                result=result+"\nnumero sdraio affittati: "+ masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getListaSdraio().size();
+            }
+        }
+        return result;
+    }
+    public String mostraOmbrelloniLiberi(String idPrenotazione){
+        return getListaOmbrelloniLiberi(masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).getDataInizio(),masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).getDataFine());
+    }
+
+    public int mostraSdraioDisponibili(String identificativoPrenotazione) {
+        return getListaSdraio(masterController.getChalet().getSpiaggia().getPrenotaizioneById(identificativoPrenotazione).getDataInizio(),masterController.getChalet().getSpiaggia().getPrenotaizioneById(identificativoPrenotazione).getDataFine());
     }
 }

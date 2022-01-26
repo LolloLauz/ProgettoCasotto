@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.AggiungiSdraioView">
+   <children>
+      <Button fx:id="aggiungiSdraio" layoutX="136.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleAggiungiSdraio" text="Aggiungi sdraio" />
+      <Label fx:id="numeroSdraioDisponibili" layoutX="48.0" layoutY="91.0" text="Numero sdraio disponibili" />
+      <TextField fx:id="numeroSdraio" layoutX="43.0" layoutY="175.0" prefHeight="26.0" prefWidth="271.0" promptText="inserisci il numero di sdraio che vuoi aggiungere" />
+   </children>
+</AnchorPane>
