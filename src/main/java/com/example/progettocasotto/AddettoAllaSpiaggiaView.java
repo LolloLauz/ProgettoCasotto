@@ -53,11 +53,33 @@ public class AddettoAllaSpiaggiaView {
     }
 
     public void handleEliminaPrenotazione(ActionEvent actionEvent) {
-
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("EliminaPrenotazione.fxml"));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(loader.load()));
+            EliminaPrenotazioneView controller = loader.getController();
+            controller.initialize(asController);
+            stage.showAndWait();
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handlePagamentoContante(ActionEvent actionEvent) {
-
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PagamentoContante.fxml"));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(loader.load()));
+            PagamentoContanteView controller = loader.getController();
+            controller.initialize(asController);
+            stage.showAndWait();
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleModificaPrenotazione(ActionEvent actionEvent) {

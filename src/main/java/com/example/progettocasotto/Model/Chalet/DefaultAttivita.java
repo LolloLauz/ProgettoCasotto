@@ -62,4 +62,11 @@ public class DefaultAttivita {
         numeroPosti-=numPersone;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "DefaultAttivita{" +
+                "nome='" + nome + '\'' +
+                '}';
+    }
 }

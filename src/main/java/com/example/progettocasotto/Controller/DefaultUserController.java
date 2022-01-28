@@ -121,6 +121,7 @@ public class DefaultUserController implements UserContrllerInterface{
     }
 
     public boolean prenotaAttivita(String nomeAttivita, int numPersone) {
+        masterController.getGestoreDB().prenotaAttivita(nomeAttivita,numPersone,currentCliente.getID());
         return masterController.addPartecipantiToAttivita(nomeAttivita,numPersone);
     }
 
@@ -269,5 +270,18 @@ public class DefaultUserController implements UserContrllerInterface{
             result="il numero di sdriao prenotate : "+masterController.getChalet().getSpiaggia().getPrenotaizioneById(value).getListaSdraio().size();
         }
         return result;
+    }
+
+    public String mostraListaAttivita() {
+        String result="";
+        for(DefaultAttivita attivita:masterController.getChalet().getListaAttivita()){
+            result=result+attivita.getNome()+" data inizio "+ attivita.getDataInizio().toString()+" data fine "+attivita.getDataFine().toString()+" numero posti disponibili "+attivita.getNumeroPosti()+"\n";
+        }
+        return result;
+    }
+
+    public ArrayList<DefaultAttivita> getAttivita() {
+
+        return masterController.getChalet().getListaAttivita();
     }
 }

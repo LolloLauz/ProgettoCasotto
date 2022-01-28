@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.AggiungiBarView">
+   <children>
+      <Button fx:id="avanti" layoutX="260.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleAvanti" text="Avanti" />
+      <TextField fx:id="nomeBar" layoutX="226.0" layoutY="94.0" promptText="Inserisci nome del Bar" />
+   </children>
+</AnchorPane>

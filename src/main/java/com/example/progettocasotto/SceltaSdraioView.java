@@ -30,7 +30,7 @@ public class SceltaSdraioView {
         c.set(dataIn.getYear(), dataIn.getMonthValue() - 1, dataIn.getDayOfMonth());
         Date dataInizio = c.getTime();
         LocalDate dataFin = dataFine.getValue();
-        c.set(dataFin.getYear(), dataFin.getMonthValue() - 1, dataIn.getDayOfMonth());
+        c.set(dataFin.getYear(), dataFin.getMonthValue() - 1, dataFin.getDayOfMonth());
         Date dataFine = c.getTime();
         displaySdraioLiberi.setText(userController.getListSdraioLiberi(dataInizio,dataFine));
         userController.prenotaSdraio(dataInizio,dataFine);

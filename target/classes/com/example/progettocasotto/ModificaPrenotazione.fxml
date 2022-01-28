@@ -13,5 +13,6 @@
       <TextField fx:id="identificativoPrenotazione" layoutX="213.0" layoutY="174.0" promptText="Numero della prenotazione" />
       <Button fx:id="aggiungiOmbrelloni" layoutX="213.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleAggiungiOmbrelloni" text="Aggiungi ombrelloni" />
       <Button fx:id="aggiungiSdraio" layoutX="213.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleAggiungiSdraio" text="Aggiungi sdraio" />
+      <Button fx:id="closeButton" layoutX="486.0" layoutY="333.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
    </children>
 </AnchorPane>

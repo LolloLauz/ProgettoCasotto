@@ -3,6 +3,7 @@ package com.example.progettocasotto.Controller;
 import com.example.progettocasotto.DataBase.GestoreDB;
 import com.example.progettocasotto.Model.Chalet.Bar.Bevanda;
 import com.example.progettocasotto.Model.Chalet.Bar.DefaultBar;
+import com.example.progettocasotto.Model.Chalet.Bar.DefaultOrdinazione;
 import com.example.progettocasotto.Model.Chalet.DefaultAttivita;
 import com.example.progettocasotto.Model.Chalet.DefaultChalet;
 import com.example.progettocasotto.Model.Chalet.DefaultSpiaggia;
@@ -82,6 +83,11 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
         }
         setQrCode();
         chalet.getBar().getListaOrdinazioni().addAll(getGestoreDB().getOrdinazioniDb());
+        chalet.getListaAttivita().addAll(getGestoreDB().getAttivitaFromDb());
+//        for(DefaultOrdinazione ordinazione:chalet.getBar().getListaOrdinazioni()){
+//            System.out.println(ordinazione.getID());
+//            ordinazione.stampaOrdinazione();
+//        }
 //        chalet.getBar().getListaBevande().addAll(getGestoreDB().getBevandeFromDB());
 //        getGestoreDB().caricaOmbrelloni();
 //        chalet.getSpiaggia().getPrenotaizioneById("3").setStatoPrenotazione(StatoPreOrd.PAGATA);
@@ -109,6 +115,7 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
     }
 
     public boolean creaAttivita(String nome, String luogo, Date dataInizio, Date dataFine, int numMassimoPersone) {
+        getGestoreDB().creaAttivita(nome,luogo,dataInizio,dataFine,numMassimoPersone);
         return chalet.creaAttivita(new DefaultAttivita(nome,luogo,dataInizio,dataFine,numMassimoPersone));
     }
 

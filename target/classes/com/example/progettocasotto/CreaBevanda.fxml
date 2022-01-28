@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.CreaBevandaView">
+   <children>
+      <Button fx:id="crea" layoutX="142.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleCrea" text="Crea" />
+      <TextField fx:id="nomeBevanda" layoutX="95.0" layoutY="81.0" promptText="nome Bevanda" />
+      <TextField fx:id="prezzoBevanda" layoutX="288.0" layoutY="81.0" promptText="prezzo Bevanda" />
+      <TextField fx:id="quantitaBevanda" layoutX="96.0" layoutY="152.0" promptText="quantita Bevanda" />
+      <TextField fx:id="descrizione" layoutX="300.0" layoutY="152.0" promptText="Descrizione" />
+      <Button fx:id="esci" layoutX="356.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleEsci" text="esci" />
+   </children>
+</AnchorPane>

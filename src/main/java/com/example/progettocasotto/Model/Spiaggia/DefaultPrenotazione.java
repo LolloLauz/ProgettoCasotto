@@ -69,22 +69,30 @@ public class DefaultPrenotazione implements PrenotazioneInterface{
     public String getID() {
         return ID;
     }
-    public void stampaOmbrelloni(){
+    public String stampaOmbrelloni(){
+        String result="";
         if(!listaOmbrelloni.isEmpty()) {
             System.out.println("\ngli ombrelloni prenotati sono: ");
+            result=result+"\ngli ombrelloni prenotati sono:";
             for (Ombrellone ombrellone : listaOmbrelloni) {
                 System.out.print("|"+ombrellone.getID()+"|");
+                result=result+"\n "+ombrellone.getID();
             }
         }
+        return result;
     }
 
-    public void stampaSdraio(){
+    public String stampaSdraio(){
+        String result="";
         if(!listaSdraio.isEmpty()) {
             System.out.println("\nle sdraio prenotati sono:");
+            result=result+"\nle sdraio prenotati sono:";
             for (Sdraio sdraio : listaSdraio) {
+                result=result+"\n"+sdraio.getID();
                 System.out.print("|"+sdraio.getID()+"|");
             }
         }
+        return result;
     }
     public void removeOmbrelloni(){
         listaOmbrelloni.clear();

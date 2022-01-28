@@ -2,6 +2,8 @@ package com.example.progettocasotto.Controller;
 
 import com.example.progettocasotto.Model.Chalet.DefaultChalet;
 
+import java.util.Date;
+
 public class DefaultGestoreController extends DefaultPersonaleController implements GestoreContrelloreInterface{
 
 
@@ -37,5 +39,10 @@ public class DefaultGestoreController extends DefaultPersonaleController impleme
     @Override
     public void setNumSdraio(int numSdraio) {
         masterController.getChalet().getSpiaggia().setNumeroSdraio(numSdraio);
+    }
+
+    @Override
+    public void creaAttivita(String nome, String luogo, String descrizione, Date dataInizio, Date dataFine, int numeroPosti) {
+        masterController.creaAttivita(nome,luogo,dataInizio,dataFine,numeroPosti);
     }
 }

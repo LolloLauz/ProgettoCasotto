@@ -2,6 +2,7 @@ package com.example.progettocasotto.DataBase;
 
 import com.example.progettocasotto.Model.Chalet.Bar.Bevanda;
 import com.example.progettocasotto.Model.Chalet.Bar.DefaultOrdinazione;
+import com.example.progettocasotto.Model.Chalet.DefaultAttivita;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
 import com.example.progettocasotto.Model.Spiaggia.Sdraio;
@@ -776,6 +777,103 @@ public class GestoreDB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void creaAttivita(String nome, String luogo, java.util.Date dataInizio, java.util.Date dataFine, int numMassimoPersone) {
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("INSERT INTO attivita (nome,luogo,data_inizio,data_fine,numero_posti) VALUES (?,?,?,?,?)");
+            preparedStatement.setString(1, nome);
+            preparedStatement.setString(2, luogo);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dataInizio);
+            java.sql.Date dataIn = new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(3, dataIn);
+            cal.setTime(dataFine);
+            java.sql.Date dataFi = new java.sql.Date(cal.getTime().getTime());
+            preparedStatement.setDate(4, dataFi);
+            preparedStatement.setInt(5, numMassimoPersone);
+            if(preparedStatement.executeUpdate()==0) {
+                System.out.println("errore nell'esecuzione della delete");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void prenotaAttivita(String nomeAttivita, int numPersone, String id) {
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("INSERT INTO prenotazioni_attivita (id_attivita,id_cliente,posti_prenotati) VALUES (?,?,?)");
+            preparedStatement.setString(1, getIdAttivita(nomeAttivita));
+            preparedStatement.setString(2, getIdUtente(id));
+            preparedStatement.setInt(3, numPersone);
+
+            if(preparedStatement.executeUpdate()==0) {
+                System.out.println("errore nell'esecuzione della delete");
+            }
+            decrementaNumeroPostiAttivita(getIdAttivita(nomeAttivita),numPersone);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void decrementaNumeroPostiAttivita(String idAttivita, int numPersone) {
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("UPDATE attivita SET  numero_posti=? WHERE id = ?");
+            preparedStatement.setInt(1, getNewNumeroPosti(numPersone,idAttivita));
+            preparedStatement.setString(2, idAttivita);
+            if(preparedStatement.executeUpdate()==0) {
+                System.out.println("errore nell'esecuzione della delete");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getNewNumeroPosti(int numPersone,String idAttivita) {
+        int numeroPosti=0;
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT numero_posti FROM attivita WHERE id=?");
+            preparedStatement.setString(1, idAttivita);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                numeroPosti=resultSet.getInt("numero_posti")-numPersone;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return numeroPosti;
+
+    }
+
+    private String getIdAttivita(String nomeAttivita) {
+        String idAttivita="";
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT id FROM attivita WHERE nome=?");
+            preparedStatement.setString(1, nomeAttivita);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                idAttivita=resultSet.getString("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return idAttivita;
+    }
+
+    public ArrayList<DefaultAttivita> getAttivitaFromDb() {
+        ArrayList<DefaultAttivita>listaAttivita=new ArrayList<>();
+        try {
+            Statement statement=connection.createStatement();
+            ResultSet resultSet=statement.executeQuery("SELECT * FROM attivita");
+            while(resultSet.next()) {
+                listaAttivita.add(new DefaultAttivita(resultSet.getString("nome"),resultSet.getString("luogo"),resultSet.getDate("data_inizio"),resultSet.getDate("data_fine"),resultSet.getInt("numero_posti")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaAttivita;
+
     }
 }
 

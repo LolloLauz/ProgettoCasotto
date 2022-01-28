@@ -3,7 +3,6 @@ package com.example.progettocasotto;
 import com.example.progettocasotto.Controller.DefaultaMasterController;
 import com.example.progettocasotto.DataBase.GestoreDB;
 import com.example.progettocasotto.DataBase.Privilegio;
-import com.example.progettocasotto.View.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

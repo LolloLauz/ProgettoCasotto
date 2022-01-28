@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.CreaAttivitaView">
+   <children>
+      <Button fx:id="creaAttivita" layoutX="274.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleCreaAttivita" text="Crea attivita" />
+      <TextField fx:id="nomeAttivita" layoutX="36.0" layoutY="56.0" promptText="nome attivita" />
+      <TextField fx:id="numeroPosti" layoutX="37.0" layoutY="126.0" promptText="numero Posti" />
+      <TextArea fx:id="descrizioneAttivita" layoutX="238.0" layoutY="52.0" prefHeight="200.0" prefWidth="200.0" promptText="descrizione" />
+      <TextField fx:id="luogo" layoutX="38.0" layoutY="188.0" promptText="luogo" />
+      <DatePicker fx:id="dataInizio" layoutX="26.0" layoutY="240.0" promptText="data inizio" />
+      <DatePicker fx:id="dataFine" layoutX="24.0" layoutY="294.0" promptText="data fine" />
+   </children>
+</AnchorPane>

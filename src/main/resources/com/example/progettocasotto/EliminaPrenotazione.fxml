@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.EliminaPrenotazioneView">
+   <children>
+      <Button fx:id="mostraPrenotazioni" layoutX="42.0" layoutY="243.0" mnemonicParsing="false" onAction="#handleMostraPrenotazioni" text="mostra prenotazioni" />
+      <TextField fx:id="nomeUtente" layoutX="29.0" layoutY="188.0" promptText="Inserisci nome utente" />
+      <TextArea fx:id="prenotazioniUtente" layoutX="194.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextField fx:id="numeroPrenotazione" layoutX="437.0" layoutY="188.0" promptText="inserisci numero prenotazione da eliminare" />
+      <Button fx:id="eliminaPrenotazione" layoutX="448.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleEliminaPrenotazione" text="elimina prenotazione" />
+   </children>
+</AnchorPane>

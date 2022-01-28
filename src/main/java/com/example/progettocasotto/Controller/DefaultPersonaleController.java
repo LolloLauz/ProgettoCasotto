@@ -255,4 +255,46 @@ public abstract class DefaultPersonaleController implements PersonaleInterface{
     public int mostraSdraioDisponibili(String identificativoPrenotazione) {
         return getListaSdraio(masterController.getChalet().getSpiaggia().getPrenotaizioneById(identificativoPrenotazione).getDataInizio(),masterController.getChalet().getSpiaggia().getPrenotaizioneById(identificativoPrenotazione).getDataFine());
     }
+
+    public String getPrenotazioniCliente(String text) {
+        String result="";
+
+        for(String nome:masterController.getGestoreDB().getPrenotazioniCliente(text)){
+            result=result+nome+"\n";
+        }
+        return result;
+    }
+
+    public String mostraPrenotazioniOrdinazioni(String nomeUtente) {
+        String result="";
+        for(String nomePrenotazione:masterController.getGestoreDB().getPrenotazioniClientedaPagare(nomeUtente)){
+            result=result+"id prenotazione da pagare :"+masterController.getChalet().getSpiaggia().getPrenotaizioneById(nomePrenotazione).getID()+"\n";
+        }
+        for(String nomeOrdinazione:masterController.getGestoreDB().getOrdinazioneClientedaPagare(nomeUtente)){
+            result=result+"id dell'ordinazione da pagare "+masterController.getChalet().getBar().getOrdinazioneById(nomeOrdinazione).getID()+"\n";
+        }
+        return result;
+    }
+
+    public String MostraScontrinoPrenotazione(String idPrenotazione) {
+        String result="";
+        result=result+"l'identificativo della prenotazione e' :"+ idPrenotazione+"\n";
+        result=result+masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaOmbrelloni();
+        result=result+masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaSdraio();
+        result=result+"\nil totale e':"+masterController.getChalet().getSpiaggia().getListinoPrezzi().calcolaPrezzo(masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione));
+        return result;
+
+    }
+
+    public String mostraScontrinoOrdinazione(String text) {
+        String result="";
+        double totale=0;
+        result="\nl'identificativo dell'ordinazione e' "+text;
+        for(Bevanda bevanda:masterController.getChalet().getBar().getOrdinazioneById(text).getListaBevande()){
+            totale+=(masterController.getChalet().getBar().getOrdinazioneById(text).getMappaBevande().get(bevanda)* bevanda.getPrezzo());
+            result=result+"\nbevande :"+bevanda.getNome()+" quantita selezionata: "+masterController.getChalet().getBar().getOrdinazioneById(text).getMappaBevande().get(bevanda)+" prezzp :"+bevanda.getPrezzo();
+        }
+        result=result+"\n il totale e' "+totale;
+        return result;
+    }
 }

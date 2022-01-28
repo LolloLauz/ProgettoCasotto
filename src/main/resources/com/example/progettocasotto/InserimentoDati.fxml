@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.InserimentoDatiView">
+   <children>
+      <TextField fx:id="nomeChalet" layoutX="206.0" layoutY="129.0" promptText="inserisci nome dello chalet" />
+      <Button fx:id="avanti" layoutX="255.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleAvanti" text="Avanti" />
+   </children>
+</AnchorPane>
