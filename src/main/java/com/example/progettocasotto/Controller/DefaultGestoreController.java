@@ -1,10 +1,8 @@
 package com.example.progettocasotto.Controller;
 
-import com.example.progettocasotto.Model.Chalet.DefaultChalet;
-
 import java.util.Date;
 
-public class DefaultGestoreController extends DefaultPersonaleController implements GestoreContrelloreInterface{
+public class DefaultGestoreController extends DefaultPersonaleController implements GestoreControllerInterface {
 
 
 
