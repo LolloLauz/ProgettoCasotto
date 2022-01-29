@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class DefaultaMasterController implements MasterController<DefaultGestoreController,AddettoASController,DefaultPersonaleController,DefaultUserController>{
+public class DefaultaMasterController implements MasterController{
 
 
     DefaultChalet chalet;
@@ -48,7 +48,7 @@ public class DefaultaMasterController implements MasterController<DefaultGestore
     @Override
     public boolean creaBar(String nome) {
         chalet.addBar(new DefaultBar(nome));
-        return false;
+        return true;
     }
 
     private void getListaClientiFromDb(){

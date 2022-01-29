@@ -39,5 +39,15 @@ public interface GestoreControllerInterface {
      * @param numSdraio il numero di sdraio.
      */
     void setNumSdraio(int numSdraio);
+
+    /**
+     * Metodo usato per creare un'attivit&agrave;
+     * @param nome il nome dell'attivit&agrave;
+     * @param luogo il luogo dell'attivit&agrave;
+     * @param descrizione la descrizione dell'attivit&agrave;
+     * @param dataInizio la data di inizio dell'attivit&agrave;
+     * @param dataFine la data di fine dell'attivit&agrave;
+     * @param numeroPosti il numero di posti dell'attivit&agrave;
+     */
     void creaAttivita(String nome, String luogo, String descrizione, Date dataInizio, Date dataFine,int numeroPosti);
 }

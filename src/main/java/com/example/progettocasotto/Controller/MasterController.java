@@ -1,17 +1,28 @@
 package com.example.progettocasotto.Controller;
 
 /**
- * interfaccia di controllo per tutto il sistema della spiaggia
- * @param <G> ControllerGestore
- * @param <A>AddettoASController
- * @param <P>PersonaleController
- * @param <U>UserController
+ * Interfaccia che definisce il controller principale della spiaggia.
  */
-public interface MasterController <G,A,P,U>{
+public interface MasterController {
 
+    /**
+     * Metodo usato per creare uno chalet.
+     * @param nome il nome dello chalet.
+     * @return true se lo chalet è stato creato correttamente, false altrimenti.
+     */
     boolean creaChalet(String nome);
 
+    /**
+     * Metodo usato per la creazione di una spiaggia.
+     * @param nome il nome della spiaggia.
+     * @return true se la spiaggia è stata creata correttamente, false altrimenti.
+     */
     boolean creaSpiaggia(String nome);
 
+    /**
+     * Metodo usato per la creazione di un bar.
+     * @param nome il nome del bar
+     * @return true se il bar è stato creato correttamente, false altrimenti.
+     */
     boolean creaBar(String nome);
 }
