@@ -8,6 +8,7 @@ public class DefaultOrdinazione implements OrdinazioneInterface {
 
     private String ID;
     private String qr_code;
+    private StatoOrdinazione statoConsegna;
 
     private Map<Bevanda,Integer> mappaBevande=new HashMap<>();
     private StatoPreOrd statoOrdinazione;
@@ -21,11 +22,16 @@ public class DefaultOrdinazione implements OrdinazioneInterface {
         this.qr_code = qr_code;
     }
 
+    public StatoOrdinazione getStatoConsegna() {
+        return statoConsegna;
+    }
+
     public DefaultOrdinazione(String ID) {
         this.ID = ID;
         this.qr_code="";
         this.utenteAssociato="";
         statoOrdinazione=StatoPreOrd.IN_ATTESA_DI_PAGAMENTO;
+        this.statoConsegna=StatoOrdinazione.NON_CONSEGNATO;
     }
 
     public String getID() {
