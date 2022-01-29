@@ -2,9 +2,15 @@ package com.example.progettocasotto;
 
 import com.example.progettocasotto.Controller.DefaultaMasterController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
 
 public class CreaBevandaView {
     public TextField nomeBevanda;
@@ -27,6 +33,19 @@ public class CreaBevandaView {
     }
 
     public void handleEsci(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ImpostaListinoPrezzi.fxml"));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(loader.load()));
+            ImpostaListinoPrezziView controller = loader.getController();
+            controller.initialize(masterController);
+            stage.showAndWait();
+            ((Stage) ((Button) actionEvent.getSource()).getScene().getWindow()).close();
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
         ((Stage) ((Button) actionEvent.getSource()).getScene().getWindow()).close();
     }
 }

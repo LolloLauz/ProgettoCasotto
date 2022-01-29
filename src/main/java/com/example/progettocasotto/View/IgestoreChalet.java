@@ -222,6 +222,7 @@ public class IgestoreChalet {
 
     public boolean createListinoPrezzi() {
         //TODO: da fare
+        //masterController.getChalet().getSpiaggia().setListinoPrezzi();
         return false;
     }
 
