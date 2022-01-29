@@ -24,7 +24,6 @@ public class DefaultUserController implements UserControllerInterface {
     public DefaultUserController(DefaultaMasterController masterController,String nomeCurrentUser) {
         this.masterController=masterController;
         this.currentCliente=new DefaultCliente(nomeCurrentUser);
-//        checkPrenotazioneCurrentCliente();
     }
 
     private void checkPrenotazioneCurrentCliente() {

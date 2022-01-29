@@ -6,7 +6,7 @@ import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class DefaultCliente {
+public class DefaultCliente implements  ClienteInterface{
     ArrayList<DefaultPrenotazione> prenotazioniAssociate=new ArrayList<>();
     ArrayList<DefaultOrdinazione> ordinazioniAssociate=new ArrayList<>();
     private String ID;

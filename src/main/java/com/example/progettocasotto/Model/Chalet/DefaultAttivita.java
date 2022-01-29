@@ -3,7 +3,7 @@ package com.example.progettocasotto.Model.Chalet;
 import java.util.Date;
 import java.util.Objects;
 
-public class DefaultAttivita {
+public class DefaultAttivita implements AttivitaInterface{
     String nome;
     int numeroPosti;
     Date dataInizio;
