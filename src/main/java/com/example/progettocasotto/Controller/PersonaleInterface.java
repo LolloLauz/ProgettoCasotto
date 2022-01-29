@@ -52,9 +52,26 @@ public interface PersonaleInterface {
      */
     void gestisciPagamento(String idCliente);
 
+    /**
+     * Metodo usato per stampare lo scontrino di una prenotazione.
+     * @param idPrenotazione l'id della prenotazione da cui ricavare lo scontrino.
+     */
     void getScontrinoPrenotazione(String idPrenotazione);
 
+    /**
+     * Metodo usato per effettuare una prenotazione manuale.
+     * @param idUtente nome dell'utente.
+     * @param dataInizio data inizio della prneotazione.
+     * @param dataFine data di fine della prenotazione.
+     * @param listaOmbrelloni la lista degli ombrelloni.
+     * @param numSdraio il numero di sdraio.
+     * @return il numero della prenotazione.
+     */
     int prenotazioneManuale(String idUtente,Date dataInizio,Date dataFine,ArrayList<String> listaOmbrelloni,int numSdraio);
 
+    /**
+     * Metodo usato per confermare l'avvenuto pagamento di una prenotazione.
+     * @param idPrenotazione l'id della prenotazione a cui bisogna confermare il pagamento.
+     */
     void confermaAvvenutoPagamentoPrenotazione(String idPrenotazione);
 }
