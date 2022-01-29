@@ -17,16 +17,39 @@ public interface PersonaleInterface {
      * @param email l'email dell'utente.
      * @param password la password dell'utente.
      * @param privilegio il privilegio dell'utente.
-     * @return true se l'utente &egrave; stato creato correttamente, false altrimenti
+     * @return true se l'utente &egrave; stato creato correttamente, false altrimenti.
      */
     boolean creaUtente(String nome, String cognome, String email, String password, Privilegio privilegio);
 
+    /**
+     * Metodo usato per la modifica di una prenotazione all'interno del sistema.
+     * @param idPrenotazione l'id della prenotazione.
+     * @param dataInizio la data di inizio della prenotazione.
+     * @param dataFine la data di fine della prenotazione.
+     * @param ombrelloni la lista di ombrelloni aggiunti alla prenotazione.
+     * @param numSdraio il numero delle sdraio aggiunte alla prenotazione.
+     */
     void modificaPrenotazione(String idPrenotazione, Date dataInizio, Date dataFine, ArrayList<String> ombrelloni,int numSdraio);
 
+    /**
+     * Metodo usato per modificarfe il periodo della prenotazione.
+     * @param idPrenotazione l'id della prenotazione.
+     * @param dataInizio la data di inizio della prenotazione.
+     * @param dataFine la data di fine della prenotazione.
+     * @return true se la modifica &egrave; avvenuta con successo, false altrimenti.
+     */
     boolean modificaPeriodoPrenotazione(String idPrenotazione, Date dataInizio, Date dataFine);
 
+    /**
+     * Metodo usato per la rimozione di una prenotazione dal sistema.
+     * @param idPrenotazione l'id della prenotazione da rimuovere.
+     */
     void removePrenotazione(String idPrenotazione);
 
+    /**
+     * Metodo usato per la gestione di un pagamento in contanti.
+     * @param idCliente l'id del cliente che deve effettuare il pagamento.
+     */
     void gestisciPagamento(String idCliente);
 
     void getScontrinoPrenotazione(String idPrenotazione);
