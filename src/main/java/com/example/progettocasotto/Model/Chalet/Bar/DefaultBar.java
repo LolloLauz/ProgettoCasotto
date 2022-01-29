@@ -111,4 +111,13 @@ public class DefaultBar implements BarInterface{
             System.out.println("bevanda "+bevanda.getNome()+" quantita ordinata "+getOrdinazioneById(id).getQuantitaOrdinata(bevanda)+" prezzo :"+bevanda.getPrezzo());
         }
     }
+
+    public String getListaOrdinazioniDaConsegnare() {
+        String result = "";
+        for(DefaultOrdinazione ordinazione : getListaOrdinazioni()){
+            if(ordinazione.getStatoConsegna().equals(StatoOrdinazione.NON_CONSEGNATO))
+                result = result + ordinazione.getID() + " Ombrellone qr:" + ordinazione.getQr_code() + "\n";
+        }
+        return result;
+    }
 }

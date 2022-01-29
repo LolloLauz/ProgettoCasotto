@@ -9,6 +9,7 @@
       <Button fx:id="eliminazionePrenotazione" layoutX="83.0" layoutY="151.0" mnemonicParsing="false" onAction="#handleEliminaPrenotazione" text="Elimina Prenotazione" />
       <Button fx:id="pagamentoContante" layoutX="83.0" layoutY="216.0" mnemonicParsing="false" onAction="#handlePagamentoContante" text="Pagamento Contante" />
       <Button fx:id="modificaPrenotazione" layoutX="83.0" layoutY="306.0" mnemonicParsing="false" onAction="#handleModificaPrenotazione" text="Modifica Prenotazione" />
+      <Button fx:id="visualizzaOrdinazioniDaConsegnare" layoutX="83.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleVisualizzaOrdinazioniDaConsegnare" text="Visualizza ordinazioni da consegnare "/>
       <Button layoutX="494.0" layoutY="332.0" mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>
