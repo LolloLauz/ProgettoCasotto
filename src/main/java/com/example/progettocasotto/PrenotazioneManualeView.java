@@ -3,6 +3,7 @@ package com.example.progettocasotto;
 import com.example.progettocasotto.Controller.AddettoASController;
 import com.example.progettocasotto.Controller.DefaultGestoreController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -12,14 +13,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class PrenotazioneManualeView {
-    public DatePicker dataInizioPrenotazione;
-    public DatePicker dataFinePrenotazione;
+    @FXML
+    private DatePicker dataInizioPrenotazione;
+    @FXML
+    private DatePicker dataFinePrenotazione;
+    @FXML
+    private TextArea mostraOmbrelloniLiberi;
+    @FXML
+    private Label numeroSdriao;
+    @FXML
+    private TextField inserisciOmbrelloni;
+    @FXML
+    private TextField inserisciNumeroSdraio;
 
-    public TextArea mostraOmbrelloniLiberi;
-
-    public Label numeroSdriao;
-    public TextField inserisciOmbrelloni;
-    public TextField inserisciNumeroSdraio;
     private int numeroSdrai=0;
     private AddettoASController asController;
     private ArrayList<String> ombrelloniSelzionati=new ArrayList<>();
