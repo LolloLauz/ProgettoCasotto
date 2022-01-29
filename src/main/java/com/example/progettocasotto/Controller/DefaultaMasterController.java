@@ -84,34 +84,6 @@ public class DefaultaMasterController implements MasterController{
         setQrCode();
         chalet.getBar().getListaOrdinazioni().addAll(getGestoreDB().getOrdinazioniDb());
         chalet.getListaAttivita().addAll(getGestoreDB().getAttivitaFromDb());
-//        for(DefaultOrdinazione ordinazione:chalet.getBar().getListaOrdinazioni()){
-//            System.out.println(ordinazione.getID());
-//            ordinazione.stampaOrdinazione();
-//        }
-//        chalet.getBar().getListaBevande().addAll(getGestoreDB().getBevandeFromDB());
-//        getGestoreDB().caricaOmbrelloni();
-//        chalet.getSpiaggia().getPrenotaizioneById("3").setStatoPrenotazione(StatoPreOrd.PAGATA);
-
-//        Date dataInizio;
-//        Date dataFine;
-//        DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
-//        try {
-//            dataInizio=dateFormat.parse("12/10/20");
-//            dataFine=dateFormat.parse("13/10/20");
-//            chalet.creaAttivita(new DefaultAttivita("beach","campo",dataInizio,dataFine,30));
-//            chalet.getSpiaggia().addPrenotazione("1",dataInizio,dataFine);
-//            chalet.getSpiaggia().addPrenotazione("2",dataInizio,dataFine);
-//            chalet.getSpiaggia().addOmbrelloneToPrenotazione("1",new Ombrellone("4"));
-//            chalet.getSpiaggia().addOmbrelloneToPrenotazione("1",new Ombrellone("5"));
-//            chalet.getSpiaggia().addOmbrelloneToPrenotazione("2",new Ombrellone("6"));
-//            chalet.getSpiaggia().addOmbrelloneToPrenotazione("2",new Ombrellone("7"));
-//            chalet.getSpiaggia().getPrenotaizioneById("1").setIdUtenteAssociato("Andrea");
-//            chalet.getSpiaggia().getPrenotaizioneById("2").setIdUtenteAssociato("Luigi");
-//            chalet.getSpiaggia().getPrenotaizioneById("1").setStatoPrenotazione(StatoPreOrd.PAGATA);
-//            chalet.getSpiaggia().getPrenotaizioneById("2").setStatoPrenotazione(StatoPreOrd.IN_ATTESA_DI_PAGAMENTO);
-//        }catch (ParseException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public boolean creaAttivita(String nome, String luogo, Date dataInizio, Date dataFine, int numMassimoPersone) {
