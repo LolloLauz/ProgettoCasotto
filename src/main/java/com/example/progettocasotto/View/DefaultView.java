@@ -49,7 +49,6 @@ public class DefaultView {
                     break;
                 case USER:
                     nomeCliente = gestoreDB.getNomeUtente(email, password);
-//                    ClientView clientView=new ClientView(masterController,nomeCliente);
                     ICliente iCliente = new ICliente(masterController, nomeCliente);
             }
             System.out.println("1 per un nuovo accesso " +
@@ -60,12 +59,9 @@ public class DefaultView {
     }
 
     public void testMetodi(){
-//        DefaultChalet chalet=new DefaultChalet();
-//        chalet.setNome("chalet");
         DefaultBar bar=new DefaultBar("bar");
         bar.creaBevanda("acqua","bottiglia d'acqua da 0,5lt",10,1.00);
         bar.creaOrdinazione("123");
         bar.selezionaBevanda("123","acqua",40);
-//        bar.stampaListaPrenotazioni();
     }
 }
