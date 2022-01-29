@@ -17,7 +17,7 @@ public interface PersonaleInterface {
      * @param email l'email dell'utente.
      * @param password la password dell'utente.
      * @param privilegio il privilegio dell'utente.
-     * @return true se
+     * @return true se l'utente &egrave; stato creato correttamente, false altrimenti
      */
     boolean creaUtente(String nome, String cognome, String email, String password, Privilegio privilegio);
 
