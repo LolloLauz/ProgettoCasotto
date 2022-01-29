@@ -185,5 +185,11 @@ public class DefaultSpiaggia implements SpiaggiaInterface{
     public ArrayList<Ombrellone> getListaOmbrelloni() {
         return listaOmbrelloni;
     }
+
+    public void setListinoPrezzi(double unaSettimana, double unMese, double dueMesi) {
+        getListinoPrezzi().setScontoUnaSettimana(unaSettimana);
+        getListinoPrezzi().setScontoUnMese(unMese);
+        getListinoPrezzi().setScontoDueMesi(dueMesi);
+    }
 }
 
