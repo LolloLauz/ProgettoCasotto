@@ -25,6 +25,18 @@ public class ListinoPrezzi {
         this.scontoDueMesi = scontoDueMesi;
     }
 
+    public double getScontoDueMesi() {
+        return scontoDueMesi;
+    }
+
+    public double getScontoUnMese() {
+        return scontoUnMese;
+    }
+
+    public double getScontoUnaSettimana() {
+        return scontoUnaSettimana;
+    }
+
     public double calcolaPrezzo(DefaultPrenotazione prenotazione){
         Calendar dataInizio=Calendar.getInstance();
         dataInizio.setTime(prenotazione.getDataInizio());
