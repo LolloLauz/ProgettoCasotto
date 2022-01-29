@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-public class DefaultUserController implements UserContrllerInterface{
+public class DefaultUserController implements UserControllerInterface {
     private DefaultCliente currentCliente;
     private ArrayList<DefaultCliente> listaClienti=new ArrayList<>();
     private DefaultPrenotazione prenotazione;
