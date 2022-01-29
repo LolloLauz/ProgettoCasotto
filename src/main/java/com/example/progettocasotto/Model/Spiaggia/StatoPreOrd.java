@@ -4,5 +4,4 @@ public enum StatoPreOrd {
     IN_ATTESA_DI_PAGAMENTO,
     PAGATA,
     SCADUTA;
-
 }
