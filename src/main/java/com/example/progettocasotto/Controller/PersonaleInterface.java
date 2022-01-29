@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Interfaccia che definisce il personale della spiaggia.
+ * Interfaccia che definisce il controller per il personale della spiaggia.
  */
 public interface PersonaleInterface {
 
