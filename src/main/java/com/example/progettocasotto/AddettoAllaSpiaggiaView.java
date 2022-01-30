@@ -13,8 +13,11 @@ import java.io.IOException;
 
 public class AddettoAllaSpiaggiaView {
     private AddettoASController asController;
+    private DefaultaMasterController mastercontorller;
+
     public void initialize(DefaultaMasterController masterController){
         this.asController=new AddettoASController(masterController);
+        this.mastercontorller=masterController;
     }
 
     public void handlePrenotazioneManuale(ActionEvent actionEvent) {
@@ -99,12 +102,12 @@ public class AddettoAllaSpiaggiaView {
 
     public void handleVisualizzaOrdinazioniDaConsegnare(ActionEvent actionEvent) {
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ModificaPrenotazione.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("TerminaleOrdinazioni.fxml"));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(loader.load()));
-            ModificaPrenotazioneView controller = loader.getController();
-            controller.initialize(asController);
+            TerminaleOrdinazioniView controller = loader.getController();
+            controller.initialize(mastercontorller);
             stage.showAndWait();
         } catch (
                 IOException e) {

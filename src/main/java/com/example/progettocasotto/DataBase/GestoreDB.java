@@ -717,6 +717,7 @@ public class GestoreDB {
                 for(DefaultOrdinazione ordinazione:listaOrdinazioni){
                     if(ordinazione.getID().equals(resultSet.getString("id"))){
                         ordinazione.setStatoOrdinazione(StatoPreOrd.valueOf(resultSet.getString("stato")));
+                        ordinazione.setQr_code(resultSet.getString("id_qrcode"));
                     }
                 }
             }
