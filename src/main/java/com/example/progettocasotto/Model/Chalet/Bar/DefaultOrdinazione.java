@@ -38,6 +38,10 @@ public class DefaultOrdinazione implements OrdinazioneInterface {
         return ID;
     }
 
+    public void setStatoConsegna(StatoOrdinazione statoConsegna) {
+        this.statoConsegna = statoConsegna;
+    }
+
     public void setStatoOrdinazione(StatoPreOrd statoOrdinazione) {
         this.statoOrdinazione = statoOrdinazione;
     }

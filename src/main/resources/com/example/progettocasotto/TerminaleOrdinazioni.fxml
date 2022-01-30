@@ -5,7 +5,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.TerminaleOrdinazioniView">
    <children>
-      <TextArea fx:id="txtOrdiniDaConsegnare" editable="false" layoutX="3.0" layoutY="100.0" prefHeight="298.0" prefWidth="594.0" />
-      <Button layoutX="274.0" layoutY="46.0" mnemonicParsing="false" onAction="#btnClose" text="Chiudi" />
+      <TextArea fx:id="txtOrdiniDaConsegnare" editable="false" layoutX="3.0" layoutY="51.0" prefHeight="298.0" prefWidth="594.0" />
+      <Button layoutX="275.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnClose" text="Chiudi" />
+      <TextField fx:id="txtIdOrdine" layoutX="109.0" layoutY="361.0" prefHeight="26.0" prefWidth="185.0" promptText="ID ORDINE" style="-fx-alignment: center;" />
+      <Button fx:id="btnContrassegnaCompletato" layoutX="299.0" layoutY="361.0" mnemonicParsing="false" onAction="#btnContrassegna" text="Contrassegna come completato" />
    </children>
 </AnchorPane>
