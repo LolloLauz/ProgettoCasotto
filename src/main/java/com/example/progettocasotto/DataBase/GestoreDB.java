@@ -387,10 +387,11 @@ public class GestoreDB {
         int numeroOrdinazione=random.nextInt(1000);
         boolean flag=false;
         try {
-            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO ordinazioni (id_qrcode,id_cliente,stato,id) VALUES (?,?,?,?)");
+            PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("INSERT INTO ordinazioni (id_qrcode,id_cliente,stato,id,stato_consegna) VALUES (?,?,?,?,?)");
             preparedStatement.setString(1,ordinazione.getQr_code());
             preparedStatement.setString(2,getIdUtente(currentCliente));
             preparedStatement.setString(3, String.valueOf(ordinazione.getStatoOrdinazione()));
+            preparedStatement.setString(5, StatoOrdinazione.NON_CONSEGNATO.toString());
             do{
                 if(checkNumeroOrdinazione(numeroOrdinazione)){
                     flag=true;
