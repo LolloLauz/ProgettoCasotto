@@ -2,6 +2,7 @@ package com.example.progettocasotto.DataBase;
 
 import com.example.progettocasotto.Model.Chalet.Bar.Bevanda;
 import com.example.progettocasotto.Model.Chalet.Bar.DefaultOrdinazione;
+import com.example.progettocasotto.Model.Chalet.Bar.StatoOrdinazione;
 import com.example.progettocasotto.Model.Chalet.DefaultAttivita;
 import com.example.progettocasotto.Model.Spiaggia.DefaultPrenotazione;
 import com.example.progettocasotto.Model.Spiaggia.Ombrellone;
@@ -875,6 +876,19 @@ public class GestoreDB {
         }
         return listaAttivita;
 
+    }
+
+    public boolean setPrenotazioneConsegnata(String idPrenotazione){
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement("UPDATE dbcasotto.ordinazioni SET stato_consegna=? WHERE id=?");
+            preparedStatement.setString(1, StatoOrdinazione.CONSEGNATO.toString());
+            preparedStatement.setString(2, idPrenotazione);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }
 

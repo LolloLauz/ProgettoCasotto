@@ -29,6 +29,7 @@ public class TerminaleOrdinazioniView {
         if(!txtIdOrdine.getText().isBlank()) {
             if(checkOrdinazione(txtIdOrdine.getText())) {
                 masterController.getChalet().getBar().getOrdinazioneById(txtIdOrdine.getText()).setStatoConsegna(StatoOrdinazione.CONSEGNATO);
+                masterController.getGestoreDB().setPrenotazioneConsegnata(txtIdOrdine.getText());
                 refreshOrders();
                 txtIdOrdine.clear();
             }
