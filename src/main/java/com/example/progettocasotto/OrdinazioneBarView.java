@@ -35,6 +35,9 @@ public class OrdinazioneBarView {
     public void handleAggiungiAllOrdine(ActionEvent actionEvent) {
         userController.ordinaBibita(bevanda.getText(), Integer.parseInt(bevandaQuantita.getText()));
         qrCode.getItems().addAll(userController.getlistaQrCode());
+
+        bevanda.clear();
+        bevandaQuantita.clear();
     }
 
     public void handleConfermaOrdinazione(ActionEvent actionEvent) {

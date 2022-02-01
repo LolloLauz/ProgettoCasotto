@@ -68,7 +68,7 @@ public class DefaultFXView {
                     Stage stage = new Stage(StageStyle.DECORATED);
                     stage.initModality(Modality.APPLICATION_MODAL);
                     stage.setScene(new Scene(loader.load()));
-                    ClientViev controller = loader.getController();
+                    ClientView controller = loader.getController();
                     controller.initialize(masterController,nomeCliente);
                     stage.showAndWait();
                 } catch (IOException e) {

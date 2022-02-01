@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.DefaultFXView">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="5.0" style="-fx-background-color: teal;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.DefaultFXView">
    <children>
-      <Button fx:id="loginButton" layoutX="274.0" layoutY="234.0" mnemonicParsing="false" onAction="#loginButtonPressed" text="Button" />
-      <TextField fx:id="passwordLabel" layoutX="217.0" layoutY="187.0" promptText="password" />
-      <TextField fx:id="emailLabel" layoutX="218.0" layoutY="147.0" promptText="email" />
-      <Label layoutX="242.0" layoutY="105.0" text="Schermata di logIn" />
+      <Label style="-fx-font-weight: bold;" text="SCHERMATA DI LOGIN" textAlignment="CENTER">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin></Label>
+      <TextField fx:id="emailLabel" promptText="email" style="-fx-alignment: center;" />
+      <TextField fx:id="passwordLabel" promptText="password" style="-fx-alignment: center;" />
+      <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonPressed" text="LOGIN">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin></Button>
    </children>
-</AnchorPane>
+   <padding>
+      <Insets bottom="10.0" left="100.0" right="100.0" top="10.0" />
+   </padding>
+</VBox>

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.ClientViev">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.ClientView">
    <children>
       <Button fx:id="prenotaOmbrellone" layoutX="70.0" layoutY="90.0" mnemonicParsing="false" onAction="#handlePrenotaOmbrellone" text="Prenota ombrellone" />
       <Button fx:id="prenotaSdraio" layoutX="70.0" layoutY="142.0" mnemonicParsing="false" onAction="#handlePrenotaSdraio" text="Prenota sdraio" />

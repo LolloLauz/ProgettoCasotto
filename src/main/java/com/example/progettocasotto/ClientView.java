@@ -13,7 +13,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class ClientViev {
+public class ClientView {
     @FXML
     private Button prenotaSdraio;
     @FXML
