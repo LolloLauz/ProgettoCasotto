@@ -3,11 +3,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: silver;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.TerminaleOrdinazioniView">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightslategrey;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.TerminaleOrdinazioniView">
    <children>
       <TextArea fx:id="txtOrdiniDaConsegnare" editable="false" layoutX="3.0" layoutY="51.0" prefHeight="298.0" prefWidth="594.0" style="-fx-font-weight: bold;" />
-      <Button layoutX="275.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnClose" text="Chiudi" />
-      <TextField fx:id="txtIdOrdine" layoutX="109.0" layoutY="361.0" prefHeight="26.0" prefWidth="185.0" promptText="ID ORDINE" style="-fx-alignment: center;" />
-      <Button fx:id="btnContrassegnaCompletato" layoutX="299.0" layoutY="361.0" mnemonicParsing="false" onAction="#btnContrassegna" text="Contrassegna come completato" />
+      <Button layoutX="275.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnClose" style="-fx-alignment: center;-fx-font-weight: bold" text="Chiudi" />
+      <TextField fx:id="txtIdOrdine" layoutX="109.0" layoutY="361.0" prefHeight="26.0" prefWidth="185.0" promptText="ID ORDINE" style="-fx-alignment: center;-fx-font-weight: bold" />
+      <Button fx:id="btnContrassegnaCompletato" layoutX="299.0" layoutY="361.0" mnemonicParsing="false" onAction="#btnContrassegna" style="-fx-alignment: center;-fx-font-weight: bold" text="Contrassegna come completato" />
    </children>
 </AnchorPane>
