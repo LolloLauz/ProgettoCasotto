@@ -16,7 +16,7 @@
          </VBox.margin></Label>
       <TextField fx:id="emailLabel" promptText="email" style="-fx-alignment: center;" />
       <TextField fx:id="passwordLabel" promptText="password" style="-fx-alignment: center;" />
-      <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonPressed" text="LOGIN">
+      <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonPressed" text="LOGIN" style="-fx-font-weight: bold;">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin></Button>

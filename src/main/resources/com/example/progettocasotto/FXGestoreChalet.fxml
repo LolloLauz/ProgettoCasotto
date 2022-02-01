@@ -2,14 +2,20 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.FXGestoreChalet">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="30.0" style="-fx-background-color: oldlace;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.FXGestoreChalet">
    <children>
-      <Button fx:id="prenotazioneManuale" layoutX="43.0" layoutY="200.0" mnemonicParsing="false" onAction="#handlePrenotazioneManule" text="prenotazione manuale" />
-      <Button fx:id="creaAttivita" layoutX="43.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleCreaAttivita" text="crea attivita" />
-      <Button fx:id="modificaPrenotazione" layoutX="232.0" layoutY="38.0" mnemonicParsing="false" onAction="#handleModificaPrenotazione" text="modifica prenotazione" />
-      <Button fx:id="eliminaPrenotazione" layoutX="236.0" layoutY="98.0" mnemonicParsing="false" onAction="#handleEliminaPrenotazione" text="elimina prenotazione" />
-      <Button fx:id="pagamentoContanti" layoutX="232.0" layoutY="162.0" mnemonicParsing="false" onAction="#handlePagamentoContanti" text="pagamento contanti" />
-      <Button fx:id="creaChalet" layoutX="69.0" layoutY="98.0" mnemonicParsing="false" onAction="#handleCreaChalet" text="Crea chalet" />
+      <Label style="-fx-font-weight: bold;" text="GESTORE CHALET" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="prenotazioneManuale" layoutX="43.0" layoutY="200.0" mnemonicParsing="false" onAction="#handlePrenotazioneManule" style="-fx-font-weight: bold;" text="PRENOTAZIONE MANUALE" />
+      <Button fx:id="creaAttivita" layoutX="43.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleCreaAttivita" text="CREA ATTIVITA'" style="-fx-font-weight: bold;" />
+      <Button fx:id="modificaPrenotazione" layoutX="232.0" layoutY="38.0" mnemonicParsing="false" onAction="#handleModificaPrenotazione" text="MODIFICA PRENOTAZIONE" style="-fx-font-weight: bold;" />
+      <Button fx:id="eliminaPrenotazione" layoutX="236.0" layoutY="98.0" mnemonicParsing="false" onAction="#handleEliminaPrenotazione" text="ELIMINA PRENOTAZIONE" style="-fx-font-weight: bold;" />
+      <Button fx:id="pagamentoContanti" layoutX="232.0" layoutY="162.0" mnemonicParsing="false" onAction="#handlePagamentoContanti" text="PAGAMENTO CONTANTI" style="-fx-font-weight: bold;" />
+      <Button fx:id="creaChalet" layoutX="69.0" layoutY="98.0" mnemonicParsing="false" onAction="#handleCreaChalet" text="CREA CHALET" style="-fx-font-weight: bold;" />
    </children>
-</AnchorPane>
+</VBox>
