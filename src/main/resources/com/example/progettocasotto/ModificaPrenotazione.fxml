@@ -16,7 +16,7 @@
             <VBox alignment="CENTER" spacing="10.0">
                <children>
                   <TextField fx:id="nomeCliente" alignment="CENTER" onAction="#handleNomeClienteSelezionato" promptText="nome cliente" />
-                  <TextField fx:id="identificativoPrenotazione" alignment="CENTER" promptText="Numero prenotazione" />
+                  <TextField fx:id="identificativoPrenotazione" alignment="CENTER" promptText="numero prenotazione" />
                   <Button fx:id="aggiungiOmbrelloni" mnemonicParsing="false" onAction="#handleAggiungiOmbrelloni" style="-fx-font-weight: bold;" text="AGGIUNGI OMBRELLONI" />
                   <Button fx:id="aggiungiSdraio" mnemonicParsing="false" onAction="#handleAggiungiSdraio" style="-fx-font-weight: bold;" text="AGGIUNGI SDRAIO" />
                </children>

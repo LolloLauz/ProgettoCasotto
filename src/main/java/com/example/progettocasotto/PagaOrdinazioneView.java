@@ -26,7 +26,7 @@ public class PagaOrdinazioneView {
 
     public void initialize(DefaultUserController userController){
         this.userController=userController;
-        mostraOrdinazione.setText("\n"+userController.getStringaOrdinazione()+"\n li totale :"+userController.getTOtaleOrdinazione());
+        mostraOrdinazione.setText("\n"+userController.getStringaOrdinazione()+"\n il totale :"+userController.getTOtaleOrdinazione());
     }
 
     public void handlePagaConCarta(ActionEvent actionEvent) {

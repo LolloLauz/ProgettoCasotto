@@ -1,16 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.PagamentoContanteView">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: lightsteelblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.PagamentoContanteView">
    <children>
-      <TextField fx:id="nomeUtente" layoutX="14.0" layoutY="36.0" promptText="inserisci nome utente" />
-      <Button fx:id="mostraPrenotazioniOrdinazioni" layoutX="14.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleMostraPrenotazioniOrdinazioni" text="mostra prenotazioni e ordinazioni" />
-      <TextArea fx:id="prenotazioniOrdinazioni" layoutX="228.0" layoutY="22.0" prefHeight="200.0" prefWidth="200.0" />
-      <TextField fx:id="numeroPrenotazione" layoutX="15.0" layoutY="263.0" promptText="numero prenotazione" />
-      <TextField fx:id="numeroOrdinazione" layoutX="300.0" layoutY="263.0" promptText="numero ordinazione" />
-      <Button fx:id="pagaPrenotazione" layoutX="31.0" layoutY="323.0" mnemonicParsing="false" onAction="#handlePagaPrenotazione" text="Paga prenotazione" />
-      <Button fx:id="pagaOrdinazione" layoutX="320.0" layoutY="323.0" mnemonicParsing="false" onAction="#handlePagaOrdinazione" text="paga ordinazione" />
+      <Label style="-fx-font-weight: bold;" text="PAGAMENTO IN CONTANTE" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nomeUtente" alignment="CENTER" layoutX="14.0" layoutY="36.0" promptText="inserisci nome utente" />
+      <Button fx:id="mostraPrenotazioniOrdinazioni" layoutX="14.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleMostraPrenotazioniOrdinazioni" style="-fx-font-weight: bold;" text="MOSTRA PRENOTAZIONI E ORDINAZIONI" />
+      <TextArea fx:id="prenotazioniOrdinazioni" editable="false" layoutX="228.0" layoutY="22.0" style="-fx-font-weight: bold;" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+         <children>
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <TextField fx:id="numeroPrenotazione" alignment="CENTER" promptText="numero prenotazione" />
+                  <Button fx:id="pagaPrenotazione" mnemonicParsing="false" onAction="#handlePagaPrenotazione" style="-fx-font-weight: bold;" text="PAGA PRENOTAZIONE" />
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <TextField fx:id="numeroOrdinazione" alignment="CENTER" promptText="numero ordinazione" />
+                  <Button fx:id="pagaOrdinazione" mnemonicParsing="false" onAction="#handlePagaOrdinazione" style="-fx-font-weight: bold;" text="PAGA ORDINAZIONE" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
-</AnchorPane>
+   <padding>
+      <Insets left="70.0" right="70.0" />
+   </padding>
+</VBox>

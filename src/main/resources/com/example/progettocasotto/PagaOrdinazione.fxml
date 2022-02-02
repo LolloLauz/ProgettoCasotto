@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.PagaOrdinazioneView">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: lightsteelblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.PagaOrdinazioneView">
    <children>
-      <Button fx:id="close" layoutX="55.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleClose" text="back" />
-      <Label fx:id="mostraOrdinazione" layoutX="19.0" layoutY="131.0" prefHeight="151.0" prefWidth="179.0" textAlignment="JUSTIFY" />
-      <Button fx:id="pagaConCarta" layoutX="330.0" layoutY="119.0" mnemonicParsing="false" onAction="#handlePagaConCarta" text="Paga con carta" />
-      <Button fx:id="pagaInContante" layoutX="324.0" layoutY="174.0" mnemonicParsing="false" onAction="#handlePagaInContate" text="Paga in contante" />
-      <Label fx:id="warningLabel" layoutX="317.0" layoutY="232.0" prefHeight="86.0" prefWidth="119.0" />
+      <Label style="-fx-font-weight: bold;" text="PAGA ORDINAZIONE" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="mostraOrdinazione" alignment="CENTER" layoutX="19.0" layoutY="131.0" style="-fx-font-weight: bold;" textAlignment="JUSTIFY">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin></Label>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <Button fx:id="pagaConCarta" mnemonicParsing="false" onAction="#handlePagaConCarta" style="-fx-font-weight: bold;" text="PAGA CON CARTA" />
+            <Button fx:id="pagaInContante" mnemonicParsing="false" onAction="#handlePagaInContate" style="-fx-font-weight: bold;" text="PAGA IN CONTANTE" />
+         </children>
+      </HBox>
+      <Label fx:id="warningLabel" contentDisplay="CENTER" layoutX="317.0" layoutY="232.0" style="-fx-font-weight: bold;" />
    </children>
-</AnchorPane>
+</VBox>
