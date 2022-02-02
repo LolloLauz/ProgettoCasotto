@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.PagaUnaPrenotazioneView">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: lightsteelblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.PagaUnaPrenotazioneView">
    <children>
-      <ComboBox fx:id="sceltaPrenotazione" layoutX="225.0" layoutY="118.0" onAction="#handlePrenotazioneSelezionata" prefWidth="150.0" promptText="Prenotazione da pagare" />
-      <Label layoutX="162.0" layoutY="71.0" text="Seleziona una premotazione che devi ancora pagare" />
-      <Button fx:id="pagaButton" layoutX="36.0" layoutY="264.0" mnemonicParsing="false" onAction="#handlePagaConCarta" text="Paga con carta" />
-      <Button fx:id="pagaContanti" layoutX="479.0" layoutY="264.0" mnemonicParsing="false" onAction="#handlePagaContanti" text="Paga contani" />
-      <Label fx:id="warningLabel" layoutX="263.0" layoutY="317.0" prefHeight="18.0" prefWidth="202.0" />
-      <TextArea fx:id="mostraScontrino" layoutX="200.0" layoutY="164.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button fx:id="closeButton" layoutX="496.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
+      <Label style="-fx-font-weight: bold;" text="PAGA PRENOTAZIONE" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="162.0" layoutY="71.0" style="-fx-font-weight: bold;" text="Seleziona una premotazione che devi ancora pagare:" />
+      <ComboBox fx:id="sceltaPrenotazione" layoutX="225.0" layoutY="118.0" onAction="#handlePrenotazioneSelezionata" promptText="Prenotazione da pagare" />
+      <TextArea fx:id="mostraScontrino" layoutX="200.0" layoutY="164.0" style="-fx-font-weight: bold;">
+         <VBox.margin>
+            <Insets left="100.0" right="100.0" />
+         </VBox.margin></TextArea>
+      <Button fx:id="pagaButton" alignment="CENTER" layoutX="36.0" layoutY="264.0" mnemonicParsing="false" onAction="#handlePagaConCarta" style="-fx-font-weight: bold;" text="PAGA CON CARTA" />
+      <Button fx:id="pagaContanti" alignment="CENTER" layoutX="479.0" layoutY="264.0" mnemonicParsing="false" onAction="#handlePagaContanti" style="-fx-font-weight: bold;" text="PAGA IN CONTANTI" />
+      <Label fx:id="warningLabel" layoutX="263.0" layoutY="317.0" style="-fx-font-weight: bold;" />
    </children>
-</AnchorPane>
+   <padding>
+      <Insets bottom="20.0" top="20.0" />
+   </padding>
+</VBox>
