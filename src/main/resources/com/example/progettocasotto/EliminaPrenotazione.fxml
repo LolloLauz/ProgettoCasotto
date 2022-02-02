@@ -2,13 +2,35 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.EliminaPrenotazioneView">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="30.0" style="-fx-background-color: lightsteelblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.EliminaPrenotazioneView">
    <children>
-      <Button fx:id="mostraPrenotazioni" layoutX="42.0" layoutY="243.0" mnemonicParsing="false" onAction="#handleMostraPrenotazioni" text="mostra prenotazioni" />
-      <TextField fx:id="nomeUtente" layoutX="29.0" layoutY="188.0" promptText="Inserisci nome utente" />
-      <TextArea fx:id="prenotazioniUtente" layoutX="194.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
-      <TextField fx:id="numeroPrenotazione" layoutX="437.0" layoutY="188.0" promptText="inserisci numero prenotazione da eliminare" />
-      <Button fx:id="eliminaPrenotazione" layoutX="448.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleEliminaPrenotazione" text="elimina prenotazione" />
+      <Label style="-fx-font-weight: bold;" text="ELIMINA PRENOTAZIONE" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" spacing="30.0">
+         <children>
+            <VBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <TextField fx:id="nomeUtente" alignment="CENTER" promptText="nome utente" />
+                  <Button fx:id="mostraPrenotazioni" mnemonicParsing="false" onAction="#handleMostraPrenotazioni" style="-fx-font-weight: BOLD;" text="MOSTRA PRENOTAZIONI" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER">
+               <children>
+                  <TextArea fx:id="prenotazioniUtente" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <TextField fx:id="numeroPrenotazione" alignment="CENTER" promptText="numero prenotazione" />
+                  <Button fx:id="eliminaPrenotazione" mnemonicParsing="false" onAction="#handleEliminaPrenotazione" style="-fx-font-weight: BOLD;" text="ELIMINA PRENOTAZIONE" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
-</AnchorPane>
+</VBox>
