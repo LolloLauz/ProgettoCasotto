@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.CreaUtenteView">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: lightsteelblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.CreaUtenteView">
    <children>
+      <Label style="-fx-font-weight: bold;" text="CREA UTENTE" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
       <TextField fx:id="nomeUtente" layoutX="40.0" layoutY="83.0" promptText="nome Utente" />
       <TextField fx:id="cognomeUtente" layoutX="40.0" layoutY="145.0" promptText="Cognome utente" />
       <TextField fx:id="emailUtente" layoutX="41.0" layoutY="200.0" promptText="email" />
-      <Button fx:id="creaUtente" layoutX="77.0" layoutY="261.0" mnemonicParsing="false" onAction="#handelCreaUtente" text="CreaUtente" />
+      <Button fx:id="creaUtente" layoutX="77.0" layoutY="261.0" mnemonicParsing="false" onAction="#handelCreaUtente" style="-fx-font-weight: bold;" text="CREA UTENTE" textAlignment="CENTER" />
    </children>
-</AnchorPane>
+   <padding>
+      <Insets left="100.0" right="100.0" />
+   </padding>
+</VBox>

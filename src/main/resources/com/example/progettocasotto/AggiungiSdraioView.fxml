@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.AggiungiSdraioView">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="30.0" style="-fx-background-color: lightsteelblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.AggiungiSdraioView">
    <children>
-      <Button fx:id="aggiungiSdraio" layoutX="136.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleAggiungiSdraio" text="Aggiungi sdraio" />
-      <Label fx:id="numeroSdraioDisponibili" layoutX="48.0" layoutY="91.0" text="Numero sdraio disponibili" />
-      <TextField fx:id="numeroSdraio" layoutX="43.0" layoutY="175.0" prefHeight="26.0" prefWidth="271.0" promptText="inserisci il numero di sdraio che vuoi aggiungere" />
+      <Label style="-fx-font-weight: bold;" text="AGGIUNGI SDRAIO" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="30.0" />
+         </VBox.margin>
+      </Label>
+      <Label fx:id="numeroSdraioDisponibili" layoutX="48.0" layoutY="91.0" style="-fx-font-weight: bold;" text="Numero sdraio disponibili" />
+      <TextField fx:id="numeroSdraio" layoutX="43.0" layoutY="175.0" prefHeight="26.0" prefWidth="271.0" promptText="inserisci il numero di sdraio che vuoi aggiungere" style="-fx-alignment: center;">
+         <VBox.margin>
+            <Insets left="100.0" right="100.0" />
+         </VBox.margin></TextField>
+      <Button fx:id="aggiungiSdraio" layoutX="136.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleAggiungiSdraio" style="-fx-font-weight: bold;" text="AGGIUNGI SDRAIO" textAlignment="CENTER" />
    </children>
-</AnchorPane>
+</VBox>

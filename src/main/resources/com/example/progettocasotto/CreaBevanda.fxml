@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.CreaBevandaView">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: lightsteelblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.CreaBevandaView">
    <children>
-      <Button fx:id="crea" layoutX="142.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleCrea" text="Crea" />
-      <TextField fx:id="nomeBevanda" layoutX="95.0" layoutY="81.0" promptText="nome Bevanda" />
-      <TextField fx:id="prezzoBevanda" layoutX="288.0" layoutY="81.0" promptText="prezzo Bevanda" />
-      <TextField fx:id="quantitaBevanda" layoutX="96.0" layoutY="152.0" promptText="quantita Bevanda" />
-      <TextField fx:id="descrizione" layoutX="300.0" layoutY="152.0" promptText="Descrizione" />
-      <Button fx:id="esci" layoutX="356.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleEsci" text="esci" />
+      <Label style="-fx-font-weight: bold;" text="CREA BEVANDA" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nomeBevanda" alignment="CENTER" layoutX="95.0" layoutY="81.0" promptText="nome" />
+      <TextField fx:id="prezzoBevanda" alignment="CENTER" layoutX="288.0" layoutY="81.0" promptText="bevanda" />
+      <TextField fx:id="quantitaBevanda" alignment="CENTER" layoutX="96.0" layoutY="152.0" promptText="quantita'" />
+      <TextField fx:id="descrizione" alignment="CENTER" layoutX="300.0" layoutY="152.0" promptText="descrizione" />
+      <Button fx:id="crea" layoutX="142.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleCrea" prefWidth="200.0" style="-fx-font-weight: bold;" text="CREA" textAlignment="CENTER" />
+      <Button fx:id="esci" layoutX="356.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleEsci" prefWidth="200.0" style="-fx-font-weight: bold;" text="ESCI" textAlignment="CENTER" />
    </children>
-</AnchorPane>
+   <padding>
+      <Insets left="100.0" right="100.0" />
+   </padding>
+</VBox>

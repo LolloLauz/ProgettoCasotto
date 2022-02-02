@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.AggiungiBarView">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: lightsteelblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.AggiungiBarView">
    <children>
-      <Button fx:id="avanti" layoutX="260.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleAvanti" text="Avanti" />
-      <TextField fx:id="nomeBar" layoutX="226.0" layoutY="94.0" promptText="Inserisci nome del Bar" />
+      <Label style="-fx-font-weight: bold;" text="AGGIUNGI BAR" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Label>
+      <TextField fx:id="nomeBar" layoutX="226.0" layoutY="94.0" promptText="Inserisci nome del Bar" style="-fx-alignment: center;">
+         <VBox.margin>
+            <Insets left="100.0" right="100.0" />
+         </VBox.margin></TextField>
+      <Button fx:id="avanti" layoutX="260.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleAvanti" style="-fx-font-weight: bold;" text="AVANTI" />
    </children>
-</AnchorPane>
+</VBox>

@@ -2,16 +2,33 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.CreaAttivitaView">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: lightsteelblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.CreaAttivitaView">
    <children>
-      <Button fx:id="creaAttivita" layoutX="274.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleCreaAttivita" text="Crea attivita" />
-      <TextField fx:id="nomeAttivita" layoutX="36.0" layoutY="56.0" promptText="nome attivita" />
-      <TextField fx:id="numeroPosti" layoutX="37.0" layoutY="126.0" promptText="numero Posti" />
-      <TextArea fx:id="descrizioneAttivita" layoutX="238.0" layoutY="52.0" prefHeight="200.0" prefWidth="200.0" promptText="descrizione" />
-      <TextField fx:id="luogo" layoutX="38.0" layoutY="188.0" promptText="luogo" />
-      <DatePicker fx:id="dataInizio" layoutX="26.0" layoutY="240.0" promptText="data inizio" />
-      <DatePicker fx:id="dataFine" layoutX="24.0" layoutY="294.0" promptText="data fine" />
+      <Label style="-fx-font-weight: bold;" text="CREA ATTIVITA'" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" spacing="20.0">
+         <children>
+            <VBox alignment="CENTER" prefWidth="300.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="nomeAttivita" promptText="nome attivita" />
+                  <TextField fx:id="numeroPosti" promptText="numero Posti" />
+                  <TextField fx:id="luogo" promptText="luogo" />
+                  <DatePicker fx:id="dataInizio" prefWidth="300.0" promptText="data inizio" />
+                  <DatePicker fx:id="dataFine" prefWidth="300.0" promptText="data fine" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER">
+               <children>
+                  <TextArea fx:id="descrizioneAttivita" prefHeight="200.0" prefWidth="200.0" promptText="descrizione" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button fx:id="creaAttivita" mnemonicParsing="false" onAction="#handleCreaAttivita" style="-fx-font-weight: bold;" text="CREA ATTIVITA'" />
    </children>
-</AnchorPane>
+</VBox>

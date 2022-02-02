@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.CreaSpiaggiaView">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: lightsteelblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettocasotto.CreaSpiaggiaView">
    <children>
-      <TextField fx:id="nomeSpiaggia" layoutX="43.0" layoutY="98.0" promptText="Inserisci nome Spiaggia" />
-      <TextField fx:id="numeroOmbrelloni" layoutX="44.0" layoutY="161.0" promptText="inserisci numero Ombrelloni" />
-      <TextField fx:id="numeroSdraio" layoutX="43.0" layoutY="255.0" promptText="inserisci numero sdraio" />
-      <Button fx:id="avanti" layoutX="300.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleAvanti" text="Avanti" />
+      <Label style="-fx-font-weight: bold;" text="CREA SPIAGGIA" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nomeSpiaggia" alignment="CENTER" layoutX="43.0" layoutY="98.0" promptText="nome spiaggia" />
+      <TextField fx:id="numeroOmbrelloni" alignment="CENTER" layoutX="44.0" layoutY="161.0" promptText="numero ombrelloni" />
+      <TextField fx:id="numeroSdraio" alignment="CENTER" layoutX="43.0" layoutY="255.0" promptText="numero sdraio" />
+      <Button fx:id="avanti" layoutX="300.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleAvanti" style="-fx-font-weight: bold;" text="AVANTI" textAlignment="CENTER" />
    </children>
-</AnchorPane>
+   <padding>
+      <Insets left="100.0" right="100.0" />
+   </padding>
+</VBox>
