@@ -62,7 +62,7 @@ public interface UserControllerInterface {
      * Metodo usato per pagare una prenotazione.
      * @param idPrenotazione l'id della prenotazione da pagare.
      */
-    void pagaPrenotazione(String idPrenotazione);
+    String pagaPrenotazione(String idPrenotazione);
 
     /**
      * Metodo usato per creare un'ordinazione.

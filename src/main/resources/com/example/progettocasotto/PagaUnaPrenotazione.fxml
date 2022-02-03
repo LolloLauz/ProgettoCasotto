@@ -20,6 +20,7 @@
          </VBox.margin></TextArea>
       <Button fx:id="pagaButton" alignment="CENTER" layoutX="36.0" layoutY="264.0" mnemonicParsing="false" onAction="#handlePagaConCarta" style="-fx-font-weight: bold;" text="PAGA CON CARTA" />
       <Button fx:id="pagaContanti" alignment="CENTER" layoutX="479.0" layoutY="264.0" mnemonicParsing="false" onAction="#handlePagaContanti" style="-fx-font-weight: bold;" text="PAGA IN CONTANTI" />
+      <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleClose" text="CLOSE" style="-fx-font-weight: bold;" />
       <Label fx:id="warningLabel" layoutX="263.0" layoutY="317.0" style="-fx-font-weight: bold;" />
    </children>
    <padding>

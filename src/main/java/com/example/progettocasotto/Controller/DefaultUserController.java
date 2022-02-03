@@ -157,12 +157,15 @@ public class DefaultUserController implements UserControllerInterface {
 
     }
 
-    public void pagaPrenotazione(String idPrenotazione) {
-        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaOmbrelloni();
-        masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaSdraio();
+    public String pagaPrenotazione(String idPrenotazione) {
+        String result="";
+        result=result+masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaOmbrelloni()+"\n";
+        result=result+masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).stampaSdraio()+"\n";
         System.out.println("\nil totale della prenotazione e' "+masterController.getChalet().getSpiaggia().getListinoPrezzi().calcolaPrezzo(masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione)));
+        result=result+"\nil totale della prenotazione e' "+masterController.getChalet().getSpiaggia().getListinoPrezzi().calcolaPrezzo(masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione));
         masterController.getChalet().getSpiaggia().getPrenotaizioneById(idPrenotazione).setStatoPrenotazione(StatoPreOrd.PAGATA);
         masterController.gestoreDB.convalidaPagamentoPrenotazione(idPrenotazione);
+        return result;
     }
 
     public void creaOrdinazione() {

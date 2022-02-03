@@ -27,7 +27,7 @@ public class PagaUnaPrenotazioneView {
 
     public void handlePagaConCarta(ActionEvent actionEvent) {
         if(flag) {
-            userController.pagaPrenotazione(sceltaPrenotazione.getValue());
+            mostraScontrino.setText(userController.pagaPrenotazione(sceltaPrenotazione.getValue()));
             flag=false;
         }
     }
